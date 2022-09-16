@@ -1,0 +1,22 @@
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.exe.config
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.exe
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.pdb
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.AssemblyReference.cache
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.Properties.Resources.resources
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.GenerateResource.cache
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.CoreCompileInputs.cache
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.exe
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.pdb
+C:\Users\2041334\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.Form1.resources
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.exe.config
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.exe
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.pdb
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.AssemblyReference.cache
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.Form1.resources
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.Properties.Resources.resources
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.GenerateResource.cache
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.CoreCompileInputs.cache
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.exe
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.pdb
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.MainMenu.resources
+U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.ProgrammerSettings.resources

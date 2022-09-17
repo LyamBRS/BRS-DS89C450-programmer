@@ -36,14 +36,14 @@ namespace BRS_Dallas_Programmer
             this.FolderButton = new System.Windows.Forms.Button();
             this.UploadCodeButton = new System.Windows.Forms.Button();
             this.ProgrammerSettings = new System.Windows.Forms.Button();
-            this.ConsoleTextArea = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.AutoProgEnterCheck = new System.Windows.Forms.Timer(this.components);
+            this.ProgrammingProgress = new System.Windows.Forms.ProgressBar();
+            this.UserTextInfo = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,10 +58,10 @@ namespace BRS_Dallas_Programmer
             this.flowLayoutPanel1.Controls.Add(this.FolderButton);
             this.flowLayoutPanel1.Controls.Add(this.UploadCodeButton);
             this.flowLayoutPanel1.Controls.Add(this.ProgrammerSettings);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 18);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(13, 13);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(176, 709);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(716, 141);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // ConnectionStatusButton
@@ -90,10 +90,10 @@ namespace BRS_Dallas_Programmer
             this.FolderButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.FolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FolderButton.ForeColor = System.Drawing.Color.Transparent;
-            this.FolderButton.Location = new System.Drawing.Point(4, 158);
+            this.FolderButton.Location = new System.Drawing.Point(183, 4);
             this.FolderButton.Margin = new System.Windows.Forms.Padding(4);
             this.FolderButton.Name = "FolderButton";
-            this.FolderButton.Size = new System.Drawing.Size(171, 129);
+            this.FolderButton.Size = new System.Drawing.Size(171, 146);
             this.FolderButton.TabIndex = 1;
             this.FolderButton.UseVisualStyleBackColor = false;
             this.FolderButton.Click += new System.EventHandler(this.FolderButton_Click);
@@ -108,10 +108,10 @@ namespace BRS_Dallas_Programmer
             this.UploadCodeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.UploadCodeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.UploadCodeButton.ForeColor = System.Drawing.Color.Transparent;
-            this.UploadCodeButton.Location = new System.Drawing.Point(4, 295);
+            this.UploadCodeButton.Location = new System.Drawing.Point(362, 4);
             this.UploadCodeButton.Margin = new System.Windows.Forms.Padding(4);
             this.UploadCodeButton.Name = "UploadCodeButton";
-            this.UploadCodeButton.Size = new System.Drawing.Size(171, 143);
+            this.UploadCodeButton.Size = new System.Drawing.Size(171, 146);
             this.UploadCodeButton.TabIndex = 2;
             this.UploadCodeButton.UseVisualStyleBackColor = false;
             this.UploadCodeButton.Click += new System.EventHandler(this.UploadCodeButton_Click);
@@ -126,38 +126,13 @@ namespace BRS_Dallas_Programmer
             this.ProgrammerSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ProgrammerSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ProgrammerSettings.ForeColor = System.Drawing.Color.Transparent;
-            this.ProgrammerSettings.Location = new System.Drawing.Point(4, 446);
+            this.ProgrammerSettings.Location = new System.Drawing.Point(541, 4);
             this.ProgrammerSettings.Margin = new System.Windows.Forms.Padding(4);
             this.ProgrammerSettings.Name = "ProgrammerSettings";
-            this.ProgrammerSettings.Size = new System.Drawing.Size(171, 110);
+            this.ProgrammerSettings.Size = new System.Drawing.Size(171, 146);
             this.ProgrammerSettings.TabIndex = 5;
             this.ProgrammerSettings.UseVisualStyleBackColor = false;
             this.ProgrammerSettings.Click += new System.EventHandler(this.ProgrammerSettings_Click);
-            // 
-            // ConsoleTextArea
-            // 
-            this.ConsoleTextArea.AcceptsReturn = true;
-            this.ConsoleTextArea.AcceptsTab = true;
-            this.ConsoleTextArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.ConsoleTextArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ConsoleTextArea.Location = new System.Drawing.Point(214, 32);
-            this.ConsoleTextArea.Multiline = true;
-            this.ConsoleTextArea.Name = "ConsoleTextArea";
-            this.ConsoleTextArea.Size = new System.Drawing.Size(1091, 674);
-            this.ConsoleTextArea.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.Console_Background;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Enabled = false;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(200, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(1127, 709);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // toolStripButton1
             // 
@@ -212,20 +187,45 @@ namespace BRS_Dallas_Programmer
             this.AutoProgEnterCheck.Interval = 1000;
             this.AutoProgEnterCheck.Tick += new System.EventHandler(this.AutoProgEnterCheck_Tick);
             // 
+            // ProgrammingProgress
+            // 
+            this.ProgrammingProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ProgrammingProgress.Location = new System.Drawing.Point(0, 304);
+            this.ProgrammingProgress.Name = "ProgrammingProgress";
+            this.ProgrammingProgress.Size = new System.Drawing.Size(742, 23);
+            this.ProgrammingProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.ProgrammingProgress.TabIndex = 1;
+            // 
+            // UserTextInfo
+            // 
+            this.UserTextInfo.BackColor = System.Drawing.SystemColors.InfoText;
+            this.UserTextInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserTextInfo.Cursor = System.Windows.Forms.Cursors.No;
+            this.UserTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.UserTextInfo.Font = new System.Drawing.Font("Courier New", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserTextInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.UserTextInfo.Location = new System.Drawing.Point(0, 267);
+            this.UserTextInfo.Name = "UserTextInfo";
+            this.UserTextInfo.ReadOnly = true;
+            this.UserTextInfo.Size = new System.Drawing.Size(742, 37);
+            this.UserTextInfo.TabIndex = 2;
+            this.UserTextInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ClientSize = new System.Drawing.Size(1340, 732);
-            this.Controls.Add(this.ConsoleTextArea);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(742, 327);
+            this.Controls.Add(this.UserTextInfo);
+            this.Controls.Add(this.ProgrammingProgress);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -245,9 +245,9 @@ namespace BRS_Dallas_Programmer
         private System.Windows.Forms.Button FolderButton;
         private System.Windows.Forms.Button UploadCodeButton;
         private System.Windows.Forms.Button ProgrammerSettings;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox ConsoleTextArea;
         private System.Windows.Forms.Timer AutoProgEnterCheck;
+        private System.Windows.Forms.ProgressBar ProgrammingProgress;
+        private System.Windows.Forms.TextBox UserTextInfo;
     }
 }
 

@@ -20,3 +20,16 @@ U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\
 U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.pdb
 U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.MainMenu.resources
 U:\Sessions\Session 5\_Programming\source\repos\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.ProgrammerSettings.resources
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.exe.config
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.exe
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\bin\Debug\BRS_Dallas_Programmer.pdb
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.AssemblyReference.cache
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.SuggestedBindingRedirects.cache
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.Form1.resources
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.MainMenu.resources
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.ProgrammerSettings.resources
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.Properties.Resources.resources
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.GenerateResource.cache
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.csproj.CoreCompileInputs.cache
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.exe
+C:\Users\cous5\Source\Repos\BRS-DS89C450-programmer\BRS_Dallas_Programmer\obj\Debug\BRS_Dallas_Programmer.pdb

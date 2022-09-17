@@ -522,6 +522,19 @@ namespace BRS
                 FTDIComName = "No Device";
             }
         }
+
+        public static void UpdateFTDIInfo()
+        {
+            ConnectedFTDI = LookForFTDI();
+            try
+            {
+                FTDIComName = ConnectedFTDI.Split('(', ')')[1];
+            }
+            catch
+            {
+                FTDIComName = "No Device";
+            }
+        }
         //#########################################################//
         /// <summary>
         /// Searches all PnPEntities and returns the com port name
@@ -559,8 +572,16 @@ namespace BRS
             }
             return ("No Device");
         }
-
-        public static bool SendHexFileDS89(string HexString)
+        //#########################################################// 
+        /// <summary>
+        /// Sends an hex file on serial port, and calls a function
+        /// after sending :. (received a G)
+        /// </summary>
+        /// <param name="HexString"></param>
+        /// <param name="ToDoWhenGReceived">Executed returnless function everytime a G is received</param>
+        /// <returns></returns>
+        //#########################################################// 
+        public static bool SendHexFileDS89(string HexString, Action ToDoWhenGReceived)
         {
             BRS.Debug.Comment("Checking if FTDI Port is opened");
             if(FTDIPort.IsOpen)
@@ -600,7 +621,17 @@ namespace BRS
                 BRS.Debug.Comment(result);
                 BRS.Debug.Comment("[FINISHED]");
 
+                BRS.Debug.Comment("Splitting Hex file into G's");
+                string[] parsedHex = HexString.Split(':');
+
                 BRS.Debug.Comment("Sending hex file");
+                foreach(string separation in parsedHex)
+                {
+                    FTDIPort.Write(separation);
+                    ToDoWhenGReceived();
+                }
+
+
                 FTDIPort.Write(HexString);
                 BRS.Debug.Success("Sent!");
                 return (true);
@@ -677,6 +708,21 @@ namespace BRS
             result = "[ERROR] COM reading never occured.";
             BRS.Debug.Error("Something went wrong");
             return (result);
+        }
+        //#########################################################//  
+        /// <summary>
+        /// returns the amount of Gs a file is going to send when
+        /// sent for programming (:) in an HEX file.
+        /// </summary>
+        /// <param name="HexString">Hex file converted to a string</param>
+        /// <returns></returns>
+        //#########################################################//   
+        public static int GetHexFileSize(string HexString)
+        {
+            BRS.Debug.Comment("Parsing hex file...");
+            BRS.Debug.Comment("Counting :'s ");
+
+            return (HexString.Length - HexString.Replace(":","").Length);
         }
     }
     //#########################################################//

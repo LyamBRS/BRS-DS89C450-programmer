@@ -13,6 +13,8 @@ using System.IO.Ports;
 using System.Management;
 using System.Management.Instrumentation;
 using System.Threading;
+using static System.Windows.Forms.AxHost;
+using static System.Net.Mime.MediaTypeNames;
 //#############################################//
 namespace BRS
 {
@@ -204,6 +206,31 @@ namespace BRS
                 }
             }
         }
+        //#########################################################//
+        /// <summary>
+        /// Function allowing the user to debug a single main function
+        /// or turn off it's debugging. Turning off ToggleDebug will
+        /// also turn off local debugs. Place this at the very
+        /// beginning of your functions.
+        /// </summary>
+        /// <param name="state">Setting to false will turn off this function's debug. ToggleDebug must have been set to true to be used.</param>
+        //#########################################################//
+        public static void LocalStart(bool state)
+        {
+            BRS.Debug.ToggleDebug(state && Debug.DEBBUG_CONSOLE);
+        }
+        //#########################################################//
+        /// <summary>
+        /// Used as a closing statement for LocalStart debugging.
+        /// Place this at the end of a function before return
+        /// statements.
+        /// </summary>
+        //#########################################################//
+        public static void LocalEnd()
+        {
+            BRS.Debug.ToggleDebug(DEBBUG_CONSOLE);
+        }
+
     }
     //#########################################################//
     /// <summary>
@@ -431,8 +458,23 @@ namespace BRS
     public class ComPorts
     {
         public static SerialPort FTDIPort = new SerialPort();
+        /// <summary>
+        /// The full name of the found serial port.
+        /// "USB Serial Com port (COM 4)"
+        /// </summary>
         public static string ConnectedFTDI = "No Device";
+        /// <summary>
+        /// The com number string of the found FTDI port.
+        /// "COM 4"
+        /// </summary>
         public static string FTDIComName = "No Device"; //COM4 COM5 ect
+        /// <summary>
+        /// String resulted after an HEX file has been
+        /// send to the FTDI in a programming attempt.
+        /// </summary>
+        public static string ProgrammingResult = "";
+
+        private static string LastHexFile = "";
 
         static ManagementClass processClass = new ManagementClass("Win32_PnPEntity");
 
@@ -522,7 +564,14 @@ namespace BRS
                 FTDIComName = "No Device";
             }
         }
-
+        //#########################################################// 
+        /// <summary>
+        /// Updates ComPort.ConnectedFTDI
+        /// aswell as
+        /// ComPort.FTDIComName
+        /// manually.
+        /// </summary>
+        //#########################################################// 
         public static void UpdateFTDIInfo()
         {
             ConnectedFTDI = LookForFTDI();
@@ -545,21 +594,16 @@ namespace BRS
         //#########################################################// 
         public static string LookForFTDI()
         {
-
             ManagementObjectCollection Ports = processClass.GetInstances();
 
             //Update the list of  ports
-            //BRS.Debug.Comment("[BRS]: Updating ManagementObjectCollection...");
             processClass = new ManagementClass("Win32_PnPEntity");
-            //BRS.Debug.Success("");
 
             //ittering the list of USB ports
-            //BRS.Debug.Comment("[BRS]: Looking for FTDI manufacturer in the given list...");
             foreach (ManagementObject prop in Ports)
             {
                 if (prop.GetPropertyValue("Manufacturer") != null)
                 {
-
                     if (prop.GetPropertyValue("Name").ToString().Contains("USB") &&
                         prop.GetPropertyValue("Name").ToString().Contains("COM") &&
                         prop.GetPropertyValue("Manufacturer").Equals("FTDI")
@@ -570,26 +614,31 @@ namespace BRS
                     }
                 }
             }
+            // No device with FTDI as a manufacturer was found.
             return ("No Device");
         }
         //#########################################################// 
         /// <summary>
         /// Sends an hex file on serial port, and calls a function
-        /// after sending :. (received a G)
+        /// after sending :. (received a G).
         /// </summary>
         /// <param name="HexString"></param>
         /// <param name="ToDoWhenGReceived">Executed returnless function everytime a G is received</param>
-        /// <returns></returns>
+        /// <returns>String. "Programmed","No Replies","Error"</returns>
         //#########################################################// 
-        public static bool SendHexFileDS89(string HexString, Action ToDoWhenGReceived)
+        public static string SendHexFileDS89(string HexString, Action ToDoWhenGReceived)
         {
             BRS.Debug.Comment("Checking if FTDI Port is opened");
             if(FTDIPort.IsOpen)
             {
+                BRS.Debug.Comment("Saving HEX file");
+                BRS.ComPorts.LastHexFile = HexString;
+
                 string result = "";
+                BRS.ComPorts.FTDIPort.ReadExisting();
                 BRS.Debug.Comment("Sending ENTER...");
                 FTDIPort.Write("\r");
-                Thread.Sleep(10);
+                Thread.Sleep(100);
 
                 result = BRS.ComPorts.ReadPort(FTDIPort,10,100);
                 BRS.Debug.Comment(result);
@@ -597,8 +646,8 @@ namespace BRS
                 BRS.Debug.Comment("Sending KILL value");
                 FTDIPort.Write("K\r");
                 Thread.Sleep(100);
-                BRS.Debug.Comment("Parsing Dallas's response...");
 
+                BRS.Debug.Comment("Parsing Dallas's response...");
                 result = BRS.ComPorts.ReadPort(FTDIPort, 10, 100);
                 BRS.Debug.Comment(result);
                 BRS.Debug.Comment("[FINISHED]");
@@ -607,7 +656,7 @@ namespace BRS
                 if(!result.Contains(">"))
                 {
                     BRS.Debug.Error("No appropriate answers from FTDI");
-                    return(false);
+                    return("No Replies");
                 }
                 BRS.Debug.Success("[FINISHED]");
 
@@ -615,28 +664,107 @@ namespace BRS
                 BRS.Debug.Comment("Sending L value");
                 FTDIPort.Write("L\r");
                 Thread.Sleep(100);
-                BRS.Debug.Comment("Parsing Dallas's response...");
 
+                BRS.Debug.Comment("Parsing Dallas's response...");
                 result = BRS.ComPorts.ReadPort(FTDIPort, 10, 100);
                 BRS.Debug.Comment(result);
                 BRS.Debug.Comment("[FINISHED]");
 
+                //////////////////////////////////////////////////////////
                 BRS.Debug.Comment("Splitting Hex file into G's");
-                string[] parsedHex = HexString.Split(':');
+                string[] parsedHex = HexString.Split('\r');
 
-                BRS.Debug.Comment("Sending hex file");
+                result = "";
+                BRS.Debug.Comment("Sending hex file...");
                 foreach(string separation in parsedHex)
                 {
                     FTDIPort.Write(separation);
+                    BRS.Debug.Comment(separation.Replace("\n",""));
+
                     ToDoWhenGReceived();
                 }
 
+                Thread.Sleep(100);
+                //Check if bad command is received
+                result = BRS.ComPorts.FTDIPort.ReadExisting();
+                if (result.Contains("BAD"))
+                {
+                    BRS.Debug.Error("Fatal error while sending file");
+                    return ("Error");
+                }
 
-                FTDIPort.Write(HexString);
                 BRS.Debug.Success("Sent!");
-                return (true);
+                BRS.ComPorts.ProgrammingResult = result;
+                return ("Programmed");
             }
-            return (false);
+            return ("No Replies");
+        }
+        //#########################################################// 
+        //#########################################################// 
+        public static string VerifyLastProgramming()
+        {
+            BRS.Debug.Comment("Removing random characters from programming results...");
+            BRS.ComPorts.ProgrammingResult = BRS.ComPorts.ProgrammingResult.Replace("\r","");
+            BRS.ComPorts.ProgrammingResult = BRS.ComPorts.ProgrammingResult.Replace(" ", "");
+            BRS.ComPorts.ProgrammingResult = BRS.ComPorts.ProgrammingResult.Replace("\n", "");
+            BRS.ComPorts.ProgrammingResult = BRS.ComPorts.ProgrammingResult.Replace(">", "");
+
+            BRS.Debug.Comment("Programming result was: ");
+            BRS.Debug.Comment(BRS.ComPorts.ProgrammingResult);
+
+            if (BRS.ComPorts.GetHexFileSize(BRS.ComPorts.LastHexFile) != BRS.ComPorts.ProgrammingResult.Length)
+            {
+                BRS.Debug.Comment(BRS.ComPorts.GetHexFileSize(BRS.ComPorts.LastHexFile).ToString());
+                BRS.Debug.Comment(BRS.ComPorts.ProgrammingResult.Length.ToString());
+                BRS.Debug.Comment(BRS.ComPorts.ProgrammingResult);
+                return ("File not fully programmed");
+            }
+            else // Correct amount of Gs
+            {
+                // Check if the button was flipped during programming
+                if (BRS.ComPorts.ProgrammingResult.Contains("89"))
+                {
+                    return ("Programming was turned off");
+                }
+
+                // Check sum did not match
+                if (BRS.ComPorts.ProgrammingResult.Contains("S"))
+                {
+                    return ("S:Checksum Error");
+                }
+
+                // Critical flash memory error
+                if (BRS.ComPorts.ProgrammingResult.Contains("F"))
+                {
+                    return ("F:Flash Memory error!");
+                }
+
+                // Invalid address in Intel Hex record.
+                if (BRS.ComPorts.ProgrammingResult.Contains("A"))
+                {
+                    return ("A:Address exeeded flash memory");
+                }
+
+                // Invalid Intel hex record format: contains non hex character
+                if (BRS.ComPorts.ProgrammingResult.Contains("H"))
+                {
+                    return ("H:Invalid HEX was sent!");
+                }
+
+                // Invalid Intel Hex record type
+                if (BRS.ComPorts.ProgrammingResult.Contains("L"))
+                {
+                    return ("L:Hex lenght error");
+                }
+
+                // Programming bytes more than once.
+                if (BRS.ComPorts.ProgrammingResult.Contains("P"))
+                {
+                    return ("P:Bytes programmed more than once");
+                }
+
+                return ("Success!");
+            }
         }
         //#########################################################// 
         /// <summary>
@@ -653,7 +781,6 @@ namespace BRS
         public static string ReadPort(SerialPort port, int readingIntervals, int TimeOut)
         {
             string result = "";
-
             if (port.IsOpen)
             {
                 BRS.Debug.Comment("Starting COM reading...");

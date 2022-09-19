@@ -36,14 +36,14 @@ namespace BRS_Dallas_Programmer
             this.FolderButton = new System.Windows.Forms.Button();
             this.UploadCodeButton = new System.Windows.Forms.Button();
             this.ProgrammerSettings = new System.Windows.Forms.Button();
+            this.AutoProgEnterCheck = new System.Windows.Forms.Timer(this.components);
+            this.ProgrammingProgress = new System.Windows.Forms.ProgressBar();
+            this.UserTextInfo = new System.Windows.Forms.TextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.AutoProgEnterCheck = new System.Windows.Forms.Timer(this.components);
-            this.ProgrammingProgress = new System.Windows.Forms.ProgressBar();
-            this.UserTextInfo = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,9 +67,8 @@ namespace BRS_Dallas_Programmer
             // ConnectionStatusButton
             // 
             this.ConnectionStatusButton.BackColor = System.Drawing.Color.Transparent;
-            this.ConnectionStatusButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_usb_disconnected_100;
+            this.ConnectionStatusButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_usb_off_100;
             this.ConnectionStatusButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ConnectionStatusButton.Enabled = false;
             this.ConnectionStatusButton.FlatAppearance.BorderSize = 0;
             this.ConnectionStatusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConnectionStatusButton.ForeColor = System.Drawing.Color.Transparent;
@@ -79,6 +78,7 @@ namespace BRS_Dallas_Programmer
             this.ConnectionStatusButton.Size = new System.Drawing.Size(171, 146);
             this.ConnectionStatusButton.TabIndex = 0;
             this.ConnectionStatusButton.UseVisualStyleBackColor = true;
+            this.ConnectionStatusButton.Click += new System.EventHandler(this.ConnectionStatusButton_Click);
             // 
             // FolderButton
             // 
@@ -101,7 +101,7 @@ namespace BRS_Dallas_Programmer
             // UploadCodeButton
             // 
             this.UploadCodeButton.BackColor = System.Drawing.Color.Transparent;
-            this.UploadCodeButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_fileLoading_100;
+            this.UploadCodeButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_file_100;
             this.UploadCodeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.UploadCodeButton.FlatAppearance.BorderSize = 0;
             this.UploadCodeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
@@ -133,6 +133,36 @@ namespace BRS_Dallas_Programmer
             this.ProgrammerSettings.TabIndex = 5;
             this.ProgrammerSettings.UseVisualStyleBackColor = false;
             this.ProgrammerSettings.Click += new System.EventHandler(this.ProgrammerSettings_Click);
+            // 
+            // AutoProgEnterCheck
+            // 
+            this.AutoProgEnterCheck.Enabled = true;
+            this.AutoProgEnterCheck.Interval = 1000;
+            this.AutoProgEnterCheck.Tick += new System.EventHandler(this.AutoProgEnterCheck_Tick);
+            // 
+            // ProgrammingProgress
+            // 
+            this.ProgrammingProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ProgrammingProgress.Location = new System.Drawing.Point(0, 304);
+            this.ProgrammingProgress.Name = "ProgrammingProgress";
+            this.ProgrammingProgress.Size = new System.Drawing.Size(742, 23);
+            this.ProgrammingProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.ProgrammingProgress.TabIndex = 1;
+            // 
+            // UserTextInfo
+            // 
+            this.UserTextInfo.BackColor = System.Drawing.SystemColors.InfoText;
+            this.UserTextInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserTextInfo.Cursor = System.Windows.Forms.Cursors.No;
+            this.UserTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.UserTextInfo.Font = new System.Drawing.Font("Courier New", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserTextInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.UserTextInfo.Location = new System.Drawing.Point(0, 267);
+            this.UserTextInfo.Name = "UserTextInfo";
+            this.UserTextInfo.ReadOnly = true;
+            this.UserTextInfo.Size = new System.Drawing.Size(742, 37);
+            this.UserTextInfo.TabIndex = 2;
+            this.UserTextInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripButton1
             // 
@@ -180,36 +210,6 @@ namespace BRS_Dallas_Programmer
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
             this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // AutoProgEnterCheck
-            // 
-            this.AutoProgEnterCheck.Enabled = true;
-            this.AutoProgEnterCheck.Interval = 1000;
-            this.AutoProgEnterCheck.Tick += new System.EventHandler(this.AutoProgEnterCheck_Tick);
-            // 
-            // ProgrammingProgress
-            // 
-            this.ProgrammingProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ProgrammingProgress.Location = new System.Drawing.Point(0, 304);
-            this.ProgrammingProgress.Name = "ProgrammingProgress";
-            this.ProgrammingProgress.Size = new System.Drawing.Size(742, 23);
-            this.ProgrammingProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.ProgrammingProgress.TabIndex = 1;
-            // 
-            // UserTextInfo
-            // 
-            this.UserTextInfo.BackColor = System.Drawing.SystemColors.InfoText;
-            this.UserTextInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.UserTextInfo.Cursor = System.Windows.Forms.Cursors.No;
-            this.UserTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.UserTextInfo.Font = new System.Drawing.Font("Courier New", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserTextInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.UserTextInfo.Location = new System.Drawing.Point(0, 267);
-            this.UserTextInfo.Name = "UserTextInfo";
-            this.UserTextInfo.ReadOnly = true;
-            this.UserTextInfo.Size = new System.Drawing.Size(742, 37);
-            this.UserTextInfo.TabIndex = 2;
-            this.UserTextInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 

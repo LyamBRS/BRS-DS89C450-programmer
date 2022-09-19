@@ -19,7 +19,7 @@ namespace BRS_Dallas_Programmer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -113,6 +113,16 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_checked_checkbox_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-checked-checkbox-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_console_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-console-100", resourceCulture);
@@ -156,6 +166,16 @@ namespace BRS_Dallas_Programmer.Properties {
         internal static System.Drawing.Bitmap icons8_error_file_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-error-file-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_file_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-file-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,6 +253,16 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_unchecked_checkbox_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-unchecked-checkbox-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_usb_connected_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-usb-connected-100", resourceCulture);
@@ -246,6 +276,16 @@ namespace BRS_Dallas_Programmer.Properties {
         internal static System.Drawing.Bitmap icons8_usb_disconnected_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-usb-disconnected-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_usb_off_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-usb-off-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

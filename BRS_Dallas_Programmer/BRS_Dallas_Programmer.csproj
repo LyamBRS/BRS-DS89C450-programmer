@@ -163,5 +163,17 @@
   <ItemGroup>
     <None Include="Icons\icons8-ok-100 %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-unchecked-checkbox-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-checked-checkbox-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-usb-off-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-file-100.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

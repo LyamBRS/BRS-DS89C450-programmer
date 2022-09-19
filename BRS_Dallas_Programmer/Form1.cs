@@ -25,8 +25,10 @@ namespace BRS_Dallas_Programmer
         string FilePath = "";
         string OldFilePath = "";
         static bool AutoProgramming = true;
+        static bool AutoConnecting = true;
         bool ShowingSettings = false;
         bool DetectedDallas = false;
+        static bool DisableFTDI = false;
         ProgrammerSettings SettingWindow;
         ////////////////////////////////////////////////////////////////////////////////////// RESIZE
         clsResize _form_resize;
@@ -91,11 +93,14 @@ namespace BRS_Dallas_Programmer
             this.Text = "[BRS] " + BRS.ComPorts.ConnectedFTDI;
             UpdateFilePath();
             UpdateUSBButton();
+
             //Check if name changed
-            if (name != BRS.ComPorts.ConnectedFTDI)
+            if (!(name.Equals(BRS.ComPorts.ConnectedFTDI)) && !DisableFTDI)
             {
-                NewUserTextInfo("COM changed...", 0);
                 BRS.Debug.Header(true);
+                BRS.Debug.Comment(Convert.ToString(DisableFTDI));
+
+                NewUserTextInfo("COM changed...", 0);
                 BRS.Debug.Comment("Updating form name and USB icon with new device name");
                 UpdateUSBButton();
                 BRS.Debug.Success("");
@@ -123,6 +128,11 @@ namespace BRS_Dallas_Programmer
                 {
                     BRS.Debug.Comment("Setting COM parameters to Proggramming ones");
                     BRS.Debug.Comment("COM used: " + BRS.ComPorts.FTDIComName);
+
+                    //Setting screen's text to attempt.
+                    NewUserTextInfo("Opening port...", 3);
+                    this.Refresh();
+
                     try
                     {
                         BRS.Debug.Comment("Attempting to open " + BRS.ComPorts.FTDIComName + " port...");
@@ -130,6 +140,7 @@ namespace BRS_Dallas_Programmer
                         if(BRS.ComPorts.FTDIPort.IsOpen)
                         {
                             NewUserTextInfo("COM already opened somewhere!", 2);
+                            this.Refresh();
                             BRS.Debug.Error("Could not open port, port already opened");
                         }
                         else
@@ -140,6 +151,8 @@ namespace BRS_Dallas_Programmer
                             BRS.Debug.Success("Port is closed, opening...");
                             FileLoading();
                             BRS.ComPorts.FTDIPort.BaudRate = 57600;
+                            this.Refresh();
+
                             BRS.ComPorts.FTDIPort.Open();
                             BRS.Debug.Success("");
 
@@ -160,7 +173,6 @@ namespace BRS_Dallas_Programmer
                         BRS.Debug.Error("Could not open " + BRS.ComPorts.FTDIComName);
                     }
                 }
-                BRS.Debug.Success("named changed");
                 BRS.Debug.Header(false);
             }
         }
@@ -200,60 +212,72 @@ namespace BRS_Dallas_Programmer
         //////////////////////////////////////////////////////////////////////////////////////
         private void UpdateUSBButton()
         {
-
-            //Check if device is connected
-            if(BRS.ComPorts.FTDIComName.Equals("No Device"))
+            if (DisableFTDI)
             {
-                ConnectionStatusButton.BackgroundImage = Properties.Resources.icons8_usb_disconnected_100;
+                ConnectionStatusButton.BackgroundImage = Properties.Resources.icons8_usb_off_100;
+                this.Refresh();
             }
             else
             {
-                ConnectionStatusButton.BackgroundImage = Properties.Resources.icons8_usb_connected_100;
-                this.Refresh();
+                //Check if device is connected
+                if (BRS.ComPorts.FTDIComName.Equals("No Device"))
+                {
+                    ConnectionStatusButton.BackgroundImage = Properties.Resources.icons8_usb_disconnected_100;
+                }
+                else
+                {
+                    ConnectionStatusButton.BackgroundImage = Properties.Resources.icons8_usb_connected_100;
+                    this.Refresh();
+                }
             }
         }
         private void UpdateFilePath()
         {
-            //BRS.Debug.Comment("Verifying file path...");
-
-            if(FilePath.Equals(OldFilePath))
+            if (DisableFTDI)
             {
-                //BRS.Debug.Comment("No changes in file path");
+                UploadCodeButton.Enabled = false;
+                UploadCodeButton.BackgroundImage = Properties.Resources.icons8_file_100;
             }
             else
             {
-                BRS.Debug.Comment("File path changed!");
-                BRS.FileWatcher.SetFileLocation(FilePath);
-                OldFilePath = FilePath;
-                BRS.Debug.Comment("Changing file checker to new path");
-                BRS.FileWatcher.CreateFileWatcher();
-            }
-
-            if(File.Exists(FilePath))
-            {
-                if (BRS.ComPorts.FTDIPort.IsOpen)
+                if (FilePath.Equals(OldFilePath))
                 {
-                    //Port opened, and files available
-                    UploadCodeButton.BackgroundImage = Properties.Resources.icons8_file_download_100;
-
-                    //Check watcher
-                    if(BRS.FileWatcher.FileChanged)
-                    {
-                        //BRS.FileWatcher.FileChanged = false;
-                        BRS.Debug.Comment("FILE CHANGED");
-                    }
+                    //BRS.Debug.Comment("No changes in file path");
                 }
                 else
                 {
-                    //Port closed and files available
-                    UploadCodeButton.BackgroundImage = Properties.Resources.icons8_delete_file_100;
+                    BRS.Debug.Comment("File path changed!");
+                    BRS.Debug.Comment("Changing file checker to new path");
+                    BRS.FileWatcher.SetFileLocation(FilePath);
+                    OldFilePath = FilePath;
+                    BRS.FileWatcher.CreateFileWatcher();
                 }
-                UploadCodeButton.Enabled = true;
-            }
-            else
-            {
-                UploadCodeButton.BackgroundImage = Properties.Resources.icons8_error_file_100;
-                UploadCodeButton.Enabled = false;
+
+                if (File.Exists(FilePath))
+                {
+                    if (BRS.ComPorts.FTDIPort.IsOpen)
+                    {
+                        //Port opened, and files available
+                        UploadCodeButton.BackgroundImage = Properties.Resources.icons8_file_download_100;
+
+                        //Check watcher
+                        if (BRS.FileWatcher.FileChanged)
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        //Port closed and files available
+                        UploadCodeButton.BackgroundImage = Properties.Resources.icons8_delete_file_100;
+                    }
+                    UploadCodeButton.Enabled = true;
+                }
+                else
+                {
+                    UploadCodeButton.BackgroundImage = Properties.Resources.icons8_error_file_100;
+                    UploadCodeButton.Enabled = false;
+                }
             }
 
         }
@@ -272,6 +296,22 @@ namespace BRS_Dallas_Programmer
         {
             BRS.Debug.Comment("Setting AutoProgramming state");
             AutoProgramming = state;
+        }
+        public bool GetAutoConnectingState()
+        {
+            BRS.Debug.Comment("Returning automatic connecting state");
+            return (AutoConnecting);
+        }
+        public void SetAutoConnectingState(bool state)
+        {
+            BRS.Debug.Comment("Setting AutoConnecting state to " + Convert.ToString(state));
+            AutoConnecting = state;
+
+            if(AutoConnecting)
+            {
+                BRS.Debug.Comment("Turning off Disable FTDI");
+                DisableFTDI = false;
+            }
         }
         public void FlipSettingShowingState()
         {
@@ -307,8 +347,9 @@ namespace BRS_Dallas_Programmer
             {
                 BRS.Debug.Comment("Creating new setting window");
                 SettingWindow = new ProgrammerSettings(this);
+
                 BRS.Debug.Comment("Showing setting window...");
-                SettingWindow.Show();
+                SettingWindow.ShowDialog();
 
             }
             else
@@ -328,10 +369,13 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Manual upload starting...");
             FileLoading();
             this.Refresh();
+
             if (BRS.ComPorts.FTDIPort.IsOpen)
             {
                 if(File.Exists(FilePath))
                 {
+                    BRS.FileWatcher.FileChanged = false;
+
                     BRS.Debug.Success("File validated, and FTDI opened");
                     BRS.Debug.Success("Parsing as text");
                     string Text = File.ReadAllText(FilePath);
@@ -339,53 +383,104 @@ namespace BRS_Dallas_Programmer
                     BRS.Debug.Success("Printing Amount of expected Gs:");
                     int Gs = 0;
                     Gs = BRS.ComPorts.GetHexFileSize(Text);
-
+                    BRS.Debug.Success(Gs.ToString());
                     amountOfGs = 0;
                     ProgrammingProgress.Maximum = Gs+1;
                     ProgrammingProgress.Value = 0;
 
                     BRS.Debug.Comment("Programming HEX file to FTDI");
                     NewUserTextInfo("Programming...",0);
-                    bool executed = BRS.ComPorts.SendHexFileDS89(Text, QReceived);
+                    string executed = BRS.ComPorts.SendHexFileDS89(Text, QReceived);
 
-                    if(executed)
+                    if(executed.Equals("Programmed"))
                     {
-                        NewUserTextInfo("Programmed!", 1);
+                        NewUserTextInfo("Verifying...", 1);
                         BRS.Debug.Success("Programmed !");
                         BRS.Debug.Comment(BRS.ComPorts.FTDIPort.ReadExisting());
-                        BRS.FileWatcher.FileChanged = false;
-                        SystemSounds.Asterisk.Play();
+                        this.Refresh();
+                        Thread.Sleep(200);
+
+                        //verifying what the dallas returned after programming it.
+                        string Verified = BRS.ComPorts.VerifyLastProgramming();
+                        
+                        if(Verified.Equals("Success!"))
+                        {
+                            NewUserTextInfo(Verified,1);
+                            SystemSounds.Asterisk.Play();
+                        }
+                        else
+                        {
+                            NewUserTextInfo(Verified, 2);
+                            SystemSounds.Hand.Play();
+                        }
                     }
-                    else
+                    else if(executed.Equals("No Replies"))
                     {
                         SystemSounds.Hand.Play();
-                        //SystemSounds.Beep.Play();
-                        //SystemSounds.Beep.Play();
                         BRS.Debug.Error("Programming failed!");
                         NewUserTextInfo("No replies from Dallas",2);
+                        ProgrammingProgress.Value = 0;
+                    }
+                    else if(executed.Equals("Error"))
+                    {
+                        BRS.Debug.Error("Programming failed!");
+                        ProgrammingProgress.Value = 0;
+
+                        SystemSounds.Hand.Play();
+                        NewUserTextInfo("Fatal programming error", 2);
+                        this.Refresh();
+                        Thread.Sleep(200);
+
+                        SystemSounds.Hand.Play();
+                        NewUserTextInfo("Fatal programming error", 0);
+                        this.Refresh();
+                        Thread.Sleep(200);
+
+                        SystemSounds.Hand.Play();
+                        NewUserTextInfo("Fatal programming error", 2);
+                        this.Refresh();
+                        Thread.Sleep(200);
+
+                        SystemSounds.Hand.Play();
+                        NewUserTextInfo("Fatal programming error", 0);
+                        this.Refresh();
+                        Thread.Sleep(200);
+
+                        SystemSounds.Hand.Play();
+                        NewUserTextInfo("Fatal programming error", 2);
+                        this.Refresh();
+                        Thread.Sleep(200);
                     }
                 }
             }
 
             BRS.Debug.Header(false);
         }
+        //#############################################################//
         /// <summary>
         /// Handler function called each time a G is received when transmitting a file
         /// </summary>
+        //#############################################################// 
         private void QReceived()
         {
             amountOfGs = amountOfGs + 1;
-            BRS.Debug.Comment(amountOfGs.ToString());
+            if(amountOfGs > ProgrammingProgress.Maximum)
+            {
+                ProgrammingProgress.Maximum = amountOfGs;
+            }
+
             ProgrammingProgress.Value = amountOfGs;
             this.Refresh();
         }
 
+        //#############################################################//
         /// <summary>
         /// changes the programmer's global text with the specified one
         /// 0: normal, 1: Green, 2: red, 3: warning orange
         /// </summary>
         /// <param name="info"></param>
         /// <param name="style"></param>
+        //#############################################################// 
         private void NewUserTextInfo(string info, int style)
         {
             switch(style)
@@ -397,13 +492,14 @@ namespace BRS_Dallas_Programmer
             }
 
             UserTextInfo.Text = info;
-
         }
+        //#############################################################//
         /// <summary>
         /// Indicate the closure of the form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        //#############################################################// 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             BRS.Debug.Header(true);
@@ -424,6 +520,54 @@ namespace BRS_Dallas_Programmer
             FTDI_Search_Timer.Stop();
 
             BRS.Debug.Header(false);
+        }
+
+        //#############################################################//
+        //#############################################################//
+        private void ConnectionStatusButton_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.LocalStart(true);
+            BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Checking if this action can be executed...");
+            if(!AutoConnecting)
+            {
+                BRS.Debug.Success("Automatic connecting off, flipping FTDI enabled flag");
+                DisableFTDI = !DisableFTDI;
+
+                if(DisableFTDI)
+                {
+                    BRS.Debug.Comment("Updating screen text...");
+                    NewUserTextInfo("Serial disabled",0);
+
+                    if (BRS.ComPorts.FTDIPort.IsOpen)
+                    {
+                        BRS.Debug.Success("Closing FTDI port");
+                        BRS.ComPorts.FTDIPort.Close();
+                    }
+                    else
+                    {
+                        BRS.Debug.Aborted("Port already closed");
+                    }
+
+                    BRS.Debug.Comment("Resetting name to reattempt connection...");
+                    name = "retry";
+                    BRS.Debug.Success("");
+                }
+                else // FTDI connection re-enabled.
+                {
+                    BRS.Debug.Comment("Resetting FTDI name to reattempt connection...");
+                    name = "retry";
+                    BRS.Debug.Success("");
+                }
+
+            }
+            BRS.Debug.Comment("Updating USB button icon");
+            UpdateUSBButton();
+            UpdateFilePath();
+
+            BRS.Debug.Header(false);
+            BRS.Debug.LocalEnd();
         }
     }
 }

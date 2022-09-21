@@ -15,6 +15,7 @@ using System.Management.Instrumentation;
 using System.Threading;
 using static System.Windows.Forms.AxHost;
 using static System.Net.Mime.MediaTypeNames;
+using System.Collections.ObjectModel;
 //#############################################//
 namespace BRS
 {
@@ -878,6 +879,9 @@ namespace BRS
         /// </summary>
         public static string LinkedComName = "No Device"; //COM4 COM5 ect
 
+        public static ObservableCollection<string> ListOfPortChanged = new ObservableCollection<string>();
+        public static List<string> AvailableComsFullName = new List<string>();
+
         public static Action DataReceivedAction;
 
         static ManagementClass processClass = new ManagementClass("Win32_PnPEntity");
@@ -974,7 +978,8 @@ namespace BRS
         }
         private static void HandleSerialChanges(object sender, EventArrivedEventArgs e)
         {
-            LinkedFullName = CheckIfStillAvailable();
+            StoreAllAvailableComs();
+
             try
             {
                 LinkedComName = LinkedFullName.Split('(', ')')[1];
@@ -992,7 +997,7 @@ namespace BRS
         //#########################################################// 
         public static void UpdatePortInfo()
         {
-            LinkedFullName = CheckIfStillAvailable();
+            //LinkedFullName = CheckIfStillAvailable();
             try
             {
                 LinkedComName = LinkedFullName.Split('(', ')')[1];
@@ -1007,27 +1012,27 @@ namespace BRS
         /// Check if the specified com port is available for use
         /// </summary>
         //#########################################################// 
-        public static string CheckIfStillAvailable()
+        public static void StoreAllAvailableComs()
         {
+            //####################################################################### From Gaurav Sangwan 2017
             ManagementObjectCollection Ports = processClass.GetInstances();
 
-            //Update the list of  ports
-            processClass = new ManagementClass("Win32_PnPEntity");
+            AvailableComsFullName.Clear();
 
-            //ittering the list of USB ports
+            BRS.Debug.Comment("[BRS]: Printing all available ports:");
             foreach (ManagementObject prop in Ports)
             {
-                if (prop.GetPropertyValue("Manufacturer") != null)
+                if (prop.GetPropertyValue("Manufacturer") != null && prop.GetPropertyValue("Name") != null)
                 {
-                    if (prop.GetPropertyValue("Name").ToString().Equals(BRS.ComPort.LinkedFullName))
+                    if (prop.GetPropertyValue("Name").ToString().Contains("USB") &&
+                        prop.GetPropertyValue("Name").ToString().Contains("COM"))
                     {
-                        //BRS.Debug.Success("[BRS]: FTDI found: " + prop.GetPropertyValue("Name").ToString());
-                        return (prop.GetPropertyValue("Name").ToString());
+                        AvailableComsFullName.Add(prop.GetPropertyValue("Name").ToString() + "  \t  " + prop.GetPropertyValue("Manufacturer").ToString());
                     }
                 }
             }
-            // No device with FTDI as a manufacturer was found.
-            return ("No Device");
+            ListOfPortChanged.Clear();
+            //#######################################################################
         }
         //#########################################################// 
         /// <summary>

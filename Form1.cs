@@ -62,6 +62,7 @@ namespace BRS_Dallas_Programmer
             name = "";
 
             BRS.Debug.Comment("Looking for FTDIs");
+            FTDI_Search_Timer.Enabled = true;
             BRS.FTDI.UpdateFTDIInfo();
 
             BRS.Debug.Comment(BRS.FTDI.FTDIComName);
@@ -322,7 +323,7 @@ namespace BRS_Dallas_Programmer
         {
             BRS.Debug.Header(true);
             BRS.Debug.Comment("Handling file dialog...");
-            FilePath = BRS.Dialog.OpenFile("[BRS]: Open your hex file", "HEX file (*.hex)|*.hex");
+            FilePath = BRS.Dialog.OpenFile("[BRS]: Open your hex file", "HEX file (*.hex)|*.hex| txt files (*.txt)|*.txt");
 
             if(File.Exists(FilePath))
             {

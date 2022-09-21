@@ -61,6 +61,7 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Specifying function to call when data is received");
             BRS.ComPort.createInfoReceivedEvent();
             BRS.ComPort.DataReceivedAction = DataReceiverHandling;
+            BRS.ComPort.startPortUpdater();
             Debug.Success("");
 
             BRS.Debug.Comment("Updating buttons and user header...");
@@ -68,6 +69,7 @@ namespace BRS_Dallas_Programmer
             UpdateFileButton();
             UpdateLinkButton();
             UpdateSettingButton();
+            UpdateConsole();
             Debug.Success("Updating finished");
 
             BRS.Debug.Header(false);
@@ -92,6 +94,9 @@ namespace BRS_Dallas_Programmer
         {
             _form_resize._resize();
         }
+        //#############################################################//
+        //#############################################################//
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         //#############################################################//
@@ -158,12 +163,14 @@ namespace BRS_Dallas_Programmer
                 Debug.Success("Port opened, settings cannot be changed");
                 SettingsButton.ToolTipText = "Close port to change settings";
                 SettingsButton.Enabled = false;
+                SettingsButton.Image = Properties.Resources.icons8_settings_disabled_100__1_;
             }
             else
             {
                 Debug.Success("Port closed, settings can be changed");
                 SettingsButton.ToolTipText = "Change port settings";
                 SettingsButton.Enabled = true;
+                SettingsButton.Image = Properties.Resources.icons8_settings_100;
             }
         }
         //#############################################################//
@@ -213,5 +220,17 @@ namespace BRS_Dallas_Programmer
 
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        //#############################################################//
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Opening setting's dialog...");
+            ConsoleSetting settings = new ConsoleSetting(this);
+            settings.ShowDialog();
+
+            BRS.Debug.Header(false);
+        }
     }
 }

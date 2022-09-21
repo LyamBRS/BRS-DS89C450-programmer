@@ -33,13 +33,13 @@ namespace BRS_Dallas_Programmer
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ConsoleArea = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.UserInfo = new System.Windows.Forms.TextBox();
-            this.Periodic100msTimer = new System.Windows.Forms.Timer(this.components);
             this.SerialLinkButon = new System.Windows.Forms.ToolStripButton();
             this.SelectFileButton = new System.Windows.Forms.ToolStripButton();
             this.FileButton = new System.Windows.Forms.ToolStripButton();
             this.ClearConsoleButton = new System.Windows.Forms.ToolStripButton();
             this.SettingsButton = new System.Windows.Forms.ToolStripButton();
+            this.UserInfo = new System.Windows.Forms.TextBox();
+            this.Periodic100msTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -99,26 +99,6 @@ namespace BRS_Dallas_Programmer
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "Console Strip";
             // 
-            // UserInfo
-            // 
-            this.UserInfo.BackColor = System.Drawing.Color.Black;
-            this.UserInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.UserInfo.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserInfo.ForeColor = System.Drawing.Color.Gray;
-            this.UserInfo.Location = new System.Drawing.Point(114, 12);
-            this.UserInfo.Name = "UserInfo";
-            this.UserInfo.ReadOnly = true;
-            this.UserInfo.ShortcutsEnabled = false;
-            this.UserInfo.Size = new System.Drawing.Size(686, 38);
-            this.UserInfo.TabIndex = 4;
-            this.UserInfo.Text = "Console";
-            this.UserInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Periodic100msTimer
-            // 
-            this.Periodic100msTimer.Enabled = true;
-            this.Periodic100msTimer.Tick += new System.EventHandler(this.Periodic100msTimer_Tick);
-            // 
             // SerialLinkButon
             // 
             this.SerialLinkButon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -171,8 +151,29 @@ namespace BRS_Dallas_Programmer
             this.SettingsButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(107, 104);
+            this.SettingsButton.Size = new System.Drawing.Size(104, 104);
             this.SettingsButton.Text = "toolStripButton1";
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            // 
+            // UserInfo
+            // 
+            this.UserInfo.BackColor = System.Drawing.Color.Black;
+            this.UserInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserInfo.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserInfo.ForeColor = System.Drawing.Color.Gray;
+            this.UserInfo.Location = new System.Drawing.Point(114, 12);
+            this.UserInfo.Name = "UserInfo";
+            this.UserInfo.ReadOnly = true;
+            this.UserInfo.ShortcutsEnabled = false;
+            this.UserInfo.Size = new System.Drawing.Size(686, 38);
+            this.UserInfo.TabIndex = 4;
+            this.UserInfo.Text = "Console";
+            this.UserInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Periodic100msTimer
+            // 
+            this.Periodic100msTimer.Enabled = true;
+            this.Periodic100msTimer.Tick += new System.EventHandler(this.Periodic100msTimer_Tick);
             // 
             // SerialConsole
             // 
@@ -184,7 +185,7 @@ namespace BRS_Dallas_Programmer
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HelpButton = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SerialConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[BRS]: Console";

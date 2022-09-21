@@ -49,7 +49,6 @@ namespace BRS_Dallas_Programmer
             // 
             // FTDI_Search_Timer
             // 
-            this.FTDI_Search_Timer.Enabled = true;
             this.FTDI_Search_Timer.Tick += new System.EventHandler(this.FTDI_Search_Timer_Tick);
             // 
             // flowLayoutPanel1

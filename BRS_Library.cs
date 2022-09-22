@@ -1024,8 +1024,7 @@ namespace BRS
             {
                 if (prop.GetPropertyValue("Manufacturer") != null && prop.GetPropertyValue("Name") != null)
                 {
-                    if (prop.GetPropertyValue("Name").ToString().Contains("USB") &&
-                        prop.GetPropertyValue("Name").ToString().Contains("COM"))
+                    if (prop.GetPropertyValue("Name").ToString().Contains("COM"))
                     {
                         AvailableComsFullName.Add(prop.GetPropertyValue("Name").ToString() + "  \t  " + prop.GetPropertyValue("Manufacturer").ToString());
                     }

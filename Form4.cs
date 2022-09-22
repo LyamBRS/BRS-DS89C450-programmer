@@ -16,6 +16,7 @@ using BRS_Dallas_Programmer;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace BRS_Dallas_Programmer
 {
@@ -27,6 +28,7 @@ namespace BRS_Dallas_Programmer
         public static string SelectedComFullName = "No Device";
         public static string SelectedComName = "No Device";
         public static bool UpdateDropDown = false;
+        public static int TimeUntilDropDownUpdate = 0;
 
         SerialPort OldSettings;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,9 +66,15 @@ namespace BRS_Dallas_Programmer
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void InnitComDropDown()
         {
+            BRS.Debug.Comment("Clearing items...");
             PortBox1.Items.Clear();
+            BRS.Debug.Comment("Adding names back...");
             foreach (string name in BRS.ComPort.AvailableComsFullName)
-            PortBox1.Items.Add(name);
+            {
+                PortBox1.Items.Add(name);
+            }
+            PortBox1.Items.Add(BRS.ComPort.Port.PortName);
+            PortBox1.SelectedItem = BRS.ComPort.Port.PortName;
         }
         
         private void InnitBaudRateBox()
@@ -145,19 +153,29 @@ namespace BRS_Dallas_Programmer
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ListChanged(object sender, EventArgs e)
         {
-            BRS.Debug.Comment("Putting out of focus dropdown");
-            BRS.Debug.Comment("Setting flag");
+            BRS.Debug.Comment("Increasing <debounce> timer.");
+            TimeUntilDropDownUpdate = 4;
             UpdateDropDown = true;
-            Debug.Success("");
         }
 
         private void UpdatePortList_Tick(object sender, EventArgs e)
         {
-            if (UpdateDropDown)
+            if (UpdateDropDown && TimeUntilDropDownUpdate == 0)
             {
-                Thread.Sleep(2000);
+                BRS.Debug.Success("Innitialising com port drop down");
                 InnitComDropDown();
                 UpdateDropDown = false;
+            }
+            else if (TimeUntilDropDownUpdate > 0)
+            {
+                TimeUntilDropDownUpdate--;
+            }
+
+            // FORCE CLOSE FORM IF LINKED
+            if(BRS.ComPort.Port.IsOpen)
+            {
+                BRS.Debug.Error("PORT OPENED, FORCE CLOSING CONSOLE SETTING FORM!");
+                this.Close();
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

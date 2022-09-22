@@ -42,6 +42,10 @@ namespace BRS_Dallas_Programmer
         public static string FilePath = "";
 
         clsResize _form_resize;
+
+        public SerialConsole serialConsoleRef;
+        public delegate void dlgThread(String Result);
+        public dlgThread Delegate;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         //#############################################################//
@@ -51,6 +55,8 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Comment("Initializing console's components...");
             InitializeComponent();
+            serialConsoleRef = this;
+            Delegate = new dlgThread(RXConsoleText);
             Debug.Success("");
 
             BRS.Debug.Comment("Creating resizing properties");
@@ -82,10 +88,51 @@ namespace BRS_Dallas_Programmer
             //Gather stored data in the buffer
             string result = BRS.ComPort.Port.ReadExisting();
 
-            ConsoleArea.SelectionColor = Color.GreenYellow;
-            ConsoleArea.AppendText(result);
-            ConsoleArea.SelectionColor = Color.Aqua;
+            try
+            {
+                serialConsoleRef.Invoke(serialConsoleRef.Delegate, result);
+            }
+            catch
+            {
+                BRS.ComPort.DataReceivedAction = EmptyReceivingHandler;
+            }
         }
+        public void EmptyReceivingHandler()
+        {
+
+        }
+        private void RXConsoleText(string received)
+        {
+
+           ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
+           //ConsoleArea.SelectionLength = received.Length;
+           ConsoleArea.SelectionColor = Color.LightBlue;
+
+            if (received.StartsWith("\r"))
+            {
+                BRS.Debug.Comment("Ends with carriage return");
+                int LineIndex = ConsoleArea.GetLineFromCharIndex(ConsoleArea.SelectionStart);
+                BRS.Debug.Comment("LineIndex: " + LineIndex.ToString());
+
+                int firstFromLine = ConsoleArea.GetFirstCharIndexFromLine(LineIndex);
+                BRS.Debug.Comment("firstFromLine: " + firstFromLine.ToString());
+
+                ConsoleArea.SelectionStart = firstFromLine;
+                ConsoleArea.SelectionLength = ConsoleArea.Text.Length - firstFromLine;
+                ConsoleArea.SelectedText = "";
+
+                received = received.Replace('\r',' ');
+                received = received.Replace('\n', ' ');
+            }
+
+            TextChangedOnRX = true;
+            ConsoleArea.SelectedText = received;
+
+            ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
+            ConsoleArea.SelectionColor = Color.Aqua;
+
+        }
+
         private void _Load(object sender, EventArgs e)
         {
             _form_resize._get_initial_size();
@@ -112,7 +159,7 @@ namespace BRS_Dallas_Programmer
                     Debug.Success("File available, ready for download.");
                     FileButton.Enabled = true;
                     FileButton.ToolTipText = "Send your file in the opened port";
-                    FileButton.Image = Properties.Resources.icons8_error_file_100;
+                    FileButton.Image = Properties.Resources.icons8_file_download_100;
                     Debug.Success("");
                 }
                 else
@@ -190,7 +237,18 @@ namespace BRS_Dallas_Programmer
                 ConsoleArea.Enabled = false;
             }
         }
-
+        //#############################################################//
+        //#############################################################//
+        public void UpdateAllIcons()
+        {
+            BRS.Debug.Comment("Updating all the buttons");
+            UpdateConsole();
+            UpdateSettingButton();
+            UpdateLinkButton();
+            UpdateLinkButton();
+            UpdateFileButton();
+            Debug.Success("All icons were updated!");
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         /// <summary>
@@ -219,6 +277,24 @@ namespace BRS_Dallas_Programmer
         {
 
         }
+        private void TextColorFading_Tick(object sender, EventArgs e)
+        {
+            int R = UserInfo.ForeColor.R;
+            int G = UserInfo.ForeColor.G;
+            int B = UserInfo.ForeColor.B;
+
+            if (R > 100) { R-=2; }
+            if (G > 100) { G-=2; }
+            if (B > 100) { B-=2; }
+
+            UserInfo.SelectionStart = 0;
+            UserInfo.SelectionLength = 0;
+            UserInfo.ForeColor = Color.FromArgb(R, G, B);
+            ConsoleArea.Focus();
+
+            // Set cursor to the end of the console
+            //ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         //#############################################################//
@@ -231,6 +307,82 @@ namespace BRS_Dallas_Programmer
             settings.ShowDialog();
 
             BRS.Debug.Header(false);
+        }
+        //#############################################################//
+        //#############################################################//
+        private void SerialLinkButon_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Checking if port is opened or closed.");
+            if (!BRS.ComPort.Port.IsOpen)
+            {
+                BRS.Debug.Comment("Attempting linking with specified COM port...");
+                BRS.Debug.Comment("Port name: " + BRS.ComPort.Port.PortName.ToString());
+                BRS.Debug.Comment("BaudRate:  " + BRS.ComPort.Port.BaudRate.ToString());
+                BRS.Debug.Comment("DataBits:  " + BRS.ComPort.Port.DataBits.ToString());
+                BRS.Debug.Comment("StopBits:  " + BRS.ComPort.Port.StopBits.ToString());
+                BRS.Debug.Comment("Parity:    " + BRS.ComPort.Port.Parity.ToString());
+                BRS.Debug.Comment("HandShake: " + BRS.ComPort.Port.Handshake.ToString());
+                try
+                {
+                    BRS.ComPort.Port.Open();
+                    Debug.Success("Port opened!");
+                    NewUserTextInfo("Linked!", 1);
+                }
+                catch
+                {
+                    Debug.Error("FAILED TO OPEN COM PORT WITH SPECIFIED INFO");
+                    NewUserTextInfo("LINKING ERROR", 2);
+                }
+            }
+            else
+            {
+                BRS.Debug.Comment("Closing COM...");
+                try
+                {
+                    BRS.ComPort.Port.Close();
+                    Debug.Success("Port closed!");
+                    NewUserTextInfo("Port closed", 1);
+                }
+                catch
+                {
+                    Debug.Error("FAILED TO OPEN COM PORT WITH SPECIFIED INFO");
+                    NewUserTextInfo("LINKING ERROR", 2);
+                }
+            }
+            BRS.Debug.Comment("Updating icons...");
+            UpdateAllIcons();
+
+            BRS.Debug.Header(false);
+        }
+        //#############################################################//
+        //#############################################################//
+        private void SelectFileButton_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.Header(true);
+            BRS.Debug.Comment("Handling file dialog...");
+            FilePath = BRS.Dialog.OpenFile("[BRS]: Open your hex file", "HEX file (*.hex)|*.hex| txt files (*.txt)|*.txt");
+
+            if (File.Exists(FilePath))
+            {
+                NewUserTextInfo("File good for download.", 1);
+            }
+            else
+            {
+                NewUserTextInfo("Invalid file", 2);
+            }
+            BRS.Debug.Success("");
+            UpdateAllIcons();
+            BRS.Debug.Header(false);
+        }
+        //#############################################################//
+        //#############################################################//
+        private void ClearConsoleButton_Click(object sender, EventArgs e)
+        {
+            NewUserTextInfo("Cleared!", 2);
+            SystemSounds.Asterisk.Play();
+            ConsoleArea.Text = "";
         }
     }
 }

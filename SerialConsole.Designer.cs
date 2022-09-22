@@ -40,6 +40,7 @@ namespace BRS_Dallas_Programmer
             this.SettingsButton = new System.Windows.Forms.ToolStripButton();
             this.UserInfo = new System.Windows.Forms.TextBox();
             this.Periodic100msTimer = new System.Windows.Forms.Timer(this.components);
+            this.TextColorFading = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -67,14 +68,13 @@ namespace BRS_Dallas_Programmer
             this.ConsoleArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ConsoleArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ConsoleArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ConsoleArea.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.ConsoleArea.ForeColor = System.Drawing.Color.Aqua;
             this.ConsoleArea.Location = new System.Drawing.Point(111, 3);
             this.ConsoleArea.Name = "ConsoleArea";
             this.ConsoleArea.ShortcutsEnabled = false;
             this.ConsoleArea.Size = new System.Drawing.Size(686, 535);
             this.ConsoleArea.TabIndex = 6;
             this.ConsoleArea.Text = "";
-            this.ConsoleArea.WordWrap = false;
             // 
             // toolStrip1
             // 
@@ -109,6 +109,7 @@ namespace BRS_Dallas_Programmer
             this.SerialLinkButon.Size = new System.Drawing.Size(107, 104);
             this.SerialLinkButon.Text = "LinkToSerial";
             this.SerialLinkButon.ToolTipText = "Connect to selected Serial Port";
+            this.SerialLinkButon.Click += new System.EventHandler(this.SerialLinkButon_Click);
             // 
             // SelectFileButton
             // 
@@ -120,6 +121,7 @@ namespace BRS_Dallas_Programmer
             this.SelectFileButton.Size = new System.Drawing.Size(107, 104);
             this.SelectFileButton.Text = "File";
             this.SelectFileButton.ToolTipText = "Select a file to send over opened port";
+            this.SelectFileButton.Click += new System.EventHandler(this.SelectFileButton_Click);
             // 
             // FileButton
             // 
@@ -143,6 +145,7 @@ namespace BRS_Dallas_Programmer
             this.ClearConsoleButton.Size = new System.Drawing.Size(107, 104);
             this.ClearConsoleButton.Text = "Clear Console";
             this.ClearConsoleButton.ToolTipText = "Clear console text area";
+            this.ClearConsoleButton.Click += new System.EventHandler(this.ClearConsoleButton_Click);
             // 
             // SettingsButton
             // 
@@ -151,7 +154,7 @@ namespace BRS_Dallas_Programmer
             this.SettingsButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(104, 104);
+            this.SettingsButton.Size = new System.Drawing.Size(107, 104);
             this.SettingsButton.Text = "toolStripButton1";
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
@@ -159,6 +162,7 @@ namespace BRS_Dallas_Programmer
             // 
             this.UserInfo.BackColor = System.Drawing.Color.Black;
             this.UserInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserInfo.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.UserInfo.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserInfo.ForeColor = System.Drawing.Color.Gray;
             this.UserInfo.Location = new System.Drawing.Point(114, 12);
@@ -175,6 +179,12 @@ namespace BRS_Dallas_Programmer
             this.Periodic100msTimer.Enabled = true;
             this.Periodic100msTimer.Tick += new System.EventHandler(this.Periodic100msTimer_Tick);
             // 
+            // TextColorFading
+            // 
+            this.TextColorFading.Enabled = true;
+            this.TextColorFading.Interval = 10;
+            this.TextColorFading.Tick += new System.EventHandler(this.TextColorFading_Tick);
+            // 
             // SerialConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -184,7 +194,6 @@ namespace BRS_Dallas_Programmer
             this.Controls.Add(this.UserInfo);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HelpButton = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SerialConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -209,5 +218,6 @@ namespace BRS_Dallas_Programmer
         private System.Windows.Forms.ToolStripButton SettingsButton;
         private System.Windows.Forms.TextBox UserInfo;
         private System.Windows.Forms.Timer Periodic100msTimer;
+        private System.Windows.Forms.Timer TextColorFading;
     }
 }

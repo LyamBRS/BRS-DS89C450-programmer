@@ -24,6 +24,9 @@ namespace BRS_Dallas_Programmer
         public static bool ConsoleEnabled = false;
         public static bool ShowPCConsoleOutput = true;
 
+        public static bool ParseReturnCheckBox = true;
+        public static bool ShowUserTX = false;
+
         public static bool TextChangedOnRX = false;
 
         public static bool LinkedToPort = false;
@@ -46,6 +49,8 @@ namespace BRS_Dallas_Programmer
         public SerialConsole serialConsoleRef;
         public delegate void dlgThread(String Result);
         public dlgThread Delegate;
+
+        public static bool oldPortState = false;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         //#############################################################//
@@ -80,6 +85,8 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Header(false);
         }
+        //#############################################################//
+        //#############################################################//
         public void DataReceiverHandling()
         {
             //tell text changed event that a reception made it change
@@ -97,25 +104,38 @@ namespace BRS_Dallas_Programmer
                 BRS.ComPort.DataReceivedAction = EmptyReceivingHandler;
             }
         }
+        //#############################################################//
+        /// <summary>
+        /// Function to replace ComPort.DataReceivedAction so an empty
+        /// function is called rather than putting text in an
+        /// inexisting console rich text box.
+        /// </summary>
+        //#############################################################//
         public void EmptyReceivingHandler()
         {
 
         }
+        //#############################################################//
+        /// <summary>
+        /// Parses the received text from ComPort.Port in the console
+        /// rich text box.
+        /// Raises the receiving flag so the textchanged event does not
+        /// occur.
+        /// </summary>
+        /// <param name="received">serial buffer</param>
+        //#############################################################//
         private void RXConsoleText(string received)
         {
-
+           //Raise flag so textchanged does not parse latest input as user input
+           TextChangedOnRX = true;
            ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
            //ConsoleArea.SelectionLength = received.Length;
-           ConsoleArea.SelectionColor = Color.LightBlue;
+           ConsoleArea.SelectionColor = Color.LightGreen;
 
             if (received.StartsWith("\r"))
             {
-                BRS.Debug.Comment("Ends with carriage return");
                 int LineIndex = ConsoleArea.GetLineFromCharIndex(ConsoleArea.SelectionStart);
-                BRS.Debug.Comment("LineIndex: " + LineIndex.ToString());
-
                 int firstFromLine = ConsoleArea.GetFirstCharIndexFromLine(LineIndex);
-                BRS.Debug.Comment("firstFromLine: " + firstFromLine.ToString());
 
                 ConsoleArea.SelectionStart = firstFromLine;
                 ConsoleArea.SelectionLength = ConsoleArea.Text.Length - firstFromLine;
@@ -125,14 +145,15 @@ namespace BRS_Dallas_Programmer
                 received = received.Replace('\n', ' ');
             }
 
-            TextChangedOnRX = true;
             ConsoleArea.SelectedText = received;
-
             ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
             ConsoleArea.SelectionColor = Color.Aqua;
 
+            //Lowering transmission flag for user inputs to show in console
+            TextChangedOnRX = false;
         }
-
+        //#############################################################//
+        //#############################################################//
         private void _Load(object sender, EventArgs e)
         {
             _form_resize._get_initial_size();
@@ -143,7 +164,23 @@ namespace BRS_Dallas_Programmer
         }
         //#############################################################//
         //#############################################################//
-
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public bool GetReturnParsing()
+        {
+            return (ParseReturnCheckBox);
+        }
+        public bool GetUSerTX()
+        {
+            return (ShowUserTX);
+        }
+        public void SetReturnParsing(bool state)
+        {
+            ParseReturnCheckBox = state;
+        }
+        public void SetUSerTX(bool state)
+        {
+            ShowUserTX = state;
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         //#############################################################//
@@ -273,27 +310,45 @@ namespace BRS_Dallas_Programmer
             Debug.Success("");
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Constantly check if comport is still opened, if not, update
+        /// all the buttons plus the console
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
         private void Periodic100msTimer_Tick(object sender, EventArgs e)
         {
-
+            if(BRS.ComPort.Port.IsOpen != oldPortState)
+            {
+                oldPortState = BRS.ComPort.Port.IsOpen;
+                UpdateAllIcons();
+                NewUserTextInfo(oldPortState ? "Port opened" : "Link closed unexpectedly", 3);
+            }
         }
+        //#############################################################//
+        /// <summary>
+        /// Function slowly fading out UserInfoText until it is not
+        /// showing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void TextColorFading_Tick(object sender, EventArgs e)
         {
             int R = UserInfo.ForeColor.R;
             int G = UserInfo.ForeColor.G;
             int B = UserInfo.ForeColor.B;
 
-            if (R > 100) { R-=2; }
-            if (G > 100) { G-=2; }
-            if (B > 100) { B-=2; }
+            if (R > 2) { R-=2; }
+            if (G > 2) { G-=2; }
+            if (B > 2) { B-=2; }
 
             UserInfo.SelectionStart = 0;
             UserInfo.SelectionLength = 0;
             UserInfo.ForeColor = Color.FromArgb(R, G, B);
             ConsoleArea.Focus();
-
-            // Set cursor to the end of the console
-            //ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
@@ -327,6 +382,7 @@ namespace BRS_Dallas_Programmer
                 try
                 {
                     BRS.ComPort.Port.Open();
+                    oldPortState = true;
                     Debug.Success("Port opened!");
                     NewUserTextInfo("Linked!", 1);
                 }
@@ -342,6 +398,7 @@ namespace BRS_Dallas_Programmer
                 try
                 {
                     BRS.ComPort.Port.Close();
+                    oldPortState = false;
                     Debug.Success("Port closed!");
                     NewUserTextInfo("Port closed", 1);
                 }
@@ -383,6 +440,79 @@ namespace BRS_Dallas_Programmer
             NewUserTextInfo("Cleared!", 2);
             SystemSounds.Asterisk.Play();
             ConsoleArea.Text = "";
+        }
+        //#############################################################//
+        //#############################################################//
+        private void FileButton_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.Header(true);
+            BRS.Debug.Comment("Trying to send file...");
+
+            if(File.Exists(FilePath))
+            {
+                if(BRS.ComPort.Port.IsOpen)
+                {
+                    NewUserTextInfo("Sending file...", 3);
+                    BRS.Debug.Comment("Sending file on comport...");
+                    this.Refresh();
+
+                    string Text = File.ReadAllText(FilePath);
+                    BRS.Debug.Comment("Writing on port...");
+                    try
+                    {
+                        BRS.ComPort.SendFile(Text);
+                        Debug.Success("File sent!");
+                        NewUserTextInfo("Success!", 1);
+                    }
+                    catch
+                    {
+                        NewUserTextInfo("Sending Error!", 2);
+                        Debug.Error("ERROR sending file could no be done");
+                    }
+                }
+                else
+                {
+                    Debug.Error("Could not send file, port closed");
+                    NewUserTextInfo("Port closed!", 2);
+                }
+            }
+            else
+            {
+                Debug.Error("Could not send file, file cant be reached");
+                NewUserTextInfo("File does not exist!",2);
+            }
+            BRS.Debug.Header(false);
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        //#############################################################//
+        private void SerialConsole_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            BRS.Debug.Comment("Key press");
+            if (ConsoleArea.Enabled)
+            {
+                ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
+                ConsoleArea.SelectionColor = Color.Aqua;
+
+                //ConsoleArea.SelectedText = e.KeyChar.ToString();
+
+                // Send text
+                BRS.ComPort.Port.Write(e.KeyChar.ToString());
+
+                ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
+                ConsoleArea.SelectionColor = Color.Aqua;
+
+                //Lowering transmission flag for user inputs to show in console
+                TextChangedOnRX = false;
+            }
+        }
+
+        private void SerialConsole_KeyUp(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void SerialConsole_KeyDown(object sender, KeyEventArgs e)
+        {
         }
     }
 }

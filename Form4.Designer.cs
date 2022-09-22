@@ -50,6 +50,10 @@ namespace BRS_Dallas_Programmer
             this.SerialPortText = new System.Windows.Forms.Button();
             this.PortBox1 = new System.Windows.Forms.ComboBox();
             this.UpdatePortList = new System.Windows.Forms.Timer(this.components);
+            this.ShowUserTxLabel = new System.Windows.Forms.Button();
+            this.ParseReturnsLabel = new System.Windows.Forms.Button();
+            this.UserTXCheckBox = new System.Windows.Forms.Button();
+            this.ParseReturnCheckBox = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BRSLogo
@@ -74,7 +78,7 @@ namespace BRS_Dallas_Programmer
             this.AcceptButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.AcceptButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(64)))));
             this.AcceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AcceptButton.Location = new System.Drawing.Point(181, 366);
+            this.AcceptButton.Location = new System.Drawing.Point(181, 438);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(102, 87);
             this.AcceptButton.TabIndex = 4;
@@ -303,7 +307,7 @@ namespace BRS_Dallas_Programmer
             this.CancelButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.CancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.CancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelButton.Location = new System.Drawing.Point(11, 366);
+            this.CancelButton.Location = new System.Drawing.Point(11, 438);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(102, 87);
             this.CancelButton.TabIndex = 22;
@@ -348,6 +352,65 @@ namespace BRS_Dallas_Programmer
             this.UpdatePortList.Interval = 500;
             this.UpdatePortList.Tick += new System.EventHandler(this.UpdatePortList_Tick);
             // 
+            // ShowUserTxLabel
+            // 
+            this.ShowUserTxLabel.FlatAppearance.BorderSize = 0;
+            this.ShowUserTxLabel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ShowUserTxLabel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ShowUserTxLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShowUserTxLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ShowUserTxLabel.Location = new System.Drawing.Point(13, 361);
+            this.ShowUserTxLabel.Name = "ShowUserTxLabel";
+            this.ShowUserTxLabel.Size = new System.Drawing.Size(134, 27);
+            this.ShowUserTxLabel.TabIndex = 25;
+            this.ShowUserTxLabel.Text = "Show User TX";
+            this.ShowUserTxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ShowUserTxLabel.UseVisualStyleBackColor = true;
+            // 
+            // ParseReturnsLabel
+            // 
+            this.ParseReturnsLabel.FlatAppearance.BorderSize = 0;
+            this.ParseReturnsLabel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ParseReturnsLabel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ParseReturnsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ParseReturnsLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ParseReturnsLabel.Location = new System.Drawing.Point(13, 394);
+            this.ParseReturnsLabel.Name = "ParseReturnsLabel";
+            this.ParseReturnsLabel.Size = new System.Drawing.Size(134, 27);
+            this.ParseReturnsLabel.TabIndex = 26;
+            this.ParseReturnsLabel.Text = "Parse \'\\r\'";
+            this.ParseReturnsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ParseReturnsLabel.UseVisualStyleBackColor = true;
+            // 
+            // UserTXCheckBox
+            // 
+            this.UserTXCheckBox.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_unchecked_checkbox_100;
+            this.UserTXCheckBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.UserTXCheckBox.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.UserTXCheckBox.FlatAppearance.BorderSize = 0;
+            this.UserTXCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.UserTXCheckBox.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.UserTXCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.UserTXCheckBox.Location = new System.Drawing.Point(151, 365);
+            this.UserTXCheckBox.Name = "UserTXCheckBox";
+            this.UserTXCheckBox.Size = new System.Drawing.Size(27, 23);
+            this.UserTXCheckBox.TabIndex = 27;
+            this.UserTXCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ParseReturnCheckBox
+            // 
+            this.ParseReturnCheckBox.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_unchecked_checkbox_100;
+            this.ParseReturnCheckBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ParseReturnCheckBox.FlatAppearance.BorderSize = 0;
+            this.ParseReturnCheckBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ParseReturnCheckBox.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ParseReturnCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ParseReturnCheckBox.Location = new System.Drawing.Point(151, 394);
+            this.ParseReturnCheckBox.Name = "ParseReturnCheckBox";
+            this.ParseReturnCheckBox.Size = new System.Drawing.Size(27, 23);
+            this.ParseReturnCheckBox.TabIndex = 28;
+            this.ParseReturnCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ConsoleSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -355,7 +418,11 @@ namespace BRS_Dallas_Programmer
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(296, 457);
+            this.ClientSize = new System.Drawing.Size(296, 537);
+            this.Controls.Add(this.ParseReturnCheckBox);
+            this.Controls.Add(this.UserTXCheckBox);
+            this.Controls.Add(this.ParseReturnsLabel);
+            this.Controls.Add(this.ShowUserTxLabel);
             this.Controls.Add(this.SerialPortText);
             this.Controls.Add(this.PortBox1);
             this.Controls.Add(this.CancelButton);
@@ -408,5 +475,9 @@ namespace BRS_Dallas_Programmer
         private System.Windows.Forms.Button SerialPortText;
         private System.Windows.Forms.ComboBox PortBox1;
         private System.Windows.Forms.Timer UpdatePortList;
+        private System.Windows.Forms.Button ShowUserTxLabel;
+        private System.Windows.Forms.Button ParseReturnsLabel;
+        private System.Windows.Forms.Button UserTXCheckBox;
+        private System.Windows.Forms.Button ParseReturnCheckBox;
     }
 }

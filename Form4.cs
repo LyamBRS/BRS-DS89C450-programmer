@@ -30,6 +30,9 @@ namespace BRS_Dallas_Programmer
         public static bool UpdateDropDown = false;
         public static int TimeUntilDropDownUpdate = 0;
 
+        public static bool UserTX = false;
+        public static bool ParseReturn = false;
+
         SerialPort OldSettings;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public ConsoleSetting(SerialConsole refConsole)
@@ -59,11 +62,35 @@ namespace BRS_Dallas_Programmer
             InnitParity();
             InnitFlowControl();
             InnitDataBit();
+            InnitCheckBox();
             Debug.Success("");
 
             BRS.Debug.Header(false);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void InnitCheckBox()
+        {
+            UserTX = console.GetUSerTX();
+            ParseReturn = console.GetReturnParsing();
+
+            if(UserTX)
+            {
+                UserTXCheckBox.BackgroundImage = Properties.Resources.icons8_checked_checkbox_100;
+            }
+            else
+            {
+                UserTXCheckBox.BackgroundImage = Properties.Resources.icons8_unchecked_checkbox_100;
+            }
+
+            if (ParseReturn)
+            {
+                ParseReturnCheckBox.BackgroundImage = Properties.Resources.icons8_checked_checkbox_100;
+            }
+            else
+            {
+                ParseReturnCheckBox.BackgroundImage = Properties.Resources.icons8_unchecked_checkbox_100;
+            }
+        }
         private void InnitComDropDown()
         {
             BRS.Debug.Comment("Clearing items...");
@@ -73,8 +100,12 @@ namespace BRS_Dallas_Programmer
             {
                 PortBox1.Items.Add(name);
             }
-            PortBox1.Items.Add(BRS.ComPort.Port.PortName);
-            PortBox1.SelectedItem = BRS.ComPort.Port.PortName;
+
+            if(!PortBox1.Items.Contains(BRS.ComPort.Port.PortName))
+            {
+                PortBox1.Items.Add("(" + BRS.ComPort.Port.PortName + ")");
+                PortBox1.SelectedItem = "(" + BRS.ComPort.Port.PortName + ")";
+            }
         }
         
         private void InnitBaudRateBox()
@@ -154,7 +185,7 @@ namespace BRS_Dallas_Programmer
         public void ListChanged(object sender, EventArgs e)
         {
             BRS.Debug.Comment("Increasing <debounce> timer.");
-            TimeUntilDropDownUpdate = 4;
+            TimeUntilDropDownUpdate = 2;
             UpdateDropDown = true;
         }
 

@@ -53,12 +53,13 @@ namespace BRS_Dallas_Programmer
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.5F));
             this.tableLayoutPanel1.Controls.Add(this.ConsoleArea, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 58);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 65);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 541F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 541);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1054F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(967, 546);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // ConsoleArea
@@ -67,14 +68,18 @@ namespace BRS_Dallas_Programmer
             this.ConsoleArea.AutoWordSelection = true;
             this.ConsoleArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ConsoleArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ConsoleArea.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ConsoleArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ConsoleArea.ForeColor = System.Drawing.Color.Aqua;
-            this.ConsoleArea.Location = new System.Drawing.Point(111, 3);
+            this.ConsoleArea.Location = new System.Drawing.Point(136, 6);
+            this.ConsoleArea.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.ConsoleArea.Name = "ConsoleArea";
+            this.ConsoleArea.ReadOnly = true;
             this.ConsoleArea.ShortcutsEnabled = false;
-            this.ConsoleArea.Size = new System.Drawing.Size(686, 535);
+            this.ConsoleArea.Size = new System.Drawing.Size(825, 534);
             this.ConsoleArea.TabIndex = 6;
             this.ConsoleArea.Text = "";
+            this.ConsoleArea.WordWrap = false;
             // 
             // toolStrip1
             // 
@@ -93,8 +98,8 @@ namespace BRS_Dallas_Programmer
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(108, 541);
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(130, 546);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "Console Strip";
@@ -131,9 +136,10 @@ namespace BRS_Dallas_Programmer
             this.FileButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.FileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FileButton.Name = "FileButton";
-            this.FileButton.Size = new System.Drawing.Size(107, 104);
+            this.FileButton.Size = new System.Drawing.Size(129, 104);
             this.FileButton.Text = "File";
             this.FileButton.ToolTipText = "Send selected file over serial";
+            this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
             // 
             // ClearConsoleButton
             // 
@@ -165,11 +171,12 @@ namespace BRS_Dallas_Programmer
             this.UserInfo.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.UserInfo.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserInfo.ForeColor = System.Drawing.Color.Gray;
-            this.UserInfo.Location = new System.Drawing.Point(114, 12);
+            this.UserInfo.Location = new System.Drawing.Point(142, 15);
+            this.UserInfo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.UserInfo.Name = "UserInfo";
             this.UserInfo.ReadOnly = true;
             this.UserInfo.ShortcutsEnabled = false;
-            this.UserInfo.Size = new System.Drawing.Size(686, 38);
+            this.UserInfo.Size = new System.Drawing.Size(831, 38);
             this.UserInfo.TabIndex = 4;
             this.UserInfo.Text = "Console";
             this.UserInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -187,17 +194,21 @@ namespace BRS_Dallas_Programmer
             // 
             // SerialConsole
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(804, 611);
+            this.ClientSize = new System.Drawing.Size(984, 621);
             this.Controls.Add(this.UserInfo);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.Name = "SerialConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[BRS]: Console";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SerialConsole_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SerialConsole_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SerialConsole_KeyUp);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

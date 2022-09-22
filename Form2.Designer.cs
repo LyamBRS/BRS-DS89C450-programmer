@@ -35,11 +35,12 @@ namespace BRS_Dallas_Programmer
             this.CheckFormsFlags = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.ButtonText = new System.Windows.Forms.TextBox();
+            this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.Programmer = new System.Windows.Forms.Button();
             this.Console = new System.Windows.Forms.Button();
+            this.InformationButton = new System.Windows.Forms.Button();
             this.Quit = new System.Windows.Forms.Button();
-            this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@ namespace BRS_Dallas_Programmer
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Controls.Add(this.Programmer);
             this.flowLayoutPanel1.Controls.Add(this.Console);
+            this.flowLayoutPanel1.Controls.Add(this.InformationButton);
             this.flowLayoutPanel1.Controls.Add(this.Quit);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.MouseLeave += new System.EventHandler(this.flowLayoutPanel1_MouseLeave);
@@ -70,6 +72,12 @@ namespace BRS_Dallas_Programmer
             this.ButtonText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ButtonText.Name = "ButtonText";
             // 
+            // serialPort2
+            // 
+            this.serialPort2.PortName = "COM2";
+            this.serialPort2.ReadTimeout = 500;
+            this.serialPort2.WriteTimeout = 500;
+            // 
             // button1
             // 
             this.button1.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.BRS_Header;
@@ -87,7 +95,7 @@ namespace BRS_Dallas_Programmer
             resources.ApplyResources(this.Programmer, "Programmer");
             this.Programmer.FlatAppearance.BorderSize = 0;
             this.Programmer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
-            this.Programmer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Programmer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(100)))));
             this.Programmer.Name = "Programmer";
             this.Programmer.UseVisualStyleBackColor = true;
             this.Programmer.Click += new System.EventHandler(this.Programmer_Click);
@@ -107,6 +115,16 @@ namespace BRS_Dallas_Programmer
             this.Console.MouseLeave += new System.EventHandler(this.flowLayoutPanel1_MouseLeave);
             this.Console.MouseHover += new System.EventHandler(this.Console_MouseHover);
             // 
+            // InformationButton
+            // 
+            this.InformationButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_info_100;
+            resources.ApplyResources(this.InformationButton, "InformationButton");
+            this.InformationButton.FlatAppearance.BorderSize = 0;
+            this.InformationButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.InformationButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(100)))));
+            this.InformationButton.Name = "InformationButton";
+            this.InformationButton.UseVisualStyleBackColor = true;
+            // 
             // Quit
             // 
             this.Quit.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_cancel_100;
@@ -119,12 +137,6 @@ namespace BRS_Dallas_Programmer
             this.Quit.Click += new System.EventHandler(this.Quit_Click);
             this.Quit.MouseLeave += new System.EventHandler(this.flowLayoutPanel1_MouseLeave);
             this.Quit.MouseHover += new System.EventHandler(this.Quit_MouseHover);
-            // 
-            // serialPort2
-            // 
-            this.serialPort2.PortName = "COM2";
-            this.serialPort2.ReadTimeout = 500;
-            this.serialPort2.WriteTimeout = 500;
             // 
             // MainMenu
             // 
@@ -155,5 +167,6 @@ namespace BRS_Dallas_Programmer
         public System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.TextBox ButtonText;
         public System.IO.Ports.SerialPort serialPort2;
+        private System.Windows.Forms.Button InformationButton;
     }
 }

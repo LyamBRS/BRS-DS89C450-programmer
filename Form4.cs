@@ -176,6 +176,9 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Parity:    " + ParityBox.SelectedIndex.ToString() + ": " + BRS.ComPort.Port.Parity.ToString());
             BRS.Debug.Comment("HandShake: " + FlowControlBox.SelectedIndex.ToString() + ": " + BRS.ComPort.Port.Handshake.ToString());
 
+            console.SetUSerTX(UserTX);
+            console.SetReturnParsing(ParseReturn);
+
             Debug.Success("Closing setting form");
             BRS.Debug.Header(false);
 
@@ -209,17 +212,67 @@ namespace BRS_Dallas_Programmer
                 this.Close();
             }
         }
-
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Flip the state of the specified checkbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
         private void UserTXCheckBox_Click(object sender, EventArgs e)
         {
+            BRS.Debug.Header(true);
 
+            BRS.Debug.Comment("Flipping ShowUserTX state...");
+            UserTX = !UserTX;
+            Debug.Success("ShowUserTX is now " + UserTX.ToString());
+
+            BRS.Debug.Comment("Updating checkbox icon");
+            UpdateCheckState(UserTXCheckBox, UserTX);
+            BRS.Debug.Header(false);
         }
-
+        //#############################################################// 
+        //#############################################################// 
         private void ParseReturnCheckBox_Click(object sender, EventArgs e)
         {
+            BRS.Debug.Header(true);
 
+            BRS.Debug.Comment("Flipping parsing return state...");
+            ParseReturn = !ParseReturn;
+            Debug.Success("ParseReturn is now " + ParseReturn.ToString());
+
+            BRS.Debug.Comment("Updating checkbox icon");
+            UpdateCheckState(ParseReturnCheckBox,ParseReturn);
+            BRS.Debug.Header(false);
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################// 
+        /// <summary>
+        /// Changes the image of a custom button depending on specified
+        /// state. If false, the button will have an unchecked grey image
+        /// if true, the button will have a checked green image.
+        /// </summary>
+        /// <param name="button"></param>
+        /// <param name="state"></param>
+        //#############################################################// 
+        private void UpdateCheckState(Button button, bool state)
+        {
+            BRS.Debug.LocalStart(true);
 
+            if (state)
+            {
+                BRS.Debug.Comment("Setting " + button.Name + " image to checked state.");
+                button.BackgroundImage = Properties.Resources.icons8_checked_checkbox_100;
+                BRS.Debug.Success("");
+            }
+            else
+            {
+                BRS.Debug.Comment("Setting " + button.Name + " image to unchecked state.");
+                button.BackgroundImage = Properties.Resources.icons8_unchecked_checkbox_100;
+                BRS.Debug.Success("");
+            }
+
+            BRS.Debug.LocalEnd();
+        }
     }
 }

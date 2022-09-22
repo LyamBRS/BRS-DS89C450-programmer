@@ -192,6 +192,39 @@
   <data name="&gt;&gt;Console.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="InformationButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="InformationButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="InformationButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="InformationButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 5</value>
+  </data>
+  <data name="InformationButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="InformationButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="InformationButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;InformationButton.Name" xml:space="preserve">
+    <value>InformationButton</value>
+  </data>
+  <data name="&gt;&gt;InformationButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;InformationButton.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;InformationButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="Quit.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -202,7 +235,7 @@
     <value>NoControl</value>
   </data>
   <data name="Quit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>290, 5</value>
+    <value>432, 5</value>
   </data>
   <data name="Quit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
@@ -223,7 +256,7 @@
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Quit.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 122</value>
@@ -232,7 +265,7 @@
     <value>6, 5, 6, 5</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 143</value>
+    <value>568, 143</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -265,7 +298,7 @@
     <value>6, 5, 6, 5</value>
   </data>
   <data name="ButtonText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 28</value>
+    <value>561, 28</value>
   </data>
   <data name="ButtonText.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -288,6 +321,9 @@
   <data name="&gt;&gt;ButtonText.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="serialPort2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>272, 17</value>
+  </metadata>
   <data name="button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -298,7 +334,7 @@
     <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 17</value>
+    <value>84, 14</value>
   </data>
   <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
@@ -321,9 +357,6 @@
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="serialPort2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>272, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -331,7 +364,7 @@
     <value>13, 23</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>456, 312</value>
+    <value>586, 312</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Courier New, 15.75pt</value>

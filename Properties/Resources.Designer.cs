@@ -213,6 +213,16 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_info_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-info-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_link_100__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-link-100 (1)", resourceCulture);

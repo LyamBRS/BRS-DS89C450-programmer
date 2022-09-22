@@ -132,7 +132,7 @@ namespace BRS_Dallas_Programmer
            //ConsoleArea.SelectionLength = received.Length;
            ConsoleArea.SelectionColor = Color.LightGreen;
 
-            if (received.StartsWith("\r"))
+            if (received.StartsWith("\r") && ParseReturnCheckBox)
             {
                 int LineIndex = ConsoleArea.GetLineFromCharIndex(ConsoleArea.SelectionStart);
                 int firstFromLine = ConsoleArea.GetFirstCharIndexFromLine(LineIndex);
@@ -142,7 +142,7 @@ namespace BRS_Dallas_Programmer
                 ConsoleArea.SelectedText = "";
 
                 received = received.Replace('\r',' ');
-                received = received.Replace('\n', ' ');
+                received = received.Replace('\n',' ');
             }
 
             ConsoleArea.SelectedText = received;
@@ -494,7 +494,10 @@ namespace BRS_Dallas_Programmer
                 ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
                 ConsoleArea.SelectionColor = Color.Aqua;
 
-                //ConsoleArea.SelectedText = e.KeyChar.ToString();
+                if (ShowUserTX)
+                {
+                    ConsoleArea.SelectedText = e.KeyChar.ToString();
+                }
 
                 // Send text
                 BRS.ComPort.Port.Write(e.KeyChar.ToString());

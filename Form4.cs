@@ -209,6 +209,16 @@ namespace BRS_Dallas_Programmer
                 this.Close();
             }
         }
+
+        private void UserTXCheckBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ParseReturnCheckBox_Click(object sender, EventArgs e)
+        {
+
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }

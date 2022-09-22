@@ -396,6 +396,7 @@ namespace BRS_Dallas_Programmer
             this.UserTXCheckBox.Size = new System.Drawing.Size(27, 23);
             this.UserTXCheckBox.TabIndex = 27;
             this.UserTXCheckBox.UseVisualStyleBackColor = true;
+            this.UserTXCheckBox.Click += new System.EventHandler(this.UserTXCheckBox_Click);
             // 
             // ParseReturnCheckBox
             // 
@@ -410,6 +411,7 @@ namespace BRS_Dallas_Programmer
             this.ParseReturnCheckBox.Size = new System.Drawing.Size(27, 23);
             this.ParseReturnCheckBox.TabIndex = 28;
             this.ParseReturnCheckBox.UseVisualStyleBackColor = true;
+            this.ParseReturnCheckBox.Click += new System.EventHandler(this.ParseReturnCheckBox_Click);
             // 
             // ConsoleSetting
             // 

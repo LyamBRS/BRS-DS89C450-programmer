@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>BRS Application icon.ico</ApplicationIcon>
+    <ApplicationIcon>BRS %28S%29 Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -234,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.ico" />
+    <Content Include="BRS %28S%29 Icon.ico" />
     <Content Include="BRS Application icon.ico" />
   </ItemGroup>
   <ItemGroup>

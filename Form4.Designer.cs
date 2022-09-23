@@ -30,6 +30,7 @@ namespace BRS_Dallas_Programmer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsoleSetting));
             this.BRSLogo = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
             this.BaudRateBox = new System.Windows.Forms.ComboBox();
@@ -447,6 +448,7 @@ namespace BRS_Dallas_Programmer
             this.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ConsoleSetting";
             this.Tag = "";

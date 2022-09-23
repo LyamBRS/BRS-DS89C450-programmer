@@ -30,6 +30,7 @@ namespace BRS_Dallas_Programmer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SerialConsole));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ConsoleArea = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -54,11 +55,11 @@ namespace BRS_Dallas_Programmer
             this.tableLayoutPanel1.Controls.Add(this.ConsoleArea, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 65);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1054F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 546F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(967, 546);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
@@ -72,7 +73,7 @@ namespace BRS_Dallas_Programmer
             this.ConsoleArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ConsoleArea.ForeColor = System.Drawing.Color.Aqua;
             this.ConsoleArea.Location = new System.Drawing.Point(136, 6);
-            this.ConsoleArea.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsoleArea.Margin = new System.Windows.Forms.Padding(6);
             this.ConsoleArea.Name = "ConsoleArea";
             this.ConsoleArea.ReadOnly = true;
             this.ConsoleArea.ShortcutsEnabled = false;
@@ -111,7 +112,7 @@ namespace BRS_Dallas_Programmer
             this.SerialLinkButon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SerialLinkButon.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SerialLinkButon.Name = "SerialLinkButon";
-            this.SerialLinkButon.Size = new System.Drawing.Size(107, 104);
+            this.SerialLinkButon.Size = new System.Drawing.Size(129, 104);
             this.SerialLinkButon.Text = "LinkToSerial";
             this.SerialLinkButon.ToolTipText = "Connect to selected Serial Port";
             this.SerialLinkButon.Click += new System.EventHandler(this.SerialLinkButon_Click);
@@ -123,7 +124,7 @@ namespace BRS_Dallas_Programmer
             this.SelectFileButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SelectFileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SelectFileButton.Name = "SelectFileButton";
-            this.SelectFileButton.Size = new System.Drawing.Size(107, 104);
+            this.SelectFileButton.Size = new System.Drawing.Size(129, 104);
             this.SelectFileButton.Text = "File";
             this.SelectFileButton.ToolTipText = "Select a file to send over opened port";
             this.SelectFileButton.Click += new System.EventHandler(this.SelectFileButton_Click);
@@ -148,7 +149,7 @@ namespace BRS_Dallas_Programmer
             this.ClearConsoleButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ClearConsoleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClearConsoleButton.Name = "ClearConsoleButton";
-            this.ClearConsoleButton.Size = new System.Drawing.Size(107, 104);
+            this.ClearConsoleButton.Size = new System.Drawing.Size(129, 104);
             this.ClearConsoleButton.Text = "Clear Console";
             this.ClearConsoleButton.ToolTipText = "Clear console text area";
             this.ClearConsoleButton.Click += new System.EventHandler(this.ClearConsoleButton_Click);
@@ -160,7 +161,7 @@ namespace BRS_Dallas_Programmer
             this.SettingsButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(107, 104);
+            this.SettingsButton.Size = new System.Drawing.Size(129, 104);
             this.SettingsButton.Text = "toolStripButton1";
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
@@ -172,7 +173,7 @@ namespace BRS_Dallas_Programmer
             this.UserInfo.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserInfo.ForeColor = System.Drawing.Color.Gray;
             this.UserInfo.Location = new System.Drawing.Point(142, 15);
-            this.UserInfo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.UserInfo.Margin = new System.Windows.Forms.Padding(6);
             this.UserInfo.Name = "UserInfo";
             this.UserInfo.ReadOnly = true;
             this.UserInfo.ShortcutsEnabled = false;
@@ -201,8 +202,9 @@ namespace BRS_Dallas_Programmer
             this.Controls.Add(this.UserInfo);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "SerialConsole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "[BRS]: Console";

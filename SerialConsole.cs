@@ -429,7 +429,7 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Checking if port is opened or closed.");
             if (!BRS.ComPort.Port.IsOpen)
             {
-                BRS.Debug.Comment("PORT CLOSED:")
+                BRS.Debug.Comment("PORT CLOSED:");
                 BRS.Debug.Comment("Attempting linking with specified COM port...");
                 BRS.Debug.Comment("Port name: " + BRS.ComPort.Port.PortName.ToString());
                 BRS.Debug.Comment("BaudRate:  " + BRS.ComPort.Port.BaudRate.ToString());
@@ -448,6 +448,7 @@ namespace BRS_Dallas_Programmer
                 {
                     Debug.Error("FAILED TO OPEN COM PORT WITH SPECIFIED INFO");
                     NewUserTextInfo("LINKING ERROR", 2);
+                    SystemSounds.Hand.Play();
                 }
             }
             else

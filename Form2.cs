@@ -170,7 +170,7 @@ namespace BRS_Dallas_Programmer
         //#############################################################//
         private void button1_MouseHover(object sender, EventArgs e)
         {
-            ButtonText.Text = "[BRS] Autonomous Dallas Prog & Better Terminal";
+            ButtonText.Text = "[BRS] Auto Dallas Prog & Better Terminal";
             ButtonText.ForeColor = Color.FromArgb(100, 100, 100);
         }
         //#############################################################//

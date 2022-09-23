@@ -209,7 +209,7 @@ namespace BRS_Dallas_Programmer
         //#############################################################//
         private void InformationButton_MouseEnter(object sender, EventArgs e)
         {
-            ButtonText.Text = "Informations";
+            ButtonText.Text = "Information";
             ButtonText.ForeColor = Color.FromArgb(90, 190, 255);
         }
         //#############################################################//

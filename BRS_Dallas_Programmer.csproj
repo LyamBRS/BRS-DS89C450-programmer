@@ -42,7 +42,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>EXE_Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -233,9 +233,8 @@
     <None Include="Icons\icons8-steam-circled-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.ico" />
     <Content Include="BRS %28S%29 Icon.ico" />
-    <Content Include="BRS Application icon.ico" />
+    <Content Include="BRS_%28S%29_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

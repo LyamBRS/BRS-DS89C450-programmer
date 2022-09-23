@@ -37,6 +37,13 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
 
+        //#############################################################//
+        /// <summary>
+        /// Closes all opened form associated with BRS Dallas Programmer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Quit_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
@@ -46,6 +53,13 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
 
+        //#############################################################//
+        /// <summary>
+        /// Opens the DS89C450's programmer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Programmer_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
@@ -55,7 +69,16 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Header(false);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Handling changes in FTDI state, as other forms cannot
+        /// handle serial ports. This is Derelect attempt at referencing
+        /// ports over forms. However, it is kept here in case it's
+        /// function was crucial, as I do not remember
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void CheckFormsFlags_Tick(object sender, EventArgs e)
         {
             //Update FTDI specs
@@ -72,44 +95,91 @@ namespace BRS_Dallas_Programmer
                 }
             }
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Loading event starting the FTDI updater
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
         private void MainMenu_Load(object sender, EventArgs e)
         {
             BRS.FTDI.startFTDIUpdater();
             BRS.FTDI.LookForFTDI();
         }
 
-
+        //#############################################################//
+        /// <summary>
+        /// Displays Quit below the main menu's buttons
+        /// when the user mouse hover's over Quit button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Quit_MouseHover(object sender, EventArgs e)
         {
             ButtonText.Text = "Quit";
             ButtonText.ForeColor = Color.FromArgb(255, 100, 100);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Displays Serial Terminal below the main menu's buttons
+        /// when the user mouse hover's over Console button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Console_MouseHover(object sender, EventArgs e)
         {
             ButtonText.Text = "Serial Terminal";
             ButtonText.ForeColor = Color.FromArgb(255,255,255);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Displays Dallas Programmer below the main menu's buttons
+        /// when the user mouse hover's over Programmer button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Programmer_MouseHover(object sender, EventArgs e)
         {
             ButtonText.Text = "Dallas Programmer";
             ButtonText.ForeColor = Color.FromArgb(90, 190, 255);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Empties the text below buttons when the mouse is leaving
+        /// hovering.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void flowLayoutPanel1_MouseLeave(object sender, EventArgs e)
         {
             ButtonText.Text = "";
             ButtonText.ForeColor = Color.FromArgb(100, 100, 100);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Display's what this application is all about when hovering
+        /// over my BRS logo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void button1_MouseHover(object sender, EventArgs e)
         {
-            ButtonText.Text = "Lyam.BRS@gmail.com";
+            ButtonText.Text = "[BRS] Autonomous Dallas Prog & Better Terminal";
             ButtonText.ForeColor = Color.FromArgb(100, 100, 100);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Open's SerialConsole form when clicking on the Console button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Console_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);

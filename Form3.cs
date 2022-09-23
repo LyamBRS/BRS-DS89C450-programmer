@@ -13,11 +13,27 @@ namespace BRS_Dallas_Programmer
 {
     public partial class ProgrammerSettings : Form
     {
+        /// <summary>
+        /// Reference to the programmer's form
+        /// </summary>
         Form1 programmerForm;
 
+        /// <summary>
+        /// Reference flag given by programmerForm deciding if it should attempt automatic programming depending on certain events
+        /// </summary>
         bool AutoProgrammingState = false;
+
+        /// <summary>
+        /// Reference flag given by programmerForm deciding if it should attempt automatic connection depending on certain events
+        /// </summary>
         bool AutoConnecting = false;
 
+        //#############################################################//
+        /// <summary>
+        /// Programmer's setting form constructor
+        /// </summary>
+        /// <param name="form">Reference to the programmer's form</param>
+        //#############################################################//
         public ProgrammerSettings(Form1 form)
         {
             BRS.Debug.Header(true);
@@ -26,6 +42,7 @@ namespace BRS_Dallas_Programmer
             InitializeComponent();
             BRS.Debug.Success("");
 
+            BRS.Debug.Comment("Referencing programmer's form.");
             programmerForm = form;
 
             BRS.Debug.Comment("Setting initial checkbox states...");
@@ -38,7 +55,13 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Header(false);
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Quit event, closing the settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void button3_Click(object sender, EventArgs e)
         {
             BRS.Debug.LocalStart(true);
@@ -60,7 +83,14 @@ namespace BRS_Dallas_Programmer
 
 
 
-
+        //#############################################################//
+        /// <summary>
+        /// Flip the autoProgramming flag, and update's the form's
+        /// checkbox image to the new state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void AutoProgrammingCheckBox_Click(object sender, EventArgs e)
         {
             BRS.Debug.LocalStart(true);
@@ -78,7 +108,14 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(true);
             BRS.Debug.LocalEnd();
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Flip the Automatic device detection flag, and update's 
+        /// the form's checkbox image to the new state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void DeviceDetectionCheckBox_Click(object sender, EventArgs e)
         {
             BRS.Debug.LocalStart(true);
@@ -96,7 +133,14 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(true);
             BRS.Debug.LocalEnd();
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Update a specified button with a checked or unchecked
+        /// checkbox image depending on the wanted state.
+        /// </summary>
+        /// <param name="button">Form's button to change</param>
+        /// <param name="state">true: Checked. false: unchecked</param>
+        //#############################################################//
         private void UpdateCheckState(Button button, bool state)
         {
             BRS.Debug.LocalStart(true);

@@ -21,20 +21,50 @@ namespace BRS_Dallas_Programmer
     public partial class Form1 : Form
     {
         static int amountOfGs = 0;
+        /// <summary>
+        /// Used to handle the form's header name.
+        /// </summary>
         static string name = "";
+        /// <summary>
+        /// Window's path to the selected hex/txt file.
+        /// </summary>
         string FilePath = "";
+        /// <summary>
+        /// Used to compare FilePath to see if it changed.
+        /// </summary>
         string OldFilePath = "";
+        /// <summary>
+        /// Flag deciding if the programmer should attempt automatic programmation
+        /// of the DS89C450
+        /// </summary>
         static bool AutoProgramming = true;
+        /// <summary>
+        /// Flag deciding if the programmer should connect to the first
+        /// discovered available FTDI
+        /// </summary>
         static bool AutoConnecting = true;
+
         bool ShowingSettings = false;
-        bool DetectedDallas = false;
+        /// <summary>
+        /// Flag specifying that no SerialPort is to be opened
+        /// </summary>
         static bool DisableFTDI = false;
+
+        /// <summary>
+        /// Reference of this form for the programmer's settings.
+        /// </summary>
         ProgrammerSettings SettingWindow;
-        ////////////////////////////////////////////////////////////////////////////////////// RESIZE
         clsResize _form_resize;
+        //////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Programmer's form constructor.
+        /// </summary>
+        //#############################################################//
         public Form1()
         {
             BRS.Debug.Header(true);
+
             BRS.Debug.Comment("Initializing form's components...");
             InitializeComponent();
 
@@ -46,6 +76,8 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Success("Form1 constructed!");
             BRS.Debug.Header(false);
         }
+        //#############################################################//
+        //#############################################################//
         private void _Load(object sender, EventArgs e)
         {
             _form_resize._get_initial_size();
@@ -55,6 +87,14 @@ namespace BRS_Dallas_Programmer
             _form_resize._resize();
         }
         //////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Loading event called whenever the programmer's form
+        /// loads. Starts BRS.FTDI events and parameters.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void Form1_Load(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
@@ -77,17 +117,27 @@ namespace BRS_Dallas_Programmer
                 BRS.FTDI.FTDIComName = "No Device";
             }
 
+            BRS.Debug.Comment("Starting FTDI updater");
             BRS.FTDI.startFTDIUpdater();
 
-            BRS.Debug.Comment("Creating fileChecker");
+            BRS.Debug.Comment("Creating fileChangeChecker");
             BRS.FileWatcher.CreateFileWatcher();
 
+            BRS.Debug.Comment("Forced calling of FTDI_Search_Timer_Tick");
             FTDI_Search_Timer_Tick(sender, e);
 
             BRS.Debug.Success("");
             BRS.Debug.Header(false);
         }
         ////////////////////////////////////////////////////////////////////////////////////// Dallas Connection Timer
+        //#############################################################//
+        /// <summary>
+        /// Tick function used to update the programmer's form name
+        /// aswell as handling COM changes in BRS.FTDI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void FTDI_Search_Timer_Tick(object sender, EventArgs e)
         {
             //Update form name.
@@ -177,6 +227,14 @@ namespace BRS_Dallas_Programmer
                 BRS.Debug.Header(false);
             }
         }
+        //#############################################################//
+        /// <summary>
+        /// Timer used for Automatic programming of DS89C450 depending
+        /// on changes in file path, and BRS.FTDI.FTDIPORT
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void AutoProgEnterCheck_Tick(object sender, EventArgs e)
         {
             if(AutoProgramming)
@@ -211,6 +269,12 @@ namespace BRS_Dallas_Programmer
 
 
         //////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Updates the USB button's image and enable state depending on
+        /// FTDI.FTDIComName or DisableFTDI flag
+        /// </summary>
+        //#############################################################//
         private void UpdateUSBButton()
         {
             if (DisableFTDI)
@@ -232,6 +296,13 @@ namespace BRS_Dallas_Programmer
                 }
             }
         }
+        //#############################################################//
+        /// <summary>
+        /// Function used to update the form's header name, aswell as
+        /// the FileButton state and image depending on FilePath
+        /// and the FTDI.FTDIPORT linked state.
+        /// </summary>
+        //#############################################################//
         private void UpdateFilePath()
         {
             if (DisableFTDI)
@@ -282,11 +353,21 @@ namespace BRS_Dallas_Programmer
             }
 
         }
+        //#############################################################//
+        /// <summary>
+        /// Function used to display a loading file icon whenever
+        /// an attempt is made at opening FTDI.FTDIPORT
+        /// </summary>
+        //#############################################################//
         private void FileLoading()
         {
             UploadCodeButton.BackgroundImage = Properties.Resources.icons8_fileLoading_100;
             this.Refresh();
         }
+        //////////////////////////////////////////////////////////////////////////////////////
+        //
+        // FUNCTIONS FOR REFERENCED SETTING FORM
+        //
         //////////////////////////////////////////////////////////////////////////////////////
         public bool GetAutoProgrammingState()
         {
@@ -318,7 +399,14 @@ namespace BRS_Dallas_Programmer
         {
             ShowingSettings = !ShowingSettings;
         }
-        ////////////////////////////////////////////////////////////////////////////////////// FOLDER BUTTON
+        //////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Click event for Folder Button handling OpenFileDialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void FolderButton_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
@@ -339,6 +427,14 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Header(false);
         }
+        //#############################################################//
+        /// <summary>
+        /// Click event of the Setting button used to call Programmer
+        /// Setting's form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void ProgrammerSettings_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
@@ -351,7 +447,6 @@ namespace BRS_Dallas_Programmer
 
                 BRS.Debug.Comment("Showing setting window...");
                 SettingWindow.ShowDialog();
-
             }
             else
             {
@@ -363,7 +458,14 @@ namespace BRS_Dallas_Programmer
             ShowingSettings = !ShowingSettings;
             BRS.Debug.Header(false);
         }
-        ////////////////////////////////////////////////////////////////////////////////////// MANUAL UPLOAD
+        //#############################################################//
+        /// <summary>
+        /// Click event used to send a file at the specified windows
+        /// path FilePath depending on FTDI.FTDIPort opened state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void UploadCodeButton_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
@@ -458,6 +560,61 @@ namespace BRS_Dallas_Programmer
         }
         //#############################################################//
         /// <summary>
+        /// Click event called when AutoConnecting is false.
+        /// Alows the programmer to switch between automatically trying
+        /// to connect to the first found FTDI, or forcefully closing
+        /// FTDI.FTDIPort
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
+        private void ConnectionStatusButton_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.LocalStart(true);
+            BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Checking if this action can be executed...");
+            if (!AutoConnecting)
+            {
+                BRS.Debug.Success("Automatic connecting off, flipping FTDI enabled flag");
+                DisableFTDI = !DisableFTDI;
+
+                if (DisableFTDI)
+                {
+                    BRS.Debug.Comment("Updating screen text...");
+                    NewUserTextInfo("Serial disabled", 0);
+
+                    if (BRS.FTDI.FTDIPort.IsOpen)
+                    {
+                        BRS.Debug.Success("Closing FTDI port");
+                        BRS.FTDI.FTDIPort.Close();
+                    }
+                    else
+                    {
+                        BRS.Debug.Aborted("Port already closed");
+                    }
+
+                    BRS.Debug.Comment("Resetting name to reattempt connection...");
+                    name = "retry";
+                    BRS.Debug.Success("");
+                }
+                else // FTDI connection re-enabled.
+                {
+                    BRS.Debug.Comment("Resetting FTDI name to reattempt connection...");
+                    name = "retry";
+                    BRS.Debug.Success("");
+                }
+
+            }
+            BRS.Debug.Comment("Updating USB button icon");
+            UpdateUSBButton();
+            UpdateFilePath();
+
+            BRS.Debug.Header(false);
+            BRS.Debug.LocalEnd();
+        }
+        //#############################################################//
+        /// <summary>
         /// Handler function called each time a G is received when transmitting a file
         /// </summary>
         //#############################################################// 
@@ -520,54 +677,6 @@ namespace BRS_Dallas_Programmer
             FTDI_Search_Timer.Stop();
 
             BRS.Debug.Header(false);
-        }
-
-        //#############################################################//
-        //#############################################################//
-        private void ConnectionStatusButton_Click(object sender, EventArgs e)
-        {
-            BRS.Debug.LocalStart(true);
-            BRS.Debug.Header(true);
-
-            BRS.Debug.Comment("Checking if this action can be executed...");
-            if(!AutoConnecting)
-            {
-                BRS.Debug.Success("Automatic connecting off, flipping FTDI enabled flag");
-                DisableFTDI = !DisableFTDI;
-
-                if(DisableFTDI)
-                {
-                    BRS.Debug.Comment("Updating screen text...");
-                    NewUserTextInfo("Serial disabled",0);
-
-                    if (BRS.FTDI.FTDIPort.IsOpen)
-                    {
-                        BRS.Debug.Success("Closing FTDI port");
-                        BRS.FTDI.FTDIPort.Close();
-                    }
-                    else
-                    {
-                        BRS.Debug.Aborted("Port already closed");
-                    }
-
-                    BRS.Debug.Comment("Resetting name to reattempt connection...");
-                    name = "retry";
-                    BRS.Debug.Success("");
-                }
-                else // FTDI connection re-enabled.
-                {
-                    BRS.Debug.Comment("Resetting FTDI name to reattempt connection...");
-                    name = "retry";
-                    BRS.Debug.Success("");
-                }
-
-            }
-            BRS.Debug.Comment("Updating USB button icon");
-            UpdateUSBButton();
-            UpdateFilePath();
-
-            BRS.Debug.Header(false);
-            BRS.Debug.LocalEnd();
         }
     }
 }

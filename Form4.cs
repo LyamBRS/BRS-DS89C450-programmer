@@ -23,18 +23,45 @@ namespace BRS_Dallas_Programmer
     public partial class ConsoleSetting : Form
     {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// SerialConsole's form reference. Used to call functions declared in it.
+        /// </summary>
         SerialConsole console;
 
         public static string SelectedComFullName = "No Device";
         public static string SelectedComName = "No Device";
+
+        /// <summary>
+        /// Flag raised when combo boxes need to be cleared and re-initialised
+        /// </summary>
         public static bool UpdateDropDown = false;
+
+        /// <summary>
+        /// Flag set to a value preventing the parsing of combo boxes until
+        /// DeviceChangedEvent stops occuring.
+        /// </summary>
         public static int TimeUntilDropDownUpdate = 0;
 
+        /// <summary>
+        /// Flag given by SerialConsole deciding if KeyPress are to be shown in the console
+        /// </summary>
         public static bool UserTX = false;
+
+        /// <summary>
+        /// Flag given by SerialConsole deciding if \r are to be parsed as carriage returns or new line feed.
+        /// </summary>
         public static bool ParseReturn = false;
 
         SerialPort OldSettings;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Constructor of SerialConsole's Setting form. Creates
+        /// ListChanged event for ListOfPortChanged of ComPort.
+        /// Initialises ComboBoxe's values.
+        /// </summary>
+        /// <param name="refConsole"></param>
+        //#############################################################//
         public ConsoleSetting(SerialConsole refConsole)
         {
             BRS.Debug.Header(true);
@@ -68,6 +95,12 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Automatically sets custom checkboxes to the state of their
+        /// associated flags given from SerialConsole's form.
+        /// </summary>
+        //#############################################################//
         private void InnitCheckBox()
         {
             UserTX = console.GetUSerTX();
@@ -91,6 +124,14 @@ namespace BRS_Dallas_Programmer
                 ParseReturnCheckBox.BackgroundImage = Properties.Resources.icons8_unchecked_checkbox_100;
             }
         }
+        //#############################################################//
+        /// <summary>
+        /// Automatically fill PortBox1 with all the available
+        /// ports given by ComPort.AvailableComsFullName. 
+        /// Sets the currently selected
+        /// port to ComPort.Port's setting.
+        /// </summary>
+        //#############################################################//
         private void InnitComDropDown()
         {
             BRS.Debug.Comment("Clearing items...");
@@ -107,11 +148,23 @@ namespace BRS_Dallas_Programmer
                 PortBox1.SelectedItem = "(" + BRS.ComPort.Port.PortName + ")";
             }
         }
-        
+        //#############################################################//
+        /// <summary>
+        /// Sets the currently selected
+        /// BaudRate to ComPort.Port's setting.
+        /// </summary>
+        //#############################################################//        
         private void InnitBaudRateBox()
         {
             BaudRateBox.Text = OldSettings.BaudRate.ToString();
         }
+        //#############################################################//
+        /// <summary>
+        /// Automatically fill StopBitBox with all the available
+        /// SerialPort.StopBits. Sets the currently selected
+        /// StopBits to ComPort.Port's setting.
+        /// </summary>
+        //#############################################################//
         private void InnitStopBit()
         {
             foreach (string name in Enum.GetNames(typeof(StopBits)))
@@ -121,24 +174,49 @@ namespace BRS_Dallas_Programmer
                     StopBitBox.Text = OldSettings.StopBits.ToString();
                 }
         }
+        //#############################################################//
+        /// <summary>
+        /// Automatically fill ParityBox with all the available
+        /// SerialPort.Parity. Sets the currently selected
+        /// parity to ComPort.Port's setting.
+        /// </summary>
+        //#############################################################//
         private void InnitParity()
         {
             foreach (string name in Enum.GetNames(typeof(Parity)))
             ParityBox.Items.Add(name);
             ParityBox.Text = OldSettings.Parity.ToString();
         }
+        //#############################################################//
+        /// <summary>
+        /// Automatically fill FlowControlBox with all the available
+        /// SerialPort.Handshake. Sets the currently selected
+        /// handshake to ComPort.Port's setting.
+        /// </summary>
+        //#############################################################//
         private void InnitFlowControl()
         {
             foreach (string name in Enum.GetNames(typeof(Handshake)))
             FlowControlBox.Items.Add(name);
             FlowControlBox.Text = OldSettings.Handshake.ToString();
         }
+        //#############################################################//
+        /// <summary>
+        /// Set's DataBit combo box with the current ComPort.Databits
+        /// values.
+        /// </summary>
+        //#############################################################//
         private void InnitDataBit()
         {
             DataBitBox.Text = OldSettings.DataBits.ToString();
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
+        /// <summary>
+        /// Closes the form with no changes to ComPort.Port's settings.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void CancelButton_Click(object sender, EventArgs e)
         {
@@ -147,6 +225,13 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Click event changing settings of ComPort.Port to the
+        /// specified ones in this form's comboBoxes before closing
+        /// the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void AcceptButton_Click(object sender, EventArgs e)
         {
@@ -185,13 +270,30 @@ namespace BRS_Dallas_Programmer
             this.Close();
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //#############################################################//
+        /// <summary>
+        /// Event called when the PortBox list should be changed.
+        /// Sets a "debounce" to 2 to avoid crashing when updating PortBox
+        /// as if a thread updates the list while ittering through it,
+        /// the form will crash
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         public void ListChanged(object sender, EventArgs e)
         {
             BRS.Debug.Comment("Increasing <debounce> timer.");
             TimeUntilDropDownUpdate = 2;
             UpdateDropDown = true;
         }
-
+        //#############################################################//
+        /// <summary>
+        /// Checks if PortBox needs updating, and that no more changes
+        /// are occuring.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void UpdatePortList_Tick(object sender, EventArgs e)
         {
             if (UpdateDropDown && TimeUntilDropDownUpdate == 0)
@@ -215,7 +317,7 @@ namespace BRS_Dallas_Programmer
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         /// <summary>
-        /// Flip the state of the specified checkbox
+        /// Flip the state of UserTXCheckBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -232,7 +334,12 @@ namespace BRS_Dallas_Programmer
             UpdateCheckState(UserTXCheckBox, UserTX);
             BRS.Debug.Header(false);
         }
-        //#############################################################// 
+        //#############################################################//
+        /// <summary>
+        /// Flip the state of ParseReturnCheckBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################// 
         private void ParseReturnCheckBox_Click(object sender, EventArgs e)
         {

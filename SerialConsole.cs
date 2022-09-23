@@ -21,36 +21,44 @@ namespace BRS_Dallas_Programmer
     public partial class SerialConsole : Form
     {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static bool ConsoleEnabled = false;
-        public static bool ShowPCConsoleOutput = true;
 
+        /// <summary>
+        /// Flag deciding if \r are to be used as carriage returns or new line events.
+        /// </summary>
         public static bool ParseReturnCheckBox = true;
+
+        /// <summary>
+        /// Flag deciding if TX sent keys are to be displayed in the console.
+        /// </summary>
         public static bool ShowUserTX = false;
 
-        public static bool TextChangedOnRX = false;
-
-        public static bool LinkedToPort = false;
-        public static bool ReadingSerialPort = false;
-        public static bool WritingOnSerialPort = false;
-
-        public static string SelectedComFullName = "No Device";
-        public static string SelectedComName = "No Device";
-
-        public static int ComBaudRate = 9600;
-        public static int ComDataBits = 8;
-        public static Parity ComParity = Parity.None;
-        public static Handshake ComHandshake = Handshake.None;
-        public static StopBits ComStopBits = StopBits.One;
-
+        /// <summary>
+        /// Window's path to the wanted hex/txt file.
+        /// </summary>
         public static string FilePath = "";
+
+        /// <summary>
+        /// To check, using a timer, if the port state changed.
+        /// </summary>
+        public static bool oldPortState = false;
 
         clsResize _form_resize;
 
+        /// <summary>
+        /// Reference of this form, for the setting form to use.
+        /// </summary>
         public SerialConsole serialConsoleRef;
-        public delegate void dlgThread(String Result);
-        public dlgThread Delegate;
 
-        public static bool oldPortState = false;
+        /// <summary>
+        /// RX data received delegate
+        /// </summary>
+        /// <param name="Result">RX string</param>
+        public delegate void dlgThread(String Result);
+
+        /// <summary>
+        /// The RX delegate
+        /// </summary>
+        public dlgThread Delegate;
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
         //#############################################################//
@@ -60,7 +68,11 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Comment("Initializing console's components...");
             InitializeComponent();
+
+            BRS.Debug.Comment("Creating SerialConsole reference...");
             serialConsoleRef = this;
+
+            BRS.Debug.Comment("Creating delegate for RX data received event...");
             Delegate = new dlgThread(RXConsoleText);
             Debug.Success("");
 
@@ -68,8 +80,9 @@ namespace BRS_Dallas_Programmer
             _form_resize = new clsResize(this);
             this.Load += _Load;
             this.Resize += _Resize;
+            Debug.Success("");
 
-            BRS.Debug.Comment("Specifying function to call when data is received");
+            BRS.Debug.Comment("Specifying RX callbacks and events of BRS.ComPort");
             BRS.ComPort.createInfoReceivedEvent();
             BRS.ComPort.DataReceivedAction = DataReceiverHandling;
             BRS.ComPort.startPortUpdater();
@@ -77,21 +90,18 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Comment("Updating buttons and user header...");
             NewUserTextInfo("Serial Console",0);
-            UpdateFileButton();
-            UpdateLinkButton();
-            UpdateSettingButton();
-            UpdateConsole();
+            UpdateAllIcons();
             Debug.Success("Updating finished");
 
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Function called when ComPort serial receives data.
+        /// </summary>
         //#############################################################//
         public void DataReceiverHandling()
         {
-            //tell text changed event that a reception made it change
-            TextChangedOnRX = true;
-
             //Gather stored data in the buffer
             string result = BRS.ComPort.Port.ReadExisting();
 
@@ -100,7 +110,8 @@ namespace BRS_Dallas_Programmer
                 serialConsoleRef.Invoke(serialConsoleRef.Delegate, result);
             }
             catch
-            {
+            {   // The form is closed, and the function could not be called
+                // Therefor, it is replaced by this empty function.
                 BRS.ComPort.DataReceivedAction = EmptyReceivingHandler;
             }
         }
@@ -126,10 +137,7 @@ namespace BRS_Dallas_Programmer
         //#############################################################//
         private void RXConsoleText(string received)
         {
-           //Raise flag so textchanged does not parse latest input as user input
-           TextChangedOnRX = true;
            ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
-           //ConsoleArea.SelectionLength = received.Length;
            ConsoleArea.SelectionColor = Color.LightGreen;
 
             if (received.StartsWith("\r") && ParseReturnCheckBox)
@@ -148,11 +156,14 @@ namespace BRS_Dallas_Programmer
             ConsoleArea.SelectedText = received;
             ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
             ConsoleArea.SelectionColor = Color.Aqua;
-
-            //Lowering transmission flag for user inputs to show in console
-            TextChangedOnRX = false;
         }
         //#############################################################//
+        /// <summary>
+        /// clsResize automatic form resizing functions called when
+        /// Serial console is loaded or resized.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void _Load(object sender, EventArgs e)
         {
@@ -162,9 +173,13 @@ namespace BRS_Dallas_Programmer
         {
             _form_resize._resize();
         }
-        //#############################################################//
-        //#############################################################//
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// 
+        /// Multi form functions to transfer and set data from settings to serial console form.
+        /// 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+        //#############################################################//
+        //#############################################################//
         public bool GetReturnParsing()
         {
             return (ParseReturnCheckBox);
@@ -182,7 +197,17 @@ namespace BRS_Dallas_Programmer
             ShowUserTX = state;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        // Button updating functions
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
         //#############################################################//
+        /// <summary>
+        /// Function called to update the button used to transfer hex
+        /// and txt files over the opened ComPort.
+        /// Changes the image of said button aswell as it's enabled
+        /// state.
+        /// </summary>
         //#############################################################//
         public void UpdateFileButton()
         {
@@ -218,6 +243,9 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Updates linking button's icon depending on ComPort.Port
+        /// </summary>
         //#############################################################//
         public void UpdateLinkButton()
         {
@@ -237,6 +265,10 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Updates the setting button depending on the state of
+        /// ComPort.Port
+        /// </summary>
         //#############################################################//
         public void UpdateSettingButton()
         {
@@ -258,6 +290,10 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Updates the RichTextBox console's depending on ComPort.Port
+        /// state.
+        /// </summary>
         //#############################################################//
         public void UpdateConsole()
         {
@@ -275,6 +311,10 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Calls all the button and console button updates.
+        /// (Link, File, Setting, Console)
+        /// </summary>
         //#############################################################//
         public void UpdateAllIcons()
         {
@@ -313,7 +353,9 @@ namespace BRS_Dallas_Programmer
         //#############################################################//
         /// <summary>
         /// Constantly check if comport is still opened, if not, update
-        /// all the buttons plus the console
+        /// all the buttons plus the console.
+        /// 
+        /// Uses bool oldPortState.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -351,7 +393,16 @@ namespace BRS_Dallas_Programmer
             ConsoleArea.Focus();
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        // CLICK EVENT FUNCTIONS FOR BUTTONS
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
+        /// <summary>
+        /// Click event calling Console's Setting form as a dialog.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void SettingsButton_Click(object sender, EventArgs e)
         {
@@ -364,6 +415,12 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Click event attempting to open or close ComPort.Port
+        /// using specified settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void SerialLinkButon_Click(object sender, EventArgs e)
         {
@@ -372,6 +429,7 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Checking if port is opened or closed.");
             if (!BRS.ComPort.Port.IsOpen)
             {
+                BRS.Debug.Comment("PORT CLOSED:")
                 BRS.Debug.Comment("Attempting linking with specified COM port...");
                 BRS.Debug.Comment("Port name: " + BRS.ComPort.Port.PortName.ToString());
                 BRS.Debug.Comment("BaudRate:  " + BRS.ComPort.Port.BaudRate.ToString());
@@ -400,7 +458,7 @@ namespace BRS_Dallas_Programmer
                     BRS.ComPort.Port.Close();
                     oldPortState = false;
                     Debug.Success("Port closed!");
-                    NewUserTextInfo("Port closed", 1);
+                    NewUserTextInfo("Link Terminated", 1);
                 }
                 catch
                 {
@@ -408,12 +466,19 @@ namespace BRS_Dallas_Programmer
                     NewUserTextInfo("LINKING ERROR", 2);
                 }
             }
+
             BRS.Debug.Comment("Updating icons...");
             UpdateAllIcons();
 
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Click event for folder button. Handles open file dialog
+        /// and saves specified file path.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void SelectFileButton_Click(object sender, EventArgs e)
         {
@@ -421,12 +486,15 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Handling file dialog...");
             FilePath = BRS.Dialog.OpenFile("[BRS]: Open your hex file", "HEX file (*.hex)|*.hex| txt files (*.txt)|*.txt");
 
+            BRS.Debug.Comment("Checking specified path...");
             if (File.Exists(FilePath))
             {
+                Debug.Success("");
                 NewUserTextInfo("File good for download.", 1);
             }
             else
             {
+                Debug.Error("INVALID SPECIFED PATH");
                 NewUserTextInfo("Invalid file", 2);
             }
             BRS.Debug.Success("");
@@ -434,6 +502,11 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Click event emptying the console's RichTextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void ClearConsoleButton_Click(object sender, EventArgs e)
         {
@@ -442,6 +515,11 @@ namespace BRS_Dallas_Programmer
             ConsoleArea.Text = "";
         }
         //#############################################################//
+        /// <summary>
+        /// Click event attempting to send a file over the serial port.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void FileButton_Click(object sender, EventArgs e)
         {
@@ -484,7 +562,16 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        // KEY PRESS EVENTS
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //#############################################################//
+        /// <summary>
+        /// Sends the pressed key on ComPort.Port if Linked properly.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void SerialConsole_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -504,9 +591,6 @@ namespace BRS_Dallas_Programmer
 
                 ConsoleArea.SelectionStart = ConsoleArea.Text.Length;
                 ConsoleArea.SelectionColor = Color.Aqua;
-
-                //Lowering transmission flag for user inputs to show in console
-                TextChangedOnRX = false;
             }
         }
 

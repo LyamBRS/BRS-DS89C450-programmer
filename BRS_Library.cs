@@ -701,6 +701,12 @@ namespace BRS
             return ("No Replies");
         }
         //#########################################################// 
+        /// <summary>
+        /// verifies the string received from the programmed device
+        /// and parses it to find ERROR characters such as:
+        /// A,H,L,S,F,V
+        /// </summary>
+        /// <returns>found error</returns>
         //#########################################################// 
         public static string VerifyLastProgramming()
         {
@@ -879,16 +885,26 @@ namespace BRS
         /// </summary>
         public static string LinkedComName = "No Device"; //COM4 COM5 ect
 
+        /// <summary>
+        /// Collection to check using a delegate in your form
+        /// </summary>
         public static ObservableCollection<string> ListOfPortChanged = new ObservableCollection<string>();
+
+        /// <summary>
+        /// List of the full names of ComPort available for linking attempts.
+        /// </summary>
         public static List<string> AvailableComsFullName = new List<string>();
 
+        /// <summary>
+        /// Set this to be a called function when RX buffer receives data.
+        /// </summary>
         public static Action DataReceivedAction;
 
         static ManagementClass processClass = new ManagementClass("Win32_PnPEntity");
 
         //#########################################################//
         /// <summary>
-        /// Lists all the USB ports, no matter their types for 
+        /// Lists all the USB ports, no matter their types, for 
         /// debugging purposes
         /// </summary>
         //#########################################################//
@@ -976,18 +992,16 @@ namespace BRS
             // Checking each 500ms
             System.Threading.Thread.Sleep(500);
         }
+        //#########################################################// 
+        /// <summary>
+        /// Executed when DeviceChangeEvent occurs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#########################################################//  
         private static void HandleSerialChanges(object sender, EventArrivedEventArgs e)
         {
             StoreAllAvailableComs();
-
-            try
-            {
-                LinkedComName = LinkedFullName.Split('(', ')')[1];
-            }
-            catch
-            {
-                LinkedComName = "No Device";
-            }
         }
         //#########################################################// 
         /// <summary>
@@ -997,7 +1011,6 @@ namespace BRS
         //#########################################################// 
         public static void UpdatePortInfo()
         {
-            //LinkedFullName = CheckIfStillAvailable();
             try
             {
                 LinkedComName = LinkedFullName.Split('(', ')')[1];
@@ -1009,7 +1022,10 @@ namespace BRS
         }
         //#########################################################//
         /// <summary>
-        /// Check if the specified com port is available for use
+        /// Stores a list of all available SerialPorts in
+        /// AvailableComsFullName
+        /// Note that you need to parse the given names to extract
+        /// COMX from them.
         /// </summary>
         //#########################################################// 
         public static void StoreAllAvailableComs()
@@ -1031,11 +1047,10 @@ namespace BRS
                 }
             }
             ListOfPortChanged.Clear();
-            //#######################################################################
         }
         //#########################################################// 
         /// <summary>
-        /// Sends an hex file on serial port seperated by \r
+        /// Sends an hex/txt file on serial port seperated, by \r
         /// </summary>
         /// <param name="FileString">Your file, as a string</param>
         /// <returns>TX reply 100ms after file was sent.</returns>
@@ -1056,10 +1071,6 @@ namespace BRS
                     Port.Write(separation);
                     BRS.Debug.Comment(separation.Replace("\n", ""));
                 }
-
-                Thread.Sleep(100);
-                //Check if bad command is received
-                result = BRS.FTDI.FTDIPort.ReadExisting();
 
                 BRS.Debug.Success("Sent!");
                 return ("Sent");
@@ -1113,10 +1124,16 @@ namespace BRS
     {
         private static string FileLocation = "empty";
         private static FileSystemWatcher watcher;
+
+        /// <summary>
+        /// Flag raised when the files at the specified location
+        /// changed
+        /// </summary>
         public static bool FileChanged = false;
         //#########################################################//
         /// <summary>
-        /// Sets the path for the checker to perform change checks
+        /// Sets the file path that will be checked for change
+        /// events
         /// </summary>
         /// <param name="path">File path</param>
         //#########################################################// 
@@ -1124,7 +1141,13 @@ namespace BRS
         {
             FileLocation = path;
         }
-
+        //#########################################################// 
+        /// <summary>
+        /// Start FileWatcher thread
+        /// be sure to have a specifed Path.
+        /// Do this using SetFileLocation
+        /// </summary>
+        //#########################################################// 
         public static void CreateFileWatcher()
         {
             string result = "";
@@ -1154,14 +1177,20 @@ namespace BRS
             watcher.IncludeSubdirectories = true;
             watcher.EnableRaisingEvents = true;
         }
-
+        //#########################################################// 
+        /// <summary>
+        /// PRIVATE. Handler for file changed event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#########################################################// 
         private static void OnChanged(object sender, FileSystemEventArgs e)
         {
             if (e.ChangeType != WatcherChangeTypes.Changed)
             {
                 return;
             }
-            BRS.Debug.Comment("HEX file has changed");
+            BRS.Debug.Comment("File has changed");
             FileChanged = true;
         }
     }

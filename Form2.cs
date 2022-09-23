@@ -16,6 +16,22 @@ namespace BRS_Dallas_Programmer
 {
     public partial class MainMenu : Form
     {
+        /// <summary>
+        /// The original height of this form
+        /// </summary>
+        int OriginalHeight;
+        int OriginalWidth;
+
+        /// <summary>
+        /// wanted drop offset
+        /// </summary>
+        int WantedSize = 0;
+
+        /// <summary>
+        /// Flag deciding if the form should expand or retract to display my informations below the buttons
+        /// </summary>
+        bool DisplayInformations = false;
+
         Form1 programming = new Form1();
         SerialConsole serialConsole = new SerialConsole();
         public MainMenu()
@@ -28,11 +44,17 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Comment("Setting FTDI port to new default serial port");
             BRS.FTDI.FTDIPort = serialPort1;
-            BRS.Debug.Success("");
+            Debug.Success("");
 
             BRS.Debug.Comment("Setting Console port to new default serial port");
             BRS.ComPort.Port = serialPort2;
-            BRS.Debug.Success("");
+            Debug.Success("");
+
+            BRS.Debug.Comment("Getting original size of this form");
+            OriginalHeight = this.Size.Height;
+            OriginalWidth = this.Size.Width;
+            WantedSize = OriginalHeight;
+            Debug.Success("");
 
             BRS.Debug.Header(false);
         }
@@ -66,6 +88,36 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Comment("Calling Programmer form...");
             programming = new Form1();
             programming.Show();
+
+            BRS.Debug.Header(false);
+        }
+        //#############################################################//
+        /// <summary>
+        /// Changes the form's sizes to display/hide informations located
+        /// below the form's original size
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
+        private void InformationButton_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Flipping DisplayInformation flag...");
+            DisplayInformations = !DisplayInformations;
+            Debug.Success("Flag is now " + DisplayInformations.ToString());
+
+            BRS.Debug.Comment("Specifying wanted form's size");
+            if (DisplayInformations)
+            {
+                BRS.Debug.Comment("Expanding form by 500 pixels...");
+                WantedSize = OriginalHeight + 180;
+            }
+            else
+            {
+                BRS.Debug.Comment("Reverting form's to original size");
+                WantedSize = OriginalHeight;
+            }
 
             BRS.Debug.Header(false);
         }
@@ -116,7 +168,7 @@ namespace BRS_Dallas_Programmer
         /// <param name="sender"></param>
         /// <param name="e"></param>
         //#############################################################//
-        private void Quit_MouseHover(object sender, EventArgs e)
+        private void Quit_MouseEnter(object sender, EventArgs e)
         {
             ButtonText.Text = "Quit";
             ButtonText.ForeColor = Color.FromArgb(255, 100, 100);
@@ -129,10 +181,10 @@ namespace BRS_Dallas_Programmer
         /// <param name="sender"></param>
         /// <param name="e"></param>
         //#############################################################//
-        private void Console_MouseHover(object sender, EventArgs e)
+        private void Console_MouseEnter(object sender, EventArgs e)
         {
             ButtonText.Text = "Serial Terminal";
-            ButtonText.ForeColor = Color.FromArgb(255,255,255);
+            ButtonText.ForeColor = Color.FromArgb(255, 255, 255);
         }
         //#############################################################//
         /// <summary>
@@ -142,9 +194,22 @@ namespace BRS_Dallas_Programmer
         /// <param name="sender"></param>
         /// <param name="e"></param>
         //#############################################################//
-        private void Programmer_MouseHover(object sender, EventArgs e)
+        private void Programmer_MouseEnter(object sender, EventArgs e)
         {
             ButtonText.Text = "Dallas Programmer";
+            ButtonText.ForeColor = Color.FromArgb(90, 190, 255);
+        }
+        //#############################################################//
+        /// <summary>
+        /// Displays Information below the main menu's buttons
+        /// when the user mouse hover's over Informationbutton.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
+        private void InformationButton_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "Informations";
             ButtonText.ForeColor = Color.FromArgb(90, 190, 255);
         }
         //#############################################################//
@@ -156,6 +221,19 @@ namespace BRS_Dallas_Programmer
         /// <param name="e"></param>
         //#############################################################//
         private void flowLayoutPanel1_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            ButtonText.ForeColor = Color.FromArgb(100, 100, 100);
+        }
+        //#############################################################//
+        /// <summary>
+        /// Empties the text below buttons when the mouse is leaving
+        /// hovering.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
+        private void FlowInfoIcons_MouseLeave(object sender, EventArgs e)
         {
             ButtonText.Text = "";
             ButtonText.ForeColor = Color.FromArgb(100, 100, 100);
@@ -188,6 +266,142 @@ namespace BRS_Dallas_Programmer
             serialConsole.Show();
 
             BRS.Debug.Header(false);
+        }
+        //#############################################################//
+        /// <summary>
+        /// Slow appearance of the bottom portion of this form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
+        private void FormExpansionTimer_Tick(object sender, EventArgs e)
+        {
+            //Lock info icon's flowcontrol's location
+            FlowInfoIcons.Location = new Point(10, 312);
+            ButtonText.Location = new Point(17, 275);
+
+            int formHeight = this.Size.Height;
+
+            float fWantedSize = (float)WantedSize;
+            float fFormHeight = (float)formHeight;
+
+            //Lerp form's height to the wanted value
+            if (fFormHeight != fWantedSize)
+            {
+                fFormHeight = Lerp(fFormHeight, fWantedSize, 0.1f);
+
+                this.Size = new Size(OriginalWidth, (int)fFormHeight);
+            }
+        }
+
+        float Lerp(float a, float b, float t)
+        {
+            return a + (b - a) * t;
+        }
+        //#############################################################//
+        /// <summary>
+        /// Hovering above the discord logo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
+        private void Discord_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "Contact us through BRS's Discord";
+            ButtonText.ForeColor = Color.FromArgb(190, 90, 255);
+        }
+        private void GitHub_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "Lyam's GitHub";
+            ButtonText.ForeColor = Color.FromArgb(190, 190, 190);
+        }
+
+        private void Steam_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "BRS's Steam page";
+            ButtonText.ForeColor = Color.FromArgb(190, 190, 255);
+        }
+
+        private void Mail_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "Contact us via e-mail";
+            ButtonText.ForeColor = Color.FromArgb(255, 100, 100);
+        }
+        //#############################################################//
+        /// <summary>
+        /// Opens BRS's Discord on the default web browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void Discord_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://discord.gg/HCYFEt2FUB");
+            }
+            catch
+            {
+                ButtonText.Text = "Can't Open Lyam[BRS]'s Github";
+                ButtonText.ForeColor = Color.FromArgb(255, 0, 0);
+            }
+        }
+        //#############################################################//
+        /// <summary>
+        /// Opens BRS's GitHub on the default web browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void GitHub_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/LyamBRS");
+            }
+            catch
+            {
+                ButtonText.Text = "Can't Open Lyam[BRS]'s Github";
+                ButtonText.ForeColor = Color.FromArgb(255, 0, 0);
+            }
+        }
+        //#############################################################//
+        /// <summary>
+        /// Opens BRS's Steam page on the default web browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void Steam_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://steamcommunity.com/id/gothilawn");
+            }
+            catch
+            {
+                ButtonText.Text = "Can't Open Lyam's Steam Page";
+                ButtonText.ForeColor = Color.FromArgb(255, 0, 0);
+            }
+        }
+        //#############################################################//
+        /// <summary>
+        /// Opens BRS's Email on the default web browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void Mail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcSMTRmXPGTGBblDTVNLnGhvXVtqpCNXhMRpBrKrLRzjqdKVVbfTrqHgnGvnqwkbcxZJbplSD");
+            }
+            catch
+            {
+                ButtonText.Text = "Can't Open Lyam[BRS]'s gmail";
+                ButtonText.ForeColor = Color.FromArgb(255, 0, 0);
+            }
         }
     }
 }

@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="flowLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Top, Left, Right</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
@@ -280,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="CheckFormsFlags.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -288,11 +288,14 @@
   <metadata name="serialPort1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>163, 17</value>
   </metadata>
+  <data name="ButtonText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="ButtonText.Font" type="System.Drawing.Font, System.Drawing">
     <value>Courier New, 18pt, style=Bold</value>
   </data>
   <data name="ButtonText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 275</value>
+    <value>17, 275</value>
   </data>
   <data name="ButtonText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
@@ -319,11 +322,227 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ButtonText.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="serialPort2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>272, 17</value>
   </metadata>
+  <metadata name="FormExpansionTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>381, 17</value>
+  </metadata>
+  <data name="FlowInfoIcons.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="FlowInfoIcons.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Discord.Name" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="&gt;&gt;Discord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Discord.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Discord.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;GitHub.Name" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="&gt;&gt;GitHub.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GitHub.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;GitHub.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Steam.Name" xml:space="preserve">
+    <value>Steam</value>
+  </data>
+  <data name="&gt;&gt;Steam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Steam.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Steam.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Mail.Name" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="&gt;&gt;Mail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Mail.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Mail.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="FlowInfoIcons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 312</value>
+  </data>
+  <data name="FlowInfoIcons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="FlowInfoIcons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>568, 143</value>
+  </data>
+  <data name="FlowInfoIcons.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.Name" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Discord.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Discord.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Discord.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Discord.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 5</value>
+  </data>
+  <data name="Discord.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="Discord.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="Discord.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Discord.Name" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="&gt;&gt;Discord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Discord.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Discord.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="GitHub.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="GitHub.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="GitHub.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="GitHub.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 5</value>
+  </data>
+  <data name="GitHub.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="GitHub.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="GitHub.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;GitHub.Name" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="&gt;&gt;GitHub.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GitHub.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;GitHub.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Steam.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Steam.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Steam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Steam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 5</value>
+  </data>
+  <data name="Steam.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="Steam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="Steam.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;Steam.Name" xml:space="preserve">
+    <value>Steam</value>
+  </data>
+  <data name="&gt;&gt;Steam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Steam.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Steam.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Mail.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Mail.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Mail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Mail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>432, 5</value>
+  </data>
+  <data name="Mail.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="Mail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="Mail.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Mail.Name" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="&gt;&gt;Mail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Mail.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Mail.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -355,7 +574,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -364,13 +583,10 @@
     <value>13, 23</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>586, 312</value>
+    <value>586, 310</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Courier New, 15.75pt</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
@@ -379,7 +595,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>[BRS] - Dallas Programmer</value>
+    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal</value>
   </data>
   <data name="&gt;&gt;CheckFormsFlags.Name" xml:space="preserve">
     <value>CheckFormsFlags</value>
@@ -398,6 +614,12 @@
   </data>
   <data name="&gt;&gt;serialPort2.Type" xml:space="preserve">
     <value>System.IO.Ports.SerialPort, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FormExpansionTimer.Name" xml:space="preserve">
+    <value>FormExpansionTimer</value>
+  </data>
+  <data name="&gt;&gt;FormExpansionTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainMenu</value>

@@ -19,7 +19,7 @@ namespace BRS_Dallas_Programmer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -173,6 +173,16 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_discord_new_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-discord-new-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_error_file_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-error-file-100", resourceCulture);
@@ -213,6 +223,16 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_github_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-github-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_info_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-info-100", resourceCulture);
@@ -226,6 +246,16 @@ namespace BRS_Dallas_Programmer.Properties {
         internal static System.Drawing.Bitmap icons8_link_100__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-link-100 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_mail_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-mail-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -276,6 +306,16 @@ namespace BRS_Dallas_Programmer.Properties {
         internal static System.Drawing.Bitmap icons8_settings_disabled_100__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-settings-disabled-100 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_steam_circled_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-steam-circled-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

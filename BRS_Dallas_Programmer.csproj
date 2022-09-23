@@ -202,5 +202,17 @@
   <ItemGroup>
     <None Include="Icons\icons8-info-100.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-mail-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-github-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-discord-new-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\icons8-steam-circled-100.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -197,8 +197,10 @@ namespace BRS_Dallas_Programmer
                         else
                         {
                             NewUserTextInfo("Connecting dallas...", 0);
+
                             BRS.Debug.Comment("Setting FTDI port to " + BRS.FTDI.FTDIComName);
                             BRS.FTDI.FTDIPort.PortName = BRS.FTDI.FTDIComName;
+
                             BRS.Debug.Success("Port is closed, opening...");
                             FileLoading();
                             BRS.FTDI.FTDIPort.BaudRate = 57600;
@@ -249,7 +251,6 @@ namespace BRS_Dallas_Programmer
                     if (BRS.FileWatcher.FileChanged)
                     {
                         NewUserTextInfo("Attempting auto programming...", 3);
-                        BRS.Debug.Comment("SENDING ENTER");
                         //Read existing
                         string result = BRS.FTDI.FTDIPort.ReadExisting();
 
@@ -261,6 +262,7 @@ namespace BRS_Dallas_Programmer
                         }
 
                         //Send enter to DS89C450
+                        BRS.Debug.Comment("SENDING ENTER");
                         BRS.FTDI.FTDIPort.Write("\r");
                     }
                 }
@@ -473,12 +475,13 @@ namespace BRS_Dallas_Programmer
             FileLoading();
             this.Refresh();
 
+            BRS.Debug.Comment("Disabling autoprogramming timer...");
+            AutoProgEnterCheck.Enabled = false;
+;
             if (BRS.FTDI.FTDIPort.IsOpen)
             {
                 if(File.Exists(FilePath))
                 {
-                    BRS.FileWatcher.FileChanged = false;
-
                     BRS.Debug.Success("File validated, and FTDI opened");
                     BRS.Debug.Success("Parsing as text");
                     string Text = File.ReadAllText(FilePath);
@@ -488,6 +491,8 @@ namespace BRS_Dallas_Programmer
                     Gs = BRS.FTDI.GetHexFileSize(Text);
                     BRS.Debug.Success(Gs.ToString());
                     amountOfGs = 0;
+
+                    //Setting progress bar
                     ProgrammingProgress.Maximum = Gs+1;
                     ProgrammingProgress.Value = 0;
 
@@ -516,6 +521,9 @@ namespace BRS_Dallas_Programmer
                             NewUserTextInfo(Verified, 2);
                             SystemSounds.Hand.Play();
                         }
+
+                        BRS.Debug.Comment("Terminating current autoprogramming attempts");
+                        BRS.FileWatcher.FileChanged = false;
                     }
                     else if(executed.Equals("No Replies"))
                     {
@@ -553,9 +561,14 @@ namespace BRS_Dallas_Programmer
                         NewUserTextInfo("Fatal programming error", 2);
                         this.Refresh();
                         Thread.Sleep(200);
+
+                        BRS.Debug.Comment("Terminating current autoprogramming attempts");
+                        BRS.FileWatcher.FileChanged = false;
                     }
                 }
             }
+            BRS.Debug.Comment("Re-Enabling autoprogramming timer...");
+            AutoProgEnterCheck.Enabled = true;
             BRS.Debug.Header(false);
         }
         //#############################################################//

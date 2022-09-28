@@ -395,7 +395,9 @@ namespace BRS_Dallas_Programmer
         {
             try
             {
-                System.Diagnostics.Process.Start("https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcSMTRmXPGTGBblDTVNLnGhvXVtqpCNXhMRpBrKrLRzjqdKVVbfTrqHgnGvnqwkbcxZJbplSD");
+                Clipboard.SetText("lyam.BRS@gmail.com");
+                ButtonText.Text = "Copied email to clipboard!";
+                ButtonText.ForeColor = Color.FromArgb(0, 255, 0);
             }
             catch
             {

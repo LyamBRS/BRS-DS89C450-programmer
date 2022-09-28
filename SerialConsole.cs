@@ -103,11 +103,12 @@ namespace BRS_Dallas_Programmer
         public void DataReceiverHandling()
         {
             //Gather stored data in the buffer
-            string result = BRS.ComPort.Port.ReadExisting();
-
+            string result = "";
+            
             try
             {
-                serialConsoleRef.Invoke(serialConsoleRef.Delegate, result);
+                result = BRS.ComPort.Port.ReadExisting();
+                serialConsoleRef.BeginInvoke(serialConsoleRef.Delegate, result);
             }
             catch
             {   // The form is closed, and the function could not be called

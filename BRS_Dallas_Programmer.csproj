@@ -52,7 +52,7 @@
     <ApplicationIcon>BRS %28S%29 Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>36AC4380778BD71F50E1256B06BACFBCF9CF795D</ManifestCertificateThumbprint>
@@ -61,7 +61,7 @@
     <ManifestKeyFile>BRS_Dallas_Programmer_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>BRS_Dallas_Programmer_TemporaryKey.pfx</AssemblyOriginatorKeyFile>

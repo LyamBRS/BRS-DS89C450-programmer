@@ -336,78 +336,6 @@
   <data name="FlowInfoIcons.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Discord.Name" xml:space="preserve">
-    <value>Discord</value>
-  </data>
-  <data name="&gt;&gt;Discord.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Discord.Parent" xml:space="preserve">
-    <value>FlowInfoIcons</value>
-  </data>
-  <data name="&gt;&gt;Discord.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;GitHub.Name" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
-  <data name="&gt;&gt;GitHub.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GitHub.Parent" xml:space="preserve">
-    <value>FlowInfoIcons</value>
-  </data>
-  <data name="&gt;&gt;GitHub.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;Steam.Name" xml:space="preserve">
-    <value>Steam</value>
-  </data>
-  <data name="&gt;&gt;Steam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Steam.Parent" xml:space="preserve">
-    <value>FlowInfoIcons</value>
-  </data>
-  <data name="&gt;&gt;Steam.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;Mail.Name" xml:space="preserve">
-    <value>Mail</value>
-  </data>
-  <data name="&gt;&gt;Mail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Mail.Parent" xml:space="preserve">
-    <value>FlowInfoIcons</value>
-  </data>
-  <data name="&gt;&gt;Mail.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="FlowInfoIcons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 312</value>
-  </data>
-  <data name="FlowInfoIcons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 5, 6, 5</value>
-  </data>
-  <data name="FlowInfoIcons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 143</value>
-  </data>
-  <data name="FlowInfoIcons.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;FlowInfoIcons.Name" xml:space="preserve">
-    <value>FlowInfoIcons</value>
-  </data>
-  <data name="&gt;&gt;FlowInfoIcons.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FlowInfoIcons.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;FlowInfoIcons.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="Discord.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -540,6 +468,30 @@
   <data name="&gt;&gt;Mail.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="FlowInfoIcons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 312</value>
+  </data>
+  <data name="FlowInfoIcons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="FlowInfoIcons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>568, 143</value>
+  </data>
+  <data name="FlowInfoIcons.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.Name" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;FlowInfoIcons.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -671,7 +623,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal</value>
+    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal v1.1</value>
   </data>
   <data name="&gt;&gt;CheckFormsFlags.Name" xml:space="preserve">
     <value>CheckFormsFlags</value>

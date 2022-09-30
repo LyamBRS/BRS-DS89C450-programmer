@@ -623,7 +623,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal v1.1</value>
+    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal v1.2</value>
   </data>
   <data name="&gt;&gt;CheckFormsFlags.Name" xml:space="preserve">
     <value>CheckFormsFlags</value>

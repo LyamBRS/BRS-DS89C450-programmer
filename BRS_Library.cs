@@ -603,15 +603,18 @@ namespace BRS
             //ittering the list of USB ports
             foreach (ManagementObject prop in Ports)
             {
-                if (prop.GetPropertyValue("Manufacturer") != null)
+                if (prop.GetPropertyValue("Name") != null)
                 {
-                    if (prop.GetPropertyValue("Name").ToString().Contains("USB") &&
-                        prop.GetPropertyValue("Name").ToString().Contains("COM") &&
-                        prop.GetPropertyValue("Manufacturer").Equals("FTDI")
-                        )
+                    if (prop.GetPropertyValue("Manufacturer") != null)
                     {
-                        //BRS.Debug.Success("[BRS]: FTDI found: " + prop.GetPropertyValue("Name").ToString());
-                        return (prop.GetPropertyValue("Name").ToString());
+                        if (prop.GetPropertyValue("Name").ToString().Contains("USB") &&
+                            prop.GetPropertyValue("Name").ToString().Contains("COM") &&
+                            prop.GetPropertyValue("Manufacturer").Equals("FTDI")
+                            )
+                        {
+                            //BRS.Debug.Success("[BRS]: FTDI found: " + prop.GetPropertyValue("Name").ToString());
+                            return (prop.GetPropertyValue("Name").ToString());
+                        }
                     }
                 }
             }

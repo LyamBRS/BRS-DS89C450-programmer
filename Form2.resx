@@ -225,6 +225,39 @@
   <data name="&gt;&gt;InformationButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="UDPNetworkInterface.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="UDPNetworkInterface.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="UDPNetworkInterface.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="UDPNetworkInterface.Location" type="System.Drawing.Point, System.Drawing">
+    <value>432, 5</value>
+  </data>
+  <data name="UDPNetworkInterface.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="UDPNetworkInterface.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="UDPNetworkInterface.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;UDPNetworkInterface.Name" xml:space="preserve">
+    <value>UDPNetworkInterface</value>
+  </data>
+  <data name="&gt;&gt;UDPNetworkInterface.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UDPNetworkInterface.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;UDPNetworkInterface.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="Quit.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -235,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="Quit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>432, 5</value>
+    <value>574, 5</value>
   </data>
   <data name="Quit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
@@ -256,7 +289,7 @@
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;Quit.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 122</value>
@@ -265,7 +298,7 @@
     <value>6, 5, 6, 5</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 143</value>
+    <value>711, 143</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -295,13 +328,13 @@
     <value>Courier New, 18pt, style=Bold</value>
   </data>
   <data name="ButtonText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 275</value>
+    <value>10, 270</value>
   </data>
   <data name="ButtonText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
   </data>
   <data name="ButtonText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 28</value>
+    <value>711, 28</value>
   </data>
   <data name="ButtonText.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -468,6 +501,39 @@
   <data name="&gt;&gt;Mail.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="Icons8.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Icons8.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="Icons8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Icons8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 5</value>
+  </data>
+  <data name="Icons8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 5, 6, 5</value>
+  </data>
+  <data name="Icons8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 128</value>
+  </data>
+  <data name="Icons8.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;Icons8.Name" xml:space="preserve">
+    <value>Icons8</value>
+  </data>
+  <data name="&gt;&gt;Icons8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Icons8.Parent" xml:space="preserve">
+    <value>FlowInfoIcons</value>
+  </data>
+  <data name="&gt;&gt;Icons8.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="FlowInfoIcons.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 312</value>
   </data>
@@ -475,7 +541,7 @@
     <value>6, 5, 6, 5</value>
   </data>
   <data name="FlowInfoIcons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 143</value>
+    <value>711, 276</value>
   </data>
   <data name="FlowInfoIcons.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -511,7 +577,7 @@
     <value>6, 5, 6, 5</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 91</value>
+    <value>565, 91</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -535,7 +601,7 @@
     <value>13, 23</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>586, 310</value>
+    <value>729, 300</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Courier New, 15.75pt</value>
@@ -616,6 +682,9 @@
         AH/AcAB/wHAAf8BwAH/AcAB///////////8=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 5, 6, 5</value>
   </data>
@@ -623,7 +692,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal v1.1</value>
+    <value>BRS: Automatic Dallas Programmer &amp; Better HyperTerminal v1.3</value>
   </data>
   <data name="&gt;&gt;CheckFormsFlags.Name" xml:space="preserve">
     <value>CheckFormsFlags</value>

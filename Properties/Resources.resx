@@ -124,8 +124,14 @@
   <data name="icons8-file-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-file-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-delete-folder-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-delete-folder-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-stack-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-stack-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-stack-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-stack-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-file-download-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-file-download-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-opened-folder-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-opened-folder-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,11 +139,14 @@
   <data name="icons8-usb-disconnected-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-usb-disconnected-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-delete-file-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-delete-file-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-icons8-default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-icons8-default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-fileLoading-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-fileLoading-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-mail-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-mail-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-delete-folder-1001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-delete-folder-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="black-square" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\black-square.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,11 +163,11 @@
   <data name="icons8-file-download-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-file-download-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-icons8-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-icons8-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-info-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-info-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-settings-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-settings-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Console Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\Console Background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,11 +175,17 @@
   <data name="icons8-usb-off-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-usb-off-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-info-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-info-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-mail-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-mail-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-error-file-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-error-file-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-steam-circled-Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-steam-circled-Normal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-broken-link-100 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-broken-link-100 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,20 +193,38 @@
   <data name="icons8-delete-history-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-delete-history-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-discord-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-discord-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-steam-circled-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-steam-circled-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-cancel-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-cancel-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-unchecked-checkbox-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-unchecked-checkbox-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-cancel-Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-cancel-Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-delete-file-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-delete-file-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-fileLoading-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-fileLoading-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-settings-disabled-100 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-settings-disabled-100 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-console-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-console-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-settings-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-settings-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-checked-checkbox-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-checked-checkbox-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-github-normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-github-normal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-delete-folder-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-delete-folder-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-discord-new-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-discord-new-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,13 +232,16 @@
   <data name="icons8-github-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-github-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-delete-folder-1001" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-delete-folder-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-console-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-console-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-more-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\icons8-more-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-steam-circled-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\icons8-steam-circled-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-checked-checkbox-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-checked-checkbox-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-console-Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\icons8-console-Normal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

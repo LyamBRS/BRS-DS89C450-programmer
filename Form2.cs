@@ -11,6 +11,8 @@ using System.IO.Ports;
 using System.IO;
 using BRS;
 using cls;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace BRS_Dallas_Programmer
 {
@@ -34,6 +36,8 @@ namespace BRS_Dallas_Programmer
 
         Form1 programming = new Form1();
         SerialConsole serialConsole = new SerialConsole();
+        UDPNetwork udpForm;
+
         public MainMenu()
         {
             BRS.Debug.Header(true);
@@ -172,6 +176,11 @@ namespace BRS_Dallas_Programmer
         {
             ButtonText.Text = "Quit";
             ButtonText.ForeColor = Color.FromArgb(255, 100, 100);
+            Quit.BackgroundImage = Properties.Resources.icons8_cancel_Selected;
+        }
+        private void Quit_MouseLeave(object sender, EventArgs e)
+        {
+            Quit.BackgroundImage = Properties.Resources.icons8_cancel_100;
         }
         //#############################################################//
         /// <summary>
@@ -185,6 +194,12 @@ namespace BRS_Dallas_Programmer
         {
             ButtonText.Text = "Serial Terminal";
             ButtonText.ForeColor = Color.FromArgb(255, 255, 255);
+            Console.BackgroundImage = Properties.Resources.icons8_console_100;
+        }
+        private void Console_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            Console.BackgroundImage = Properties.Resources.icons8_console_Normal;
         }
         //#############################################################//
         /// <summary>
@@ -198,6 +213,12 @@ namespace BRS_Dallas_Programmer
         {
             ButtonText.Text = "Dallas Programmer";
             ButtonText.ForeColor = Color.FromArgb(90, 190, 255);
+            Programmer.BackgroundImage = Properties.Resources.icons8_file_download_Selected;
+        }
+        private void Programmer_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            Programmer.BackgroundImage = Properties.Resources.icons8_file_download_100;
         }
         //#############################################################//
         /// <summary>
@@ -211,6 +232,12 @@ namespace BRS_Dallas_Programmer
         {
             ButtonText.Text = "Information";
             ButtonText.ForeColor = Color.FromArgb(90, 190, 255);
+            InformationButton.BackgroundImage = Properties.Resources.icons8_info_Selected;
+        }
+        private void InformationButton_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            InformationButton.BackgroundImage = Properties.Resources.icons8_info_100;
         }
         //#############################################################//
         /// <summary>
@@ -250,6 +277,24 @@ namespace BRS_Dallas_Programmer
         {
             ButtonText.Text = "[BRS] Auto Dallas Prog & Better Terminal";
             ButtonText.ForeColor = Color.FromArgb(100, 100, 100);
+        }
+        //#############################################################// 
+        /// <summary>
+        /// Display's the name of the application for UDP Network
+        /// terminal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void UDPNetworkInterface_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "UDP Network Terminal";
+            ButtonText.ForeColor = Color.FromArgb(255, 255, 255);
+            UDPNetworkInterface.BackgroundImage = Properties.Resources.icons8_stack_Selected;
+        }
+        private void UDPNetworkInterface_MouseLeave(object sender, EventArgs e)
+        {
+            UDPNetworkInterface.BackgroundImage = Properties.Resources.icons8_stack_100;
         }
         //#############################################################//
         /// <summary>
@@ -309,23 +354,48 @@ namespace BRS_Dallas_Programmer
         {
             ButtonText.Text = "Contact us through BRS's Discord";
             ButtonText.ForeColor = Color.FromArgb(190, 90, 255);
+            Discord.BackgroundImage = Properties.Resources.icons8_discord_Selected;
         }
+        private void Discord_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            Discord.BackgroundImage = Properties.Resources.icons8_discord_new_100;
+        }
+        //#############################################################//
         private void GitHub_MouseEnter(object sender, EventArgs e)
         {
             ButtonText.Text = "Lyam's GitHub";
             ButtonText.ForeColor = Color.FromArgb(190, 190, 190);
+            GitHub.BackgroundImage = Properties.Resources.icons8_github_normal;
         }
-
+        private void GitHub_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            GitHub.BackgroundImage = Properties.Resources.icons8_github_100;
+        }
+        //#############################################################//
         private void Steam_MouseEnter(object sender, EventArgs e)
         {
             ButtonText.Text = "BRS's Steam page";
             ButtonText.ForeColor = Color.FromArgb(190, 190, 255);
+            Steam.BackgroundImage = Properties.Resources.icons8_steam_circled_100;
         }
-
+        private void Steam_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            Steam.BackgroundImage = Properties.Resources.icons8_steam_circled_Normal;
+        }
+        //#############################################################//
         private void Mail_MouseEnter(object sender, EventArgs e)
         {
             ButtonText.Text = "Contact us via e-mail";
             ButtonText.ForeColor = Color.FromArgb(255, 100, 100);
+            Mail.BackgroundImage = Properties.Resources.icons8_mail_Selected;
+        }
+        private void Mail_MouseLeave(object sender, EventArgs e)
+        {
+            ButtonText.Text = "";
+            Mail.BackgroundImage = Properties.Resources.icons8_mail_100;
         }
         //#############################################################//
         /// <summary>
@@ -404,6 +474,73 @@ namespace BRS_Dallas_Programmer
                 ButtonText.Text = "Can't Open Lyam[BRS]'s gmail";
                 ButtonText.ForeColor = Color.FromArgb(255, 0, 0);
             }
+        }
+        //#############################################################//
+        /// <summary>
+        /// Opens icon 8. Source for icons used in this project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void Icons8_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://icons8.com/icons");
+            }
+            catch
+            {
+                ButtonText.Text = "Can't Open icons8 website";
+                ButtonText.ForeColor = Color.FromArgb(255, 0, 0);
+            }
+        }
+        private void Icons8_MouseEnter(object sender, EventArgs e)
+        {
+            ButtonText.Text = "icons8.com Source for the icons used.";
+            ButtonText.ForeColor = Color.FromArgb(0, 255, 0);
+            Icons8.BackgroundImage = Properties.Resources.icons8_icons8_Selected;
+        }
+        private void Icons8_MouseLeave(object sender, EventArgs e)
+        {
+            Icons8.BackgroundImage = Properties.Resources.icons8_icons8_default;
+        }
+        //#############################################################//
+        /// <summary>
+        /// Opens the UDP network terminal form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################// 
+        private void UDPNetworkInterface_Click(object sender, EventArgs e)
+        {
+            BRS.Debug.Header(true);
+
+            string hostName = Dns.GetHostName();
+            BRS.Debug.Comment("HOST: \t" + hostName);
+
+            IPAddress[] addresses = Dns.GetHostAddresses(hostName);
+            foreach (IPAddress address in addresses)
+            {
+                string addressName = address.ToString();
+                string header = "\t";
+
+                BRS.Debug.Comment(addressName + "\t" + address.AddressFamily.ToString());
+            }
+
+            BRS.Debug.Comment(System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable().ToString());
+            System.Net.NetworkInformation.NetworkInterface[] interfaces = System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface Interface in interfaces)
+            {
+                string addressName = Interface.Name;
+                string header = "\t";
+
+                BRS.Debug.Comment(addressName + "\t" + Interface.Description);
+            }
+
+            udpForm = new UDPNetwork();
+            udpForm.Show();
+
+            BRS.Debug.Header(false);
         }
     }
 }

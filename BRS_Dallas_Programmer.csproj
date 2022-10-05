@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BRS_Dynamic_Buttons.cs" />
     <Compile Include="BRS_Library.cs" />
     <Compile Include="clsResize.cs" />
     <Compile Include="Form1.cs">
@@ -116,6 +117,12 @@
     <Compile Include="SerialConsole.Designer.cs">
       <DependentUpon>SerialConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="UDPNetwork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UDPNetwork.Designer.cs">
+      <DependentUpon>UDPNetwork.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SerialConsole.resx">
       <DependentUpon>SerialConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UDPNetwork.resx">
+      <DependentUpon>UDPNetwork.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BRS_Dallas_Programmer_TemporaryKey.pfx" />
     <None Include="ClassDiagram1.cd" />
@@ -252,6 +262,11 @@
   <ItemGroup>
     <Content Include="BRS %28S%29 Icon.ico" />
     <Content Include="BRS_%28S%29_Icon.ico" />
+    <None Include="Icons\icons8-no-network-100.png" />
+    <None Include="Icons\icons8-wired-network-connection-100.png" />
+    <None Include="Icons\icons8-wi-fi-100.png" />
+    <None Include="Icons\icons8-connected-100.png" />
+    <None Include="Icons\icons8-disconnected-100.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

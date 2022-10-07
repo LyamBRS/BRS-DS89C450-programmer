@@ -49,6 +49,11 @@ namespace BRS_Dallas_Programmer
             this.Mail = new System.Windows.Forms.Button();
             this.Icons8 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.Programmer = new System.Windows.Forms.Button();
+            this.Console = new System.Windows.Forms.Button();
+            this.InformationButton = new System.Windows.Forms.Button();
+            this.UDPNetworkInterface = new System.Windows.Forms.Button();
+            this.Quit = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.FlowInfoIcons.SuspendLayout();
             this.SuspendLayout();
@@ -89,19 +94,6 @@ namespace BRS_Dallas_Programmer
             this.Console.Click += new System.EventHandler(this.Console_Click);
             this.Console.MouseEnter += new System.EventHandler(this.Console_MouseEnter);
             this.Console.MouseLeave += new System.EventHandler(this.Console_MouseLeave);
-            // 
-            // InformationButton
-            // 
-            this.InformationButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_info_100;
-            resources.ApplyResources(this.InformationButton, "InformationButton");
-            this.InformationButton.FlatAppearance.BorderSize = 0;
-            this.InformationButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(191)))), ((int)(((byte)(255)))));
-            this.InformationButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.InformationButton.Name = "InformationButton";
-            this.InformationButton.UseVisualStyleBackColor = true;
-            this.InformationButton.Click += new System.EventHandler(this.InformationButton_Click);
-            this.InformationButton.MouseEnter += new System.EventHandler(this.InformationButton_MouseEnter);
-            this.InformationButton.MouseLeave += new System.EventHandler(this.InformationButton_MouseLeave);
             // 
             // UDPNetworkInterface
             // 
@@ -245,6 +237,19 @@ namespace BRS_Dallas_Programmer
             this.button1.UseVisualStyleBackColor = true;
             this.button1.MouseLeave += new System.EventHandler(this.flowLayoutPanel1_MouseLeave);
             this.button1.MouseHover += new System.EventHandler(this.button1_MouseHover);
+            // 
+            // InformationButton
+            // 
+            this.InformationButton.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_info_100;
+            resources.ApplyResources(this.InformationButton, "InformationButton");
+            this.InformationButton.FlatAppearance.BorderSize = 0;
+            this.InformationButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(191)))), ((int)(((byte)(255)))));
+            this.InformationButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.InformationButton.Name = "InformationButton";
+            this.InformationButton.UseVisualStyleBackColor = true;
+            this.InformationButton.Click += new System.EventHandler(this.InformationButton_Click);
+            this.InformationButton.MouseEnter += new System.EventHandler(this.InformationButton_MouseEnter);
+            this.InformationButton.MouseLeave += new System.EventHandler(this.InformationButton_MouseLeave);
             // 
             // MainMenu
             // 

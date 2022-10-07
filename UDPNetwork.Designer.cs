@@ -35,7 +35,6 @@ namespace BRS_Dallas_Programmer
             this.ReceivingTextBox = new System.Windows.Forms.RichTextBox();
             this.ReceiverIP = new System.Windows.Forms.TextBox();
             this.UserTextInfo = new System.Windows.Forms.TextBox();
-            this.ComputerNetworkType = new System.Windows.Forms.Button();
             this.ClearReceivedWindow = new System.Windows.Forms.Button();
             this.SendToAddress = new System.Windows.Forms.Button();
             this.UDP_Link = new System.Windows.Forms.Button();
@@ -59,7 +58,7 @@ namespace BRS_Dallas_Programmer
             this.ToSendTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ToSendTextBox.Location = new System.Drawing.Point(12, 80);
             this.ToSendTextBox.Name = "ToSendTextBox";
-            this.ToSendTextBox.Size = new System.Drawing.Size(351, 374);
+            this.ToSendTextBox.Size = new System.Drawing.Size(351, 364);
             this.ToSendTextBox.TabIndex = 1;
             this.ToSendTextBox.Text = "";
             // 
@@ -72,7 +71,7 @@ namespace BRS_Dallas_Programmer
             this.ReceivingTextBox.Location = new System.Drawing.Point(372, 80);
             this.ReceivingTextBox.Name = "ReceivingTextBox";
             this.ReceivingTextBox.ReadOnly = true;
-            this.ReceivingTextBox.Size = new System.Drawing.Size(351, 374);
+            this.ReceivingTextBox.Size = new System.Drawing.Size(351, 364);
             this.ReceivingTextBox.TabIndex = 2;
             this.ReceivingTextBox.Text = "";
             // 
@@ -85,6 +84,7 @@ namespace BRS_Dallas_Programmer
             this.ReceiverIP.Name = "ReceiverIP";
             this.ReceiverIP.Size = new System.Drawing.Size(258, 29);
             this.ReceiverIP.TabIndex = 8;
+            this.ReceiverIP.TextChanged += new System.EventHandler(this.ReceiverIP_TextChanged);
             // 
             // UserTextInfo
             // 
@@ -101,37 +101,30 @@ namespace BRS_Dallas_Programmer
             this.UserTextInfo.TabIndex = 9;
             this.UserTextInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // ComputerNetworkType
-            // 
-            this.ComputerNetworkType.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_no_network_100;
-            this.ComputerNetworkType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ComputerNetworkType.FlatAppearance.BorderSize = 0;
-            this.ComputerNetworkType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComputerNetworkType.Location = new System.Drawing.Point(322, 460);
-            this.ComputerNetworkType.Name = "ComputerNetworkType";
-            this.ComputerNetworkType.Size = new System.Drawing.Size(90, 90);
-            this.ComputerNetworkType.TabIndex = 10;
-            this.ComputerNetworkType.UseVisualStyleBackColor = true;
-            // 
             // ClearReceivedWindow
             // 
             this.ClearReceivedWindow.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_delete_history_100;
             this.ClearReceivedWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClearReceivedWindow.FlatAppearance.BorderSize = 0;
+            this.ClearReceivedWindow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.ClearReceivedWindow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.ClearReceivedWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ClearReceivedWindow.Location = new System.Drawing.Point(537, 460);
+            this.ClearReceivedWindow.Location = new System.Drawing.Point(537, 453);
             this.ClearReceivedWindow.Name = "ClearReceivedWindow";
             this.ClearReceivedWindow.Size = new System.Drawing.Size(90, 90);
             this.ClearReceivedWindow.TabIndex = 6;
             this.ClearReceivedWindow.UseVisualStyleBackColor = true;
+            this.ClearReceivedWindow.Click += new System.EventHandler(this.ClearReceivedWindow_Click);
             // 
             // SendToAddress
             // 
             this.SendToAddress.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_file_download_100;
             this.SendToAddress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SendToAddress.FlatAppearance.BorderSize = 0;
+            this.SendToAddress.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.SendToAddress.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.SendToAddress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SendToAddress.Location = new System.Drawing.Point(12, 460);
+            this.SendToAddress.Location = new System.Drawing.Point(12, 453);
             this.SendToAddress.Name = "SendToAddress";
             this.SendToAddress.Size = new System.Drawing.Size(90, 90);
             this.SendToAddress.TabIndex = 5;
@@ -143,8 +136,10 @@ namespace BRS_Dallas_Programmer
             this.UDP_Link.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_disconnected_100;
             this.UDP_Link.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.UDP_Link.FlatAppearance.BorderSize = 0;
+            this.UDP_Link.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.UDP_Link.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.UDP_Link.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UDP_Link.Location = new System.Drawing.Point(633, 460);
+            this.UDP_Link.Location = new System.Drawing.Point(633, 453);
             this.UDP_Link.Name = "UDP_Link";
             this.UDP_Link.Size = new System.Drawing.Size(90, 90);
             this.UDP_Link.TabIndex = 4;
@@ -156,12 +151,15 @@ namespace BRS_Dallas_Programmer
             this.ClearSendingWindow.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_delete_history_100;
             this.ClearSendingWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClearSendingWindow.FlatAppearance.BorderSize = 0;
+            this.ClearSendingWindow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.ClearSendingWindow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.ClearSendingWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ClearSendingWindow.Location = new System.Drawing.Point(108, 460);
+            this.ClearSendingWindow.Location = new System.Drawing.Point(108, 453);
             this.ClearSendingWindow.Name = "ClearSendingWindow";
             this.ClearSendingWindow.Size = new System.Drawing.Size(90, 90);
             this.ClearSendingWindow.TabIndex = 3;
             this.ClearSendingWindow.UseVisualStyleBackColor = true;
+            this.ClearSendingWindow.Click += new System.EventHandler(this.ClearSendingWindow_Click);
             // 
             // ReceiverPort
             // 
@@ -172,6 +170,7 @@ namespace BRS_Dallas_Programmer
             this.ReceiverPort.Name = "ReceiverPort";
             this.ReceiverPort.Size = new System.Drawing.Size(258, 29);
             this.ReceiverPort.TabIndex = 11;
+            this.ReceiverPort.TextChanged += new System.EventHandler(this.ReceiverPort_TextChanged);
             // 
             // SenderPort
             // 
@@ -182,6 +181,7 @@ namespace BRS_Dallas_Programmer
             this.SenderPort.Name = "SenderPort";
             this.SenderPort.Size = new System.Drawing.Size(258, 29);
             this.SenderPort.TabIndex = 13;
+            this.SenderPort.TextChanged += new System.EventHandler(this.SenderPort_TextChanged);
             // 
             // label1
             // 
@@ -267,7 +267,6 @@ namespace BRS_Dallas_Programmer
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SenderPort);
             this.Controls.Add(this.ReceiverPort);
-            this.Controls.Add(this.ComputerNetworkType);
             this.Controls.Add(this.UserTextInfo);
             this.Controls.Add(this.ReceiverIP);
             this.Controls.Add(this.ClearReceivedWindow);
@@ -298,7 +297,6 @@ namespace BRS_Dallas_Programmer
         private System.Windows.Forms.Button ClearReceivedWindow;
         private System.Windows.Forms.TextBox ReceiverIP;
         private System.Windows.Forms.TextBox UserTextInfo;
-        private System.Windows.Forms.Button ComputerNetworkType;
         private System.Windows.Forms.TextBox ReceiverPort;
         private System.Windows.Forms.TextBox SenderPort;
         private System.Windows.Forms.Label label1;

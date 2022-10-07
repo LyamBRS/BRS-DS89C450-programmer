@@ -538,7 +538,7 @@ namespace BRS_Dallas_Programmer
             }
 
             udpForm = new UDPNetwork();
-            udpForm.Show();
+            udpForm.ShowDialog();
 
             BRS.Debug.Header(false);
         }

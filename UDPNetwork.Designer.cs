@@ -53,6 +53,7 @@ namespace BRS_Dallas_Programmer
             this.ToSendTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ToSendTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ToSendTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ToSendTextBox.EnableAutoDragDrop = true;
             this.ToSendTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ToSendTextBox.Location = new System.Drawing.Point(12, 80);
             this.ToSendTextBox.Name = "ToSendTextBox";

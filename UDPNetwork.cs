@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using BRS_Dallas_Programmer.Properties;
 using BRS_Dallas_Programmer_Icons;
+using System.Media;
 
 namespace BRS_Dallas_Programmer
 {
@@ -97,9 +98,11 @@ namespace BRS_Dallas_Programmer
             Connect.Update();
 
             //Save received text in a textbox, then delete text.
-            ReceivingTextBox.Text = ReceivingTextBox.Text + RXtext;
-            RXtext = "";
-
+            if (RXtext.Length > 0)
+            {
+                ReceivingTextBox.Text = ReceivingTextBox.Text + RXtext;
+                RXtext = "";
+            }
             //For pulsating animations of text colours
             radianCounter = radianCounter + 0.08f;
             if(radianCounter > 6.28){radianCounter = 0;}
@@ -218,7 +221,7 @@ namespace BRS_Dallas_Programmer
         {
             //-------------------------------------------[Declaration]-//
               IPAddress address;
-                
+            bool Error = false;
             //---------------------------------------------------------//
             BRS.Debug.Header(true);
 
@@ -234,27 +237,41 @@ namespace BRS_Dallas_Programmer
                         Debug.Success("Port valid!");
 
                         BRS.Debug.Comment("Overwritting UDP client...");
-                        UDP_TX = new UdpClient(Convert.ToInt32(SenderPort.Text));
-                        endPoint = new IPEndPoint(address, Convert.ToInt32(SenderPort.Text));
+                        try
+                        {
+                            UDP_TX = new UdpClient(Convert.ToInt32(SenderPort.Text));
+                            endPoint = new IPEndPoint(address, Convert.ToInt32(SenderPort.Text));
+                        }
+                        catch
+                        {
+                            Debug.Error("FATAL ERROR WHEN ATTEMPTING TO LINK");
+                            Error = true;
+                        }
 
-                        IP_Address = IP_LIST.Text;
-                        IP_Port = SenderPort.Text;
+                        if (Error == false)
+                        {
+                            IP_Address = IP_LIST.Text;
+                            IP_Port = SenderPort.Text;
 
-                        BRS.Debug.Comment("Creating new UDP RX thread");
-                        thread = new System.Threading.Thread(ReceiveUDP_Thread);
-                        thread.Start();
-                        Debug.Success("UDP RX Thread started!");
+                            BRS.Debug.Comment("Creating new UDP RX thread");
+                            thread = new System.Threading.Thread(ReceiveUDP_Thread);
+                            thread.Start();
+                            Debug.Success("UDP RX Thread started!");
 
-                        Connect.State = ControlState.Active;
+                            Connect.State = ControlState.Active;
+                            SystemSounds.Asterisk.Play();
+                        }
                     }
                     else
                     {
                         Debug.Aborted("Port Invalid");
+                        SystemSounds.Hand.Play();
                     }
                 }
                 else
                 {
                     Debug.Aborted("Address Invalid");
+                    SystemSounds.Hand.Play();
                 }
             }
             else
@@ -265,10 +282,12 @@ namespace BRS_Dallas_Programmer
                     thread.Abort();
                     UDP_TX.Dispose();
                     Connect.State = ControlState.Inactive;
+                    SystemSounds.Asterisk.Play();
                 }
                 catch
                 {
                     BRS.Debug.Error("Could not dispose of UDP TX");
+                    SystemSounds.Hand.Play();
                 }
             }
 
@@ -379,6 +398,14 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Comment("Clearing TX textbox.");
             ToSendTextBox.Text = "";
+            if (ClearTX.State != ControlState.Active)
+            {
+                SystemSounds.Hand.Play();
+            }
+            else
+            {
+                SystemSounds.Asterisk.Play();
+            }
             Debug.Success("");
 
             BRS.Debug.Header(false);
@@ -396,6 +423,14 @@ namespace BRS_Dallas_Programmer
 
             BRS.Debug.Comment("Clearing RX textbox.");
             ReceivingTextBox.Text = "";
+            if (ClearTX.State != ControlState.Active)
+            {
+                SystemSounds.Hand.Play();
+            }
+            else
+            {
+                SystemSounds.Asterisk.Play();
+            }
             Debug.Success("");
 
             BRS.Debug.Header(false);

@@ -88,10 +88,10 @@ namespace BRS
                 }
 
                 // Stack increased, show function name
-                if (PreviousIndent < tabs)
-                {
-                    Console.Write(indentation + "[" + functionName + "]:\n");
-                }
+                //if (PreviousIndent < tabs)
+                //{
+                //   Console.Write(indentation + "[" + functionName + "]:\n");
+                //}
 
                 if (PreviousIndent != tabs)
                 {
@@ -99,7 +99,7 @@ namespace BRS
                 }
 
                 // Create the string
-                Console.Write(indentation + "|\t" + message + "\n");
+                Console.Write(indentation + " |\t" + "[" + functionName + "]:" + message + "\n");
             }
         }
         //#########################################################//

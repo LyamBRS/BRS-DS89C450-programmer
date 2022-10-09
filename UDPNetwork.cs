@@ -8,24 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BRS;
+using BRS.Buttons;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Text;
+using BRS_Dallas_Programmer.Properties;
+using BRS_Dallas_Programmer_Icons;
 
 namespace BRS_Dallas_Programmer
 {
     public partial class UDPNetwork : Form
     {
-        TriStateButton ClearTX;
-        TriStateButton ClearRX;
-        TriStateButton SendText;
-        TriStateButton Connect;
+        BRS.Buttons.GenericButton ClearTX;
+        BRS.Buttons.GenericButton ClearRX;
+        BRS.Buttons.GenericButton SendText;
+        BRS.Buttons.GenericButton Connect;
 
         System.Threading.Thread thread;
 
-        UdpClient UDP_RX;
         UdpClient UDP_TX;
         IPEndPoint endPoint;
         IPEndPoint RXendpoint;
@@ -34,9 +36,7 @@ namespace BRS_Dallas_Programmer
         string IP_Address = "";
         string IP_Port = "";
         string RXtext = "";
-        bool oldNetworkState = false;
 
-        bool RXportIsGood = false;
         bool TXportIsGood = false;
         bool RXipIsGood = false;
 
@@ -47,34 +47,25 @@ namespace BRS_Dallas_Programmer
         {
             InitializeComponent();
 
-            ClearTX = new TriStateButton(ClearSendingWindow);
-            ClearRX = new TriStateButton(ClearReceivedWindow);
-            SendText = new TriStateButton(SendToAddress);
-            Connect = new TriStateButton(UDP_Link);
+            ClearTX = new GenericButton(ClearSendingWindow, ClearConsolButton.GetStatesColors(), ClearConsolButton.GetStatesBitmaps());
+            ClearRX = new GenericButton(ClearReceivedWindow, ClearConsolButton.GetStatesColors(), ClearConsolButton.GetStatesBitmaps());
+            SendText = new GenericButton(SendToAddress, fileButtons.GetStatesColors(), fileButtons.GetStatesBitmaps());
+            Connect = new GenericButton(UDP_Link, connectButton.GetStatesColors(), connectButton.GetStatesBitmaps());
 
-            ButtonColors clearConsolColor = new ButtonColors(Color.Empty, Color.Black, Color.Black, Color.FromArgb(255, 128, 0, 0));
-            ButtonColors regularColor = new ButtonColors(Color.Empty, Color.Black, Color.Black, Color.Black);
-
-            ClearTX.SetAllBitmaps(Properties.Resources.icons8_delete_history_100, Properties.Resources.icons8_delete_history_100, Properties.Resources.icons8_delete_history_100);
-            ClearRX.SetAllBitmaps(Properties.Resources.icons8_delete_history_100, Properties.Resources.icons8_delete_history_100, Properties.Resources.icons8_delete_history_100);
-            SendText.SetAllBitmaps(Properties.Resources.icons8_file_100, Properties.Resources.icons8_file_download_100, Properties.Resources.icons8_error_file_100);
-            Connect.SetAllBitmaps(Properties.Resources.icons8_disconnected_100, Properties.Resources.icons8_connected_100, Properties.Resources.icons8_disconnected_100);
-
+            // Specifying the buttons as animated.
             ClearRX.Animated = true;
             ClearTX.Animated = true;
             SendText.Animated = true;
             Connect.Animated = true;
 
-            ClearTX.SetAllColors(clearConsolColor);
-            ClearRX.SetAllColors(clearConsolColor);
-
-            Connect.SetAllColors(regularColor);
-            SendText.SetAllColors(regularColor);
-
-            SendText.Disable();
+            SendText.State = ControlState.Disabled;
             UpdatePCInfo();
         }
         //#############################################################//
+        /// <summary>
+        /// Prints out all the computer's IP informations, and saves
+        /// the host name in a global variable of this form.
+        /// </summary>
         //#############################################################//
         private void UpdatePCInfo()
         {
@@ -90,33 +81,64 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Updater function for button animations and colour shifting
+        /// animations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void ButtonUpdater_Tick(object sender, EventArgs e)
         {
+            // Update buttons
             ClearTX.Update();
             ClearRX.Update();
             SendText.Update();
             Connect.Update();
 
+            //Save received text in a textbox, then delete text.
             ReceivingTextBox.Text = ReceivingTextBox.Text + RXtext;
             RXtext = "";
 
             //For pulsating animations of text colours
             radianCounter = radianCounter + 0.08f;
-            if(radianCounter > 6.28)
-            {
-                radianCounter = 0;
-            }
+            if(radianCounter > 6.28){radianCounter = 0;}
 
-            if (IP_LIST.Text != "" && SenderPort.Text != "" && ReceiverPort.Text != "" && ReceiverIP.Text != "")
+            //If we are connected, enable file send.
+            if (Connect.State != ControlState.Active)
             {
-                SendText.Enable();
-                SendText.state = true;
+                SendText.State = ControlState.Disabled;
             }
             else
             {
-                SendText.Disable();
+                if (ToSendTextBox.Text.Equals(""))
+                {
+                    SendText.State = ControlState.Warning;
+                }
+                else
+                {
+                    SendText.State = ControlState.Active;
+                }
             }
+
+            //Check textboxes texts to error or activate clear buttons
+            if(ToSendTextBox.Text.Equals(""))
+            {
+                ClearTX.State = ControlState.Error;
+            }
+            else
+            {
+                ClearTX.State = ControlState.Active;
+            }
+            if (ReceivingTextBox.Text.Equals(""))
+            {
+                ClearRX.State = ControlState.Error;
+            }
+            else
+            {
+                ClearRX.State = ControlState.Active;
+            }
+
             ///////////////////////////////////
             double multiplier = Math.Pow(Math.Sin(radianCounter),20);
 
@@ -129,15 +151,6 @@ namespace BRS_Dallas_Programmer
                 ReceiverIP.ForeColor = Color.FromArgb(255, (int)(multiplier * 255), (int)((1 - multiplier) * 255), 0);
             }
 
-            if (RXportIsGood)
-            {
-                ReceiverPort.ForeColor = Color.LimeGreen;
-            }
-            else
-            {
-                ReceiverPort.ForeColor = Color.FromArgb(255, (int)(multiplier * 255), (int)((1 - multiplier) * 255), 0);
-            }
-
             if (TXportIsGood)
             {
                 SenderPort.ForeColor = Color.LightBlue;
@@ -148,6 +161,12 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Event occuring when the dropdown list for IP addresses is
+        /// clicked on. This updates the available IP addresses.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void IP_LIST_DropDown(object sender, EventArgs e)
         {
@@ -166,81 +185,86 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
-        //#############################################################//
-        private void NetWorkUpdater_Tick(object sender, EventArgs e)
-        {
-        }
-        //#############################################################//
-        //#############################################################//
-        private void IP_LIST_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-        //#############################################################//
+        /// <summary>
+        /// Function enabling and disabling textbox and dropdowns to
+        /// avoid people from changing text once a connection has been
+        /// established.
+        /// </summary>
         //#############################################################//
         private void updateTextBox()
         {
-            if(Connect.state)
+            if(Connect.State != ControlState.Inactive)
             {
                 IP_LIST.Enabled = false;
-                ReceiverPort.Enabled = false;
                 ReceiverIP.Enabled = false;
                 SenderPort.Enabled = false;
             }
             else
             {
                 IP_LIST.Enabled = true;
-                ReceiverPort.Enabled = true;
                 ReceiverIP.Enabled = true;
                 SenderPort.Enabled = true;
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Function executed when attempting to establish a connection
+        /// to the UDP address.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void UDP_Link_Click(object sender, EventArgs e)
         {
+            //-------------------------------------------[Declaration]-//
+              IPAddress address;
+                
+            //---------------------------------------------------------//
             BRS.Debug.Header(true);
 
-            if (Connect.state != true)
+            BRS.Debug.Comment("Verifying link state...");
+            if (Connect.State == ControlState.Inactive)
             {
-                IPAddress address;
+                Debug.Success("No link established, attempting connection...");
                 if (IPAddress.TryParse(ReceiverIP.Text, out address))
                 {
-                    BRS.Debug.Success("Address valid");
-                    if (ReceiverPort.Text.All(char.IsDigit))
+                    Debug.Success("Address valid!");
+                    if (SenderPort.Text.All(char.IsDigit))
                     {
-                        BRS.Debug.Success("Port valid");
+                        Debug.Success("Port valid!");
 
-                        BRS.Debug.Comment("Overwritting UDP client");
-                        UDP_TX = new UdpClient(Convert.ToInt32(ReceiverPort.Text));
-                        endPoint = new IPEndPoint(address, Convert.ToInt32(ReceiverPort.Text));
+                        BRS.Debug.Comment("Overwritting UDP client...");
+                        UDP_TX = new UdpClient(Convert.ToInt32(SenderPort.Text));
+                        endPoint = new IPEndPoint(address, Convert.ToInt32(SenderPort.Text));
 
                         IP_Address = IP_LIST.Text;
                         IP_Port = SenderPort.Text;
+
+                        BRS.Debug.Comment("Creating new UDP RX thread");
                         thread = new System.Threading.Thread(ReceiveUDP_Thread);
                         thread.Start();
+                        Debug.Success("UDP RX Thread started!");
 
-                        Connect.state = true;
+                        Connect.State = ControlState.Active;
                     }
                     else
                     {
-                        BRS.Debug.Aborted("Port Invalid");
+                        Debug.Aborted("Port Invalid");
                     }
                 }
                 else
                 {
-                    BRS.Debug.Aborted("Address Invalid");
+                    Debug.Aborted("Address Invalid");
                 }
             }
             else
             {
-                BRS.Debug.Comment("Closing UDP");
-                Connect.state = false;
-
+                BRS.Debug.Success("Link found! Closing link...");
                 try
                 {
                     thread.Abort();
                     UDP_TX.Dispose();
+                    Connect.State = ControlState.Inactive;
                 }
                 catch
                 {
@@ -252,19 +276,29 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Event occuring when attempting to send text held in TX
+        /// textbox to a specific IP address
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void SendToAddress_Click(object sender, EventArgs e)
         {
+            //-------------------------------------------[Declaration]-//
+              byte[] bytes;
+            //-------------------------------------------[Declaration]-//
             BRS.Debug.Header(true);
 
-            BRS.Debug.Comment("Sending Text Box");
-
+            BRS.Debug.Comment("Attempting to send text box...");
             try
             {
-                byte[] bytes = Encoding.ASCII.GetBytes(ToSendTextBox.Text);
+                bytes = Encoding.ASCII.GetBytes(ToSendTextBox.Text);
                 if (UDP_TX != null)
                 {
+                    BRS.Debug.Comment("Sending on UDP...");
                     UDP_TX.Send(bytes, bytes.Length, endPoint);
+                    Debug.Success("");
                 }
                 else
                 {
@@ -279,35 +313,12 @@ namespace BRS_Dallas_Programmer
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Event occuring when text changes for the sender port.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
-        //#############################################################//
-        //#############################################################//
-        private void ReceiverPort_TextChanged(object sender, EventArgs e)
-        {
-            if (ReceiverPort.Text.All(char.IsDigit))
-            {
-                long number = -1;
-                try
-                {
-                    number = Convert.ToInt64(ReceiverPort.Text);
-                }
-                catch
-                {
-                    BRS.Debug.Error("COULD NOT PARSE PORT TEXT");
-                    RXportIsGood = false;
-                }
-
-                if(number > 65535 || number <= 0)
-                {
-                    RXportIsGood = false;
-                }
-                else
-                {
-                    RXportIsGood = true;
-                }
-            }
-        }
-
         private void SenderPort_TextChanged(object sender, EventArgs e)
         {
             if (SenderPort.Text.All(char.IsDigit))
@@ -323,6 +334,7 @@ namespace BRS_Dallas_Programmer
                     TXportIsGood = false;
                 }
 
+                // Check if entered port is within available ports.
                 if (number > 65535 || number <= 0)
                 {
                     TXportIsGood = false;
@@ -333,6 +345,14 @@ namespace BRS_Dallas_Programmer
                 }
             }
         }
+        //#############################################################//
+        /// <summary>
+        /// Function automatically checking the validity of an entered
+        /// receiver port.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //#############################################################//
         private void ReceiverIP_TextChanged(object sender, EventArgs e)
         {
             IPAddress address;
@@ -347,44 +367,61 @@ namespace BRS_Dallas_Programmer
             }
         }
         //#############################################################//
+        /// <summary>
+        /// Clears the RX receiver informations textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void ClearSendingWindow_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Clearing TX textbox.");
             ToSendTextBox.Text = "";
+            Debug.Success("");
+
             BRS.Debug.Header(false);
         }
         //#############################################################//
+        /// <summary>
+        /// Clears the TX information to send textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //#############################################################//
         private void ClearReceivedWindow_Click(object sender, EventArgs e)
         {
             BRS.Debug.Header(true);
+
+            BRS.Debug.Comment("Clearing RX textbox.");
             ReceivingTextBox.Text = "";
+            Debug.Success("");
+
             BRS.Debug.Header(false);
         }
-        //#############################################################//        //#############################################################//
-        //#############################################################//        //#############################################################//
+        //#############################################################//
+        /// <summary>
+        /// Thread to parse UDP received informations
+        /// </summary>
+        //#############################################################//
         private void ReceiveUDP_Thread()
         {
-            IPAddress address;
+            //-------------------------------------------[Declaration]-//
+              IPAddress address;
+              byte[] receivedBytes;
+            //---------------------------------------------------------//
+
+
             if (IPAddress.TryParse(IP_Address, out address))
             {
                 RXendpoint = new IPEndPoint(address, Convert.ToInt32(IP_Port));
             }
-            else
-            {
-            }
 
-            byte[] receivedBytes;
-
-            while(true)
+            while (thread.IsAlive)
             {
                 receivedBytes = UDP_TX.Receive(ref RXendpoint);
-                
-                //foreach(byte Char in receivedBytes)
-                //{
-                    RXtext = RXtext + System.Text.Encoding.ASCII.GetString(receivedBytes);
-                //}
+                RXtext = RXtext + System.Text.Encoding.ASCII.GetString(receivedBytes);
             }
         }
     }

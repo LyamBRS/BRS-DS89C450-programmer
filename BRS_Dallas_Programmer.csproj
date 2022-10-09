@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="BRS_Dynamic_Buttons.cs" />
     <Compile Include="BRS_Library.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="clsResize.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -262,6 +263,12 @@
   <ItemGroup>
     <Content Include="BRS %28S%29 Icon.ico" />
     <Content Include="BRS_%28S%29_Icon.ico" />
+    <None Include="Icons\icons8-delete-history-disabled-100.png" />
+    <None Include="Icons\icons8-connected-selected-100.png" />
+    <None Include="Icons\icons8-disconnected-selected-100.png" />
+    <None Include="Icons\icons8-opened-folder-Disabled-100.png" />
+    <None Include="Icons\icons8-opened-folder-selected-100.png" />
+    <None Include="Icons\icons8-file-loading-100_Selected.png" />
     <None Include="Icons\icons8-no-network-100.png" />
     <None Include="Icons\icons8-wired-network-connection-100.png" />
     <None Include="Icons\icons8-wi-fi-100.png" />

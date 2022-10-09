@@ -35,19 +35,17 @@ namespace BRS_Dallas_Programmer
             this.ReceivingTextBox = new System.Windows.Forms.RichTextBox();
             this.ReceiverIP = new System.Windows.Forms.TextBox();
             this.UserTextInfo = new System.Windows.Forms.TextBox();
-            this.ClearReceivedWindow = new System.Windows.Forms.Button();
-            this.SendToAddress = new System.Windows.Forms.Button();
-            this.UDP_Link = new System.Windows.Forms.Button();
-            this.ClearSendingWindow = new System.Windows.Forms.Button();
-            this.ReceiverPort = new System.Windows.Forms.TextBox();
             this.SenderPort = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.ButtonUpdater = new System.Windows.Forms.Timer(this.components);
             this.IP_LIST = new System.Windows.Forms.ComboBox();
             this.NetWorkUpdater = new System.Windows.Forms.Timer(this.components);
+            this.ClearReceivedWindow = new System.Windows.Forms.Button();
+            this.SendToAddress = new System.Windows.Forms.Button();
+            this.UDP_Link = new System.Windows.Forms.Button();
+            this.ClearSendingWindow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ToSendTextBox
@@ -101,13 +99,81 @@ namespace BRS_Dallas_Programmer
             this.UserTextInfo.TabIndex = 9;
             this.UserTextInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // SenderPort
+            // 
+            this.SenderPort.BackColor = System.Drawing.SystemColors.MenuText;
+            this.SenderPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SenderPort.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.SenderPort.Location = new System.Drawing.Point(105, 10);
+            this.SenderPort.Name = "SenderPort";
+            this.SenderPort.Size = new System.Drawing.Size(258, 29);
+            this.SenderPort.TabIndex = 13;
+            this.SenderPort.TextChanged += new System.EventHandler(this.SenderPort_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 21);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Port:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label2.Location = new System.Drawing.Point(12, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 21);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "TX IP:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label3.Location = new System.Drawing.Point(369, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 21);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "RX IP:";
+            // 
+            // ButtonUpdater
+            // 
+            this.ButtonUpdater.Enabled = true;
+            this.ButtonUpdater.Interval = 10;
+            this.ButtonUpdater.Tick += new System.EventHandler(this.ButtonUpdater_Tick);
+            // 
+            // IP_LIST
+            // 
+            this.IP_LIST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.IP_LIST.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.IP_LIST.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IP_LIST.DropDownHeight = 1000;
+            this.IP_LIST.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.IP_LIST.DropDownWidth = 1000;
+            this.IP_LIST.ForeColor = System.Drawing.Color.MediumSpringGreen;
+            this.IP_LIST.FormattingEnabled = true;
+            this.IP_LIST.IntegralHeight = false;
+            this.IP_LIST.Location = new System.Drawing.Point(108, 45);
+            this.IP_LIST.Name = "IP_LIST";
+            this.IP_LIST.Size = new System.Drawing.Size(255, 29);
+            this.IP_LIST.Sorted = true;
+            this.IP_LIST.TabIndex = 24;
+            this.IP_LIST.DropDown += new System.EventHandler(this.IP_LIST_DropDown);
+            // 
+            // NetWorkUpdater
+            // 
+            this.NetWorkUpdater.Enabled = true;
+            this.NetWorkUpdater.Interval = 1000;
+            // 
             // ClearReceivedWindow
             // 
             this.ClearReceivedWindow.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_delete_history_100;
             this.ClearReceivedWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClearReceivedWindow.FlatAppearance.BorderSize = 0;
-            this.ClearReceivedWindow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.ClearReceivedWindow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.ClearReceivedWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ClearReceivedWindow.Location = new System.Drawing.Point(537, 453);
             this.ClearReceivedWindow.Name = "ClearReceivedWindow";
@@ -121,8 +187,6 @@ namespace BRS_Dallas_Programmer
             this.SendToAddress.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_file_download_100;
             this.SendToAddress.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SendToAddress.FlatAppearance.BorderSize = 0;
-            this.SendToAddress.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.SendToAddress.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.SendToAddress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SendToAddress.Location = new System.Drawing.Point(12, 453);
             this.SendToAddress.Name = "SendToAddress";
@@ -151,8 +215,6 @@ namespace BRS_Dallas_Programmer
             this.ClearSendingWindow.BackgroundImage = global::BRS_Dallas_Programmer.Properties.Resources.icons8_delete_history_100;
             this.ClearSendingWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClearSendingWindow.FlatAppearance.BorderSize = 0;
-            this.ClearSendingWindow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.ClearSendingWindow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.ClearSendingWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ClearSendingWindow.Location = new System.Drawing.Point(108, 453);
             this.ClearSendingWindow.Name = "ClearSendingWindow";
@@ -160,99 +222,6 @@ namespace BRS_Dallas_Programmer
             this.ClearSendingWindow.TabIndex = 3;
             this.ClearSendingWindow.UseVisualStyleBackColor = true;
             this.ClearSendingWindow.Click += new System.EventHandler(this.ClearSendingWindow_Click);
-            // 
-            // ReceiverPort
-            // 
-            this.ReceiverPort.BackColor = System.Drawing.SystemColors.MenuText;
-            this.ReceiverPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ReceiverPort.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ReceiverPort.Location = new System.Drawing.Point(465, 10);
-            this.ReceiverPort.Name = "ReceiverPort";
-            this.ReceiverPort.Size = new System.Drawing.Size(258, 29);
-            this.ReceiverPort.TabIndex = 11;
-            this.ReceiverPort.TextChanged += new System.EventHandler(this.ReceiverPort_TextChanged);
-            // 
-            // SenderPort
-            // 
-            this.SenderPort.BackColor = System.Drawing.SystemColors.MenuText;
-            this.SenderPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SenderPort.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.SenderPort.Location = new System.Drawing.Point(105, 10);
-            this.SenderPort.Name = "SenderPort";
-            this.SenderPort.Size = new System.Drawing.Size(258, 29);
-            this.SenderPort.TabIndex = 13;
-            this.SenderPort.TextChanged += new System.EventHandler(this.SenderPort_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(8, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 21);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "TX Port:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(8, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 21);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "TX IP:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label3.Location = new System.Drawing.Point(369, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 21);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "RX IP:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label4.Location = new System.Drawing.Point(369, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 21);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "RX Port:";
-            // 
-            // ButtonUpdater
-            // 
-            this.ButtonUpdater.Enabled = true;
-            this.ButtonUpdater.Interval = 10;
-            this.ButtonUpdater.Tick += new System.EventHandler(this.ButtonUpdater_Tick);
-            // 
-            // IP_LIST
-            // 
-            this.IP_LIST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.IP_LIST.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.IP_LIST.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IP_LIST.DropDownHeight = 1000;
-            this.IP_LIST.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.IP_LIST.DropDownWidth = 1000;
-            this.IP_LIST.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.IP_LIST.FormattingEnabled = true;
-            this.IP_LIST.IntegralHeight = false;
-            this.IP_LIST.Location = new System.Drawing.Point(108, 45);
-            this.IP_LIST.Name = "IP_LIST";
-            this.IP_LIST.Size = new System.Drawing.Size(255, 29);
-            this.IP_LIST.Sorted = true;
-            this.IP_LIST.TabIndex = 24;
-            this.IP_LIST.DropDown += new System.EventHandler(this.IP_LIST_DropDown);
-            this.IP_LIST.TextChanged += new System.EventHandler(this.IP_LIST_TextChanged);
-            // 
-            // NetWorkUpdater
-            // 
-            this.NetWorkUpdater.Enabled = true;
-            this.NetWorkUpdater.Interval = 1000;
-            this.NetWorkUpdater.Tick += new System.EventHandler(this.NetWorkUpdater_Tick);
             // 
             // UDPNetwork
             // 
@@ -262,11 +231,9 @@ namespace BRS_Dallas_Programmer
             this.ClientSize = new System.Drawing.Size(735, 555);
             this.Controls.Add(this.IP_LIST);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SenderPort);
-            this.Controls.Add(this.ReceiverPort);
             this.Controls.Add(this.UserTextInfo);
             this.Controls.Add(this.ReceiverIP);
             this.Controls.Add(this.ClearReceivedWindow);
@@ -297,12 +264,10 @@ namespace BRS_Dallas_Programmer
         private System.Windows.Forms.Button ClearReceivedWindow;
         private System.Windows.Forms.TextBox ReceiverIP;
         private System.Windows.Forms.TextBox UserTextInfo;
-        private System.Windows.Forms.TextBox ReceiverPort;
         private System.Windows.Forms.TextBox SenderPort;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer ButtonUpdater;
         private System.Windows.Forms.ComboBox IP_LIST;
         private System.Windows.Forms.Timer NetWorkUpdater;

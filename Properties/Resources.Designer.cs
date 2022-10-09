@@ -19,7 +19,7 @@ namespace BRS_Dallas_Programmer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -143,6 +143,16 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_connected_selected_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-connected-selected-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_console_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-console-100", resourceCulture);
@@ -203,9 +213,29 @@ namespace BRS_Dallas_Programmer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_delete_history_disabled_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-delete-history-disabled-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_disconnected_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-disconnected-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_disconnected_selected_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-disconnected-selected-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +296,16 @@ namespace BRS_Dallas_Programmer.Properties {
         internal static System.Drawing.Bitmap icons8_file_download_Selected {
             get {
                 object obj = ResourceManager.GetObject("icons8-file-download-Selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_file_loading_100_Selected {
+            get {
+                object obj = ResourceManager.GetObject("icons8-file-loading-100_Selected", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -406,6 +446,26 @@ namespace BRS_Dallas_Programmer.Properties {
         internal static System.Drawing.Bitmap icons8_opened_folder_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-opened-folder-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_opened_folder_Disabled_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-opened-folder-Disabled-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_opened_folder_selected_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-opened-folder-selected-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
